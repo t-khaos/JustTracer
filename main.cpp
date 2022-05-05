@@ -3,9 +3,9 @@
 
 int main() {
 
-    const int width = 400;
-    const double aspect_ratio = 16.0/9.0;
-    const int height= static_cast<int>(400/aspect_ratio);
+    const int width = 720;
+    const int height= 480;
+    const double aspect_ratio = static_cast<double>(width)/height;
     const double fov=90;
 
     Renderer renderer;
@@ -24,5 +24,5 @@ int main() {
 
     scene.Add(sphere_center);
 
-    renderer.Render(scene,camera,10);
+    renderer.Render(scene,camera,25);
 }
