@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-add_executable(Renderer main.cpp Ray.h Material.h Light.h Object.h Math.h Vector.h Scene.h Renderer.h Camera.h Sphere.h)
+add_executable(Renderer main.cpp Ray.hpp Material.hpp Light.hpp Object.hpp Math.hpp Vector.hpp Scene.hpp Renderer.hpp Camera.hpp Sphere.hpp)
 
 # openMP 配置
 FIND_PACKAGE(OpenMP REQUIRED)

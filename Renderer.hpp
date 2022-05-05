@@ -4,9 +4,9 @@
 #include <iostream>
 #include <fstream>
 
-#include "Scene.h"
-#include "Math.h"
-#include "Camera.h"
+#include "Scene.hpp"
+#include "Math.hpp"
+#include "Camera.hpp"
 
 struct Renderer {
 

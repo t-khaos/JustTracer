@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "Object.h"
-#include "Vector.h"
+#include "Object.hpp"
+#include "Vector.hpp"
 
 
 struct Sphere : Object{

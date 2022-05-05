@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "Ray.h"
+#include "Ray.hpp"
 
 struct Object{
     Object(){}

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Ray.h"
-#include "Math.h"
+#include "Ray.hpp"
+#include "Math.hpp"
 
 struct Camera{
     Point3 origin;
