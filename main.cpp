@@ -22,7 +22,7 @@ int main() {
 
     auto sphere_center = std::make_shared<Sphere>(0.5,Vec3(0,0,-1));
 
-    scene.Add(sphere_center);
+    scene.add(sphere_center);
 
-    renderer.Render(scene,camera,25);
+    renderer.draw(scene,camera,25);
 }

@@ -17,8 +17,8 @@ struct Camera{
         double viewport_height = 2.0*h;
         double viewport_width = aspect_ratio*viewport_height;
 
-        Vec3 w = (look_from-look_at).normalized();
-        Vec3 u = up.cross(w).normalized();
+        Vec3 w = (look_from - look_at).normalize();
+        Vec3 u = up.cross(w).normalize();
         Vec3 v = w.cross(u);
 
         origin = look_from;
@@ -27,7 +27,7 @@ struct Camera{
         start = origin - horizontal/2 -vertical/2 -w;
     }
 
-    Ray GetRay(double s, double  t) const{
+    Ray get_ray(double s, double  t) const{
         return Ray(origin,start + s * horizontal + t* vertical - origin);
     }
 };
