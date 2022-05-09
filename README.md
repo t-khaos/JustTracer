@@ -1,1 +1,1 @@
-This is a Ray Tracing Renderer.
+软光追渲染器
