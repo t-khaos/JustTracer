@@ -3,7 +3,7 @@
 #include <limits>
 #include <memory>
 
-#include "Vector.hpp"
+#include "Math/Vector3.h"
 
 struct Ray {
     Point3 origin;

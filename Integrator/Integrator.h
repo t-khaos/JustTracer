@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "Vector.hpp"
-#include "Ray.hpp"
+#include "../Math/Vector3.h"
+#include "../Ray.h"
 
 
 struct Integrator{

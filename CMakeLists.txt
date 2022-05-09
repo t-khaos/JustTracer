@@ -14,4 +14,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-add_executable(Renderer main.cpp Ray.hpp Material.hpp Light.hpp Object.hpp Math.hpp Vector.hpp Scene.hpp Renderer.hpp Camera.hpp Sphere.hpp Integrator.h Film.h Shape.h)
+add_executable(Renderer main.cpp Ray.h Material/Material.h Light/Light.h Object.h Math.h Math/Vector3.h Scene.h Renderer.h Camera/Camera.hpp Sphere.h Integrator/Integrator.h Film.h Shape/Shape.h Random.h Sampler.h Math/Vector2.h Math/Matrix4.h Math/Vector4.h)

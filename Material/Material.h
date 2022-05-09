@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vector.hpp"
-#include "Math.hpp"
+#include "../Math/Vector3.h"
+#include "../Math.h"
 
 
 struct Material {

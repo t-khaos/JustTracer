@@ -7,6 +7,9 @@ struct Vector3 {
         struct {
             double x, y, z;
         };
+        struct {
+            double r, g, b;
+        };
         double data[3];
     };
 

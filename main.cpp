@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Renderer.hpp"
+#include "Renderer.h"
 
 int main() {
 

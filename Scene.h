@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "Sphere.hpp"
+#include "Sphere.h"
 
 struct Scene{
 
