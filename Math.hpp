@@ -4,8 +4,9 @@
 #include <cmath>
 #include <random>
 
-
 #define PI 3.1415926535897932385
+#define EPS 0.0001
+
 
 inline double clamp(double x, double min, double max) {
     if (x < min) return min;

@@ -24,7 +24,7 @@ bool Scene::intersect(const Ray &ray, HitResult &result) const {
     HitResult tempResult;
     bool isHit = false;
     double time_closest = std::numeric_limits<double>::max();
-    double eps = 0.001;
+    double eps = 0.0001;
 
     for(auto& object : objects){
         if(object->intersect(ray, tempResult, eps, time_closest)){
