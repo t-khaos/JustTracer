@@ -10,7 +10,7 @@ int main() {
 
     Renderer renderer;
 
-    Camera camera(
+    PerspectiveCamera camera(
             Vec3(0.0,0.0,0.0),
             Vec3(0.0,0.0,-1.0),
             Vec3(0,1,0),

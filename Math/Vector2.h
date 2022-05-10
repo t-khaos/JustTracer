@@ -8,6 +8,9 @@ struct Vector2 {
         struct {
             double u, v;
         };
+        struct {
+            double s, t;
+        };
         double data[2];
     };
 
