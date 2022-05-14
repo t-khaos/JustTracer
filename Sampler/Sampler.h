@@ -1,13 +1,11 @@
 #pragma once
 
-#include "../Random.h"
-#include "../Math/Vector2.h"
-#include "../Ray.h"
 
-struct Sampler {
-    int spp;
-    Random random;
+#include <vector>
+#include <iostream>
+#include "../Tool/Vector2.h"
 
-    virtual Vector2 Sample(int x, int y) = 0;
+
+struct Sampler{
+    virtual Vec2 CastRayByDistribution(int x, int y) = 0;
 };
-

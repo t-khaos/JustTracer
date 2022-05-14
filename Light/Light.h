@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Math/Vector3.h"
+#include "../Tool/Vector3.h"
 
 enum LightType{
     Area,
@@ -27,4 +27,8 @@ struct PointLight{
 
 struct DirectionLight{
     
+};
+
+struct EnvLight{
+
 };

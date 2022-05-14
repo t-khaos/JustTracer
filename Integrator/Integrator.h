@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include "../Math/Vector3.h"
+#include "../Tool/Vector3.h"
 #include "../Ray.h"
+#include "../Scene.h"
 
 
 struct Integrator{
-    Integrator(){}
-
-    virtual Color Li(const Ray& ray)=0;
+    virtual Color Li(const Ray& ray, Scene* scene) const =0;
 };
+

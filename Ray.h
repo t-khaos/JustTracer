@@ -2,14 +2,15 @@
 
 #include <limits>
 #include <memory>
+#include "Tool/Vector3.h"
 
-#include "Math/Vector3.h"
 
 struct Ray {
     Point3 origin;
     Vec3 direction;
 
     Ray(const Point3 &_ori, const Vec3 &_dir) : origin(_ori), direction(_dir.normalize()) {}
+
     Point3 at(double time) const { return origin + direction * time; }
 };
 

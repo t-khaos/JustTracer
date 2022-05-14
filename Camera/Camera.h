@@ -1,13 +1,9 @@
 #pragma once
 
 #include "../Ray.h"
-#include "../Math.h"
-#include "../Math/Vector2.h"
+#include "../Tool/Global.h"
+#include "../Tool/Vector2.h"
 
 struct Camera {
-    Camera() {}
-
-    virtual ~Camera() {}
-
-    virtual Ray GetRay(const Point2 &target) const = 0;
+    virtual Ray GetRay(const double &s, const double &t) const = 0;
 };

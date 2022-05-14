@@ -1,21 +1,23 @@
 #pragma once
 
 #include "Camera.h"
+#include "../Tool/Vector3.h"
 
-struct PerspectiveCamera : Camera {
+class PerspectiveCamera : public Camera {
+private:
     Point3 origin;
     Point3 start;
-
     Vec3 horizontal;
     Vec3 vertical;
 
+public:
     PerspectiveCamera(Point3 look_from, Point3 look_at, Vec3 up, double fov, double aspect_ratio);
 
-    virtual Ray GetRay(const Point2 &target) const override;
+    virtual Ray GetRay(const double &s, const double &t) const override;
 };
 
 PerspectiveCamera::PerspectiveCamera(Point3 look_from, Point3 look_at, Vec3 up, double fov, double aspect_ratio) {
-    double theta = degrees_to_radians(fov);
+    double theta = Degrees2Radians(fov);
     double h = std::tan(theta / 2);
 
     double viewport_height = 2.0 * h;
@@ -31,6 +33,6 @@ PerspectiveCamera::PerspectiveCamera(Point3 look_from, Point3 look_at, Vec3 up, 
     start = origin - horizontal / 2 - vertical / 2 - w;
 }
 
-Ray PerspectiveCamera::GetRay(const Point2 &target) const {
-    return Ray(origin, start + target.s * horizontal + target.t * vertical - origin);
+Ray PerspectiveCamera::GetRay(const double &s, const double &t) const {
+    return Ray(origin, start + s * horizontal + t * vertical - origin);
 }

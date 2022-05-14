@@ -5,42 +5,64 @@
 #include <fstream>
 
 #include "Scene.h"
-#include "Math.h"
+#include "Tool/Global.h"
 #include "Camera/PerspectiveCamera.h"
-#include "Sampler/TrapezoidalSampler.h"
+#include "Film.h"
+#include "Sampler/Sampler.h"
+#include "Integrator/Integrator.h"
 
-struct Renderer {
+class Renderer {
+private:
+    Scene *scene = nullptr;
+    Camera *camera = nullptr;
+    Sampler *sampler = nullptr;
+    Film *film = nullptr;
+    Integrator *integrator = nullptr;
 
-    void draw(const Scene &scene, const PerspectiveCamera &camera, int spp);
+    int spp;
+
+public:
+    explicit Renderer(int _spp) : spp(_spp) {}
+
+    void SetScene(Scene *_scene) { scene = _scene; }
+
+    void SetCamera(Camera *_camera) { camera = _camera; }
+
+    void SetSampler(Sampler *_sample) { sampler = _sample; }
+
+    void SetFilm(Film *_film) { film = _film; }
+
+    void SetIntegrator(Integrator *_integrator) { integrator = _integrator; }
+
+    void Render() const;
 };
 
-void Renderer::draw(const Scene &scene, const PerspectiveCamera &camera, int spp) {
-    std::vector<Color> pixels(scene.width * scene.height);
-    Color color;
-    //2x2 subpixel sampler
-    TrapezoidalSampler sampler(2,2);
+
+void Renderer::Render() const {
+
+    std::vector<Color> pixels(film->width * film->height);
+    Color color(0.0);
+
+    //多线程计算每个像素的颜色
 #pragma omp parallel for schedule(dynamic, 1) private(color)
-    for (int y = scene.height - 1; y >= 0; --y) {
-        std::cout << "Rendering " << spp << " spp: " << 100.0 * (scene.height - 1 - y) / (scene.height - 1) << "%"
-                  << std::endl;
-        for (int x = 0; x < scene.width; x++) {
-            color = Color();
+    for (int y = film->height - 1; y >= 0; --y) {
+        std::cout << 100.0 * (film->height - 1 - y) / (film->height - 1) << "%" << std::endl;
+        for (int x = 0; x < film->width; x++) {
+            color = Color(0.0);
             for (int index = 0; index < spp; index++) {
-                Ray ray = camera.GetRay(sampler.Sample(x,y));
-                color += scene.cast_ray(ray);
+                //根据采样分布计算投射的光线方向参数
+                auto position = sampler->CastRayByDistribution(x, y);
+                double s = position.x / (film->width - 1);
+                double t = position.y / (film->height - 1);
+                //投射光线并累计颜色
+                Ray ray = camera->GetRay(s, t);
+                color += integrator->Li(ray, scene);
             }
-            pixels[(scene.height - y - 1) * scene.width + x] = color * 0.25 * (1 / static_cast<double>(spp));
+            //将颜色处理后写入像素
+            pixels[(film->height - y - 1) * film->width + x] = color * (1 / static_cast<double>(spp));
         }
     }
 
-    std::string filename =
-            "result_" + std::to_string(scene.height) + "p_" + std::to_string(spp * 4) + "spp" + ".ppm";
-    std::ofstream file;
-    file.open(filename);
-    file << "P3\n" << scene.width << "\n" << scene.height << "\n255\n";
-    for (int i = 0; i < scene.width * scene.height; i++)
-        file << toInt(pixels[i].x) << " " << toInt(pixels[i].y) << " " << toInt(pixels[i].z) << " ";
-    file.close();
-
-    std::cout << "\nDone." << std::endl;
+    //冲洗胶卷
+    film->Develop(pixels);
 }
