@@ -4,6 +4,8 @@
 #include "Sampler/TrapezoidalSampler.h"
 #include "Integrator/NormalIntegrator.h"
 #include "Tool/Vector3.h"
+#include "Integrator/PathIntegrator.h"
+#include "Material/DiffuseMaterial.h"
 
 int main() {
 
@@ -18,19 +20,26 @@ int main() {
     //材质
     //-------------------------------------------------------------
 
-
+    DiffuseMaterial mat_diffuse_ground(Color(0.8, 0.8, 0.0),MaterialType::DIFFUSE);
+    DiffuseMaterial mat_diffuse_center(Color(0.7, 0.3, 0.3),MaterialType::DIFFUSE);
+    RefractMaterial mat_refract_left(Color(0.8, 0.8, 0.8), MaterialType::REFRACT);
+    RefractMaterial mat_refract_right(Color(0.8, 0.6, 0.2), MaterialType::REFRACT);
     //物体
     //-------------------------------------------------------------
-    std::shared_ptr<Sphere> sphere_center = std::make_shared<Sphere>(0.5, Vec3(0, 0, -1));
 
+    auto sphere_ground = std::make_shared<Sphere>(100.0, Vec3(0.0, -100.5, -1.0),&mat_diffuse_ground);
+    auto sphere_center = std::make_shared<Sphere>(0.5, Vec3(0, 0, -1),&mat_diffuse_center);
+    auto sphere_right = std::make_shared<Sphere>(0.5, Vec3(1, 0, -1),&mat_refract_right);
+    auto sphere_left = std::make_shared<Sphere>(0.5, Vec3(-1, 0, -1),&mat_refract_left);
 
     //场景
     //-------------------------------------------------------------
     Scene scene;
 
+    scene.Add(sphere_ground);
     scene.Add(sphere_center);
-
-
+    scene.Add(sphere_left);
+    scene.Add(sphere_right);
 
     //相机
     //-------------------------------------------------------------
@@ -43,7 +52,8 @@ int main() {
     );
 
     //积分器
-    NormalIntegrator integrator;
+    //-------------------------------------------------------------
+    PathIntegrator integrator(5);
 
     //采样器
     //-------------------------------------------------------------
@@ -52,6 +62,7 @@ int main() {
     //胶片
     //-------------------------------------------------------------
     Film film(width, height);
+    film.filename = "test.ppm";
 
     //渲染
     //-------------------------------------------------------------
@@ -64,6 +75,5 @@ int main() {
     renderer.SetIntegrator(&integrator);
 
     renderer.Render();
-
 
 }

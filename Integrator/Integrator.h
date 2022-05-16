@@ -7,6 +7,6 @@
 
 
 struct Integrator{
-    virtual Color Li(const Ray& ray, Scene* scene) const =0;
+    virtual Color Li(const Ray& ray, Scene* scene) =0;
 };
 

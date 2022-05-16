@@ -27,7 +27,7 @@ inline double Clamp(double x){
 //-------------------------------------------------------------
 
 inline int Map2RGB(double x){
-    return int(std::pow(Clamp(x), 1) * 255 + .5);
+    return int(std::pow(Clamp(x), 1./2.2) * 255 + .5);
 }
 
 

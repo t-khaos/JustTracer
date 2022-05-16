@@ -23,9 +23,9 @@ PerspectiveCamera::PerspectiveCamera(Point3 look_from, Point3 look_at, Vec3 up, 
     double viewport_height = 2.0 * h;
     double viewport_width = aspect_ratio * viewport_height;
 
-    Vec3 w = (look_from - look_at).normalize();
-    Vec3 u = up.cross(w).normalize();
-    Vec3 v = w.cross(u);
+    Vec3 w = (look_from - look_at).Normalize();
+    Vec3 u = up.Cross(w).Normalize();
+    Vec3 v = w.Cross(u);
 
     origin = look_from;
     horizontal = viewport_width * u;
