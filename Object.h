@@ -6,6 +6,5 @@
 
 struct Object {
     Object() {}
-
-    virtual bool intersect(const Ray &ray, HitResult &result, double t_min, double t_max) const = 0;
+    virtual bool intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const = 0;
 };

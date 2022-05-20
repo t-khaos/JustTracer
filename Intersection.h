@@ -24,7 +24,7 @@ struct Frame {
 struct BSDFSample {
     Color radiance;
     Vector3 wi;
-    double pdf;
+    float pdf;
 };
 
 

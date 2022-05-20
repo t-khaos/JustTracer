@@ -12,16 +12,16 @@ struct Ray {
 
     Ray(const Point3 &_ori, const Vec3 &_dir) : origin(_ori), direction(_dir.Normalize()) {}
 
-    Point3 at(double time) const { return origin + direction * time; }
+    Point3 at(float time) const { return origin + direction * time; }
 };
 
 
 struct HitResult {
     Point3 point;
     Vec3 normal;
-    double time;
+    float distance;
 
-    Material* material = nullptr;
+    std::shared_ptr<Material> material = nullptr;
 
-    HitResult() : point(Point3()), normal(Vec3()), time(0.0) {}
+    HitResult() : point(Point3()), normal(Vec3()), distance(0.0) {}
 };

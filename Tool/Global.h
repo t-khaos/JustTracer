@@ -8,30 +8,30 @@
 //-------------------------------------------------------------
 
 #define PI 3.1415926535897932385
-#define EPS 0.0001
+#define EPSILON 0.0005
 
 //数学
 //-------------------------------------------------------------
 
-inline double Clamp(double x, double min, double max) {
+inline float Clamp(float x, float min, float max) {
     if (x < min) return min;
     if (x > max) return max;
     return x;
 }
 
-inline double Clamp(double x){
+inline float Clamp(float x){
     return Clamp(x, 0.0, 1.0);
 }
 
 //转换
 //-------------------------------------------------------------
 
-inline int Map2RGB(double x){
+inline int Map2RGB(float x){
     return int(std::pow(Clamp(x), 1./2.2) * 255 + .5);
 }
 
 
-inline double Degrees2Radians(double degrees) {
+inline float Degrees2Radians(float degrees) {
     return degrees * PI / 180.0;
 }
 
@@ -39,14 +39,14 @@ inline double Degrees2Radians(double degrees) {
 //-------------------------------------------------------------
 static std::random_device rd;
 static std::mt19937 mersenne_twister(rd());
-static std::uniform_real_distribution<double> uniform(0,1);
+static std::uniform_real_distribution<float> uniform(0,1);
 
-inline double RandomDouble() {
+inline float RandomFloat() {
     return uniform(mersenne_twister);
 }
 
-inline double RandomDouble(double min, double max) {
-    return min + (max-min) * RandomDouble();
+inline float RandomFloat(float min, float max) {
+    return min + (max-min) * RandomFloat();
 }
 
 

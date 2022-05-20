@@ -23,4 +23,4 @@ add_executable(
     Object.h Sphere.h Shape/Shape.h
     Sampler/Sampler.h Sampler/TrapezoidalSampler.h
     Integrator/Integrator.h Integrator/NormalIntegrator.h
-        Shape/Triangle.h Shape/Mesh.h Shape/Model.h Shape/Vertex.h Shape/Texture.h Accelerator/BVH.h Accelerator/KDTree.h Accelerator/AABB.h Integrator/PathIntegrator.h Material/DiffuseMaterial.h)
+        Shape/Triangle.h Shape/Mesh.h Shape/Model.h Shape/Vertex.h Shape/Texture.h Accelerator/BVH.h Accelerator/KDTree.h Accelerator/AABB.h Integrator/SimplePathIntegrator.h Material/DiffuseMaterial.h Material/RefractMaterial.h Integrator/MonteCarloPathIntegrator.h Integrator/PathIntegrator.h)

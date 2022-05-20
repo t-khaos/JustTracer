@@ -6,10 +6,10 @@
 struct NormalIntegrator : public Integrator {
     NormalIntegrator() {}
 
-    virtual Color Li(const Ray &ray, Scene *scene) override;
+    virtual Color Li(const Ray &ray, std::shared_ptr<Scene> scene) override;
 };
 
-Color NormalIntegrator::Li(const Ray &ray, Scene *scene) {
+Color NormalIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     HitResult result;
     if (scene->Intersect(ray, result)) {
         return 0.5 * (result.normal + Color(1.0));
