@@ -70,10 +70,10 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     //获取交点材质的pdf
     float pdf = result.material->PDF(ray.direction, diffuseDirN, result.normal);
     // CastRay() * Eval() * cos_theta / P_RR / pdf;
-/*    L_indirect = CastRay(diffuseRay, scene, ++depth)
+    L_indirect = CastRay(diffuseRay, scene, ++depth)
                  * result.material->Eval(ray.direction, diffuseDirN, result.normal)
                  * (diffuseDirN.Dot(result.normal))
                  / P_RR
-                 / pdf;*/
+                 / pdf;
     return L_direct + L_indirect;
 }

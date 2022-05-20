@@ -17,7 +17,7 @@ int main() {
     const int height = 480;
     const float aspect_ratio = static_cast<float>(width) / height;
     const float fov = 90;
-    const int spp = 100;
+    const int spp = 1000;
 
     //材质
     //-------------------------------------------------------------
