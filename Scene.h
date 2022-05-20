@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "Sphere.h"
+#include "Shape/Sphere.h"
 #include "Light/Light.h"
 
 struct Scene {

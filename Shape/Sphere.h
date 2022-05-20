@@ -2,7 +2,7 @@
 
 
 #include "Object.h"
-#include "Tool/Vector3.h"
+#include "../Tool/Vector3.h"
 
 
 struct Sphere : Object {

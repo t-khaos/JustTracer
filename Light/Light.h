@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Tool/Vector3.h"
-#include "../Object.h"
+#include "../Shape/Object.h"
 
 
 struct LightSampleResult{
