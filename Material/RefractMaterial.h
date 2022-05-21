@@ -2,25 +2,29 @@
 
 #include "Material.h"
 
-struct RefractMaterial : Material{
+struct RefractMaterial : Material {
     RefractMaterial(
-            const Color& _color,
-            const Color& _emission,
-            const MaterialType& _type = MaterialType::REFRACT)
-            :Material(_color, _emission , _type){}
+            const Color3f &_color,
+            const Color3f &_emission,
+            const MaterialType &_type = MaterialType::REFRACT)
+            : Material(_color, _emission, _type) {}
 
-    virtual float PDF(const Vec3& wi, const Vec3& wo, const Vec3& N) override;
-    virtual Vec3 Eval(const Vec3& wi, const Vec3& wo, const Vec3& N) override;
-    virtual Vec3 Sample(const Vec3& V, const Vec3& N) override;
+    virtual float PDF(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) override;
+
+    virtual Vector3f Eval(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) override;
+
+    virtual Vector3f Sample(const Vector3f &V, const Vector3f &N) override;
 
 };
 
-float RefractMaterial::PDF(const Vec3& wi, const Vec3& wo, const Vec3& N){
+float RefractMaterial::PDF(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) {
     return 1;
 }
-Vec3 RefractMaterial::Eval(const Vec3& wi, const Vec3& wo, const Vec3& N){
-    return  base_color;
+
+Vector3f RefractMaterial::Eval(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) {
+    return base_color;
 }
-Vec3 RefractMaterial::Sample(const Vec3& V, const Vec3& N){
-    return V.Reflect(N);
+
+Vector3f RefractMaterial::Sample(const Vector3f &V, const Vector3f &N) {
+    return Reflect(V, N);
 }

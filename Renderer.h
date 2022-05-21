@@ -40,15 +40,15 @@ public:
 
 void Renderer::Render() const {
 
-    std::vector<Color> pixels(film->width * film->height);
-    Color color(0.0);
+    std::vector<Color3f> pixels(film->width * film->height);
+    Color3f color(0.0);
 
     //多线程计算每个像素的颜色
 #pragma omp parallel for schedule(dynamic, 1) private(color)
     for (int y = film->height - 1; y >= 0; --y) {
         std::cout << 100.0 * (film->height - 1 - y) / (film->height - 1) << "%" << std::endl;
         for (int x = 0; x < film->width; x++) {
-            color = Color(0.0);
+            color = Color3f(0.0);
             for (int index = 0; index < spp; index++) {
                 //根据采样分布计算投射的光线方向参数
                 auto position = sampler->CastRayByDistribution(x, y);

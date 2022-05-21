@@ -18,7 +18,7 @@ struct Scene {
 
     bool Intersect(const Ray &ray, HitResult &result) const;
 
-    Color CastRay(const Ray &ray) const;
+    Color3f CastRay(const Ray &ray) const;
 
 };
 

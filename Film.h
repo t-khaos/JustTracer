@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 
-#include "Tool/Vector3.h"
+#include "Tool/Vector.h"
 #include "Tool/Global.h"
 
 struct Film {
@@ -15,11 +15,11 @@ struct Film {
     Film(const int &_w, const int &_h)
             : width(_w), height(_h), filename("output.ppm") {}
 
-    void Develop(const std::vector<Color> &pixels) const;
+    void Develop(const std::vector<Color3f> &pixels) const;
 };
 
 
-void Film::Develop(const std::vector<Color> &pixels) const {
+void Film::Develop(const std::vector<Color3f> &pixels) const {
     std::ofstream file;
     file.open(filename);
     file << "P3\n" << width << "\n" << height << "\n255\n";

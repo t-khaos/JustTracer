@@ -2,7 +2,7 @@
 
 ## TODO List
 
-- Object 几何物体 √
+- Object 物体 √
     - Sphere 球体 √
     - Model 模型
         - Mesh 网格
@@ -14,6 +14,8 @@
 - Renderer 渲染器 √
   - OpenMP多线程加速 √
 - Film 胶片 √
+  - 输出PPM格式图片 √
+  - 使用第三方库输出常用格式图片
 - Scene 场景 √
 - Camera 相机 √
   - PerspectiveCamera 透视相机 √

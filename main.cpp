@@ -3,13 +3,19 @@
 #include "Material/MicrofacetMaterial.h"
 #include "Sampler/TrapezoidalSampler.h"
 #include "Integrator/NormalIntegrator.h"
-#include "Tool/Vector3.h"
+#include "Tool/Vector.h"
 #include "Integrator/SimplePathIntegrator.h"
 #include "Material/DiffuseMaterial.h"
 #include "Material/RefractMaterial.h"
 #include "Integrator/MonteCarloPathIntegrator.h"
+#include "Shape/Model.h"
 
 int main() {
+
+
+    Mesh mesh;
+
+    mesh.LoadModel("../Resources/Models/cube.obj");
 
     //参数
     //-------------------------------------------------------------
@@ -22,23 +28,40 @@ int main() {
     //材质
     //-------------------------------------------------------------
 
-    auto mat_diffuse_red = std::make_shared<DiffuseMaterial>(Color(0.63f, 0.065f, 0.05f), Color(0), MaterialType::DIFFUSE);
-    auto mat_diffuse_green = std::make_shared<DiffuseMaterial>(Color(0.14f, 0.45f, 0.091f), Color(0), MaterialType::DIFFUSE);
-    auto mat_diffuse_white = std::make_shared<DiffuseMaterial>(Color(0.725f, 0.71f, 0.68f), Color(0), MaterialType::DIFFUSE);
+    auto mat_diffuse_red = std::make_shared<DiffuseMaterial>(
+            Color3f(0.63f, 0.065f, 0.05f),
+            Color3f(0.f),
+            MaterialType::DIFFUSE
+    );
+    auto mat_diffuse_green = std::make_shared<DiffuseMaterial>(
+            Color3f(0.14f, 0.45f, 0.091f),
+            Color3f(0.f),
+            MaterialType::DIFFUSE
+    );
+    auto mat_diffuse_white = std::make_shared<DiffuseMaterial>(
+            Color3f(0.725f, 0.71f, 0.68f),
+            Color3f(0.f),
+            MaterialType::DIFFUSE
+    );
 
-    auto mat_light = std::make_shared<DiffuseMaterial>(Color(0.65,0.65,0.65), Color(100,100,100), MaterialType::LIGHT);
+    auto mat_light = std::make_shared<DiffuseMaterial>(
+            Color3f(0.65, 0.65, 0.65),
+            Color3f(100, 100, 100),
+            MaterialType::LIGHT
+    );
+
     //物体
     //-------------------------------------------------------------
-    auto sphere_left = std::make_shared<Sphere>(1e5, Vec3(-1e5-150,0,0),mat_diffuse_red);
-    auto sphere_right = std::make_shared<Sphere>(1e5, Vec3(1e5+150,0,0), mat_diffuse_green);
-    auto sphere_back = std::make_shared<Sphere>(1e5, Vec3(0,0, 1e5+150), mat_diffuse_white);
-    auto sphere_bottom = std::make_shared<Sphere>(2000, Vec3(0, -2060, 0), mat_diffuse_white);
-    auto sphere_top = std::make_shared<Sphere>(1e5, Vec3(0,1e5+150,0), mat_diffuse_white);
+    auto sphere_left = std::make_shared<Sphere>(1e5, Vector3f(-1e5 - 150, 0, 0), mat_diffuse_red);
+    auto sphere_right = std::make_shared<Sphere>(1e5, Vector3f(1e5 + 150, 0, 0), mat_diffuse_green);
+    auto sphere_back = std::make_shared<Sphere>(1e5, Vector3f(0, 0, 1e5 + 150), mat_diffuse_white);
+    auto sphere_bottom = std::make_shared<Sphere>(2000, Vector3f(0, -2060, 0), mat_diffuse_white);
+    auto sphere_top = std::make_shared<Sphere>(1e5, Vector3f(0, 1e5 + 150, 0), mat_diffuse_white);
 
 
-    auto sphere_red = std::make_shared<Sphere>(35, Vec3(50,0,0), mat_diffuse_red);
+    auto sphere_red = std::make_shared<Sphere>(35, Vector3f(0, 0, 0), mat_diffuse_red);
 
-    auto sphere_light = std::make_shared<Sphere>(30, Vec3(0,180,0),mat_light);
+    auto sphere_light = std::make_shared<Sphere>(30, Vector3f(0, 180, 0), mat_light);
 
     //光源
     //-------------------------------------------------------------
@@ -62,9 +85,9 @@ int main() {
     //相机
     //-------------------------------------------------------------
     auto camera = std::make_shared<PerspectiveCamera>(
-            Vec3(0, 0, -150),
-            Vec3(0, 0, 0),
-            Vec3(0, 1, 0),
+            Vector3f(0, 0, -150),
+            Vector3f(0, 0, 0),
+            Vector3f(0, 1, 0),
             fov,
             aspect_ratio
     );

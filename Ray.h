@@ -2,26 +2,26 @@
 
 #include <limits>
 #include <memory>
-#include "Tool/Vector3.h"
+#include "Tool/Vector.h"
 #include "Material/Material.h"
 
 
 struct Ray {
-    Point3 origin;
-    Vec3 direction;
+    Point3f origin;
+    Vector3f direction;
 
-    Ray(const Point3 &_ori, const Vec3 &_dir) : origin(_ori), direction(_dir.Normalize()) {}
+    Ray(const Point3f &_ori, const Vector3f &_dir) : origin(_ori), direction((Normalize(_dir))) {}
 
-    Point3 at(float time) const { return origin + direction * time; }
+    Point3f at(float time) const { return origin + direction * time; }
 };
 
 
 struct HitResult {
-    Point3 point;
-    Vec3 normal;
+    Point3f point;
+    Vector3f normal;
     float distance;
 
     std::shared_ptr<Material> material = nullptr;
 
-    HitResult() : point(Point3()), normal(Vec3()), distance(0.0) {}
+    HitResult() : point(Point3f()), normal(Vector3f()), distance(0.0) {}
 };

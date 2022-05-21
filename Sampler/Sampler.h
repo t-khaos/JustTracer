@@ -1,11 +1,10 @@
 #pragma once
 
-
 #include <vector>
 #include <iostream>
-#include "../Tool/Vector2.h"
+#include "../Tool/Vector.h"
 
 
-struct Sampler{
-    virtual Vec2 CastRayByDistribution(int x, int y) = 0;
+struct Sampler {
+    virtual Vector2f CastRayByDistribution(int x, int y) = 0;
 };

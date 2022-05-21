@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include "../Tool/Vector3.h"
+#include "../Tool/Vector.h"
 #include "../Ray.h"
 #include "../Scene.h"
 
 
-struct Integrator{
-    virtual Color Li(const Ray& ray, std::shared_ptr<Scene> scene) =0;
+struct Integrator {
+    virtual Color3f Li(const Ray &ray, std::shared_ptr<Scene> scene) = 0;
 };
 
