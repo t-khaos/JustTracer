@@ -23,18 +23,14 @@ struct Texture {
     TextureType type;
 };
 
-struct Face {
-    std::vector<Vector3f> indices;
-};
 
-class Mesh {
-private:
+
+struct Mesh {
     std::vector<Vector3f> positions;
     std::vector<Vector3f> normals;
     std::vector<Vector2f> uvs;
-    std::vector<Face> faces;
+    std::vector<std::vector<Vector3i>> faces;
 
-public:
     void LoadModel(const std::string &fileName) {
 
         std::ifstream fileStream(fileName);
@@ -65,25 +61,25 @@ public:
                 }
                 uvs.push_back(uv);
             } else if (!line.compare(0, 2, "f ")) {
-                std::vector<int> face;
+                std::vector<Vector3i> face;
+                Vector3i index;
+                strStream>>trash;
+                while(strStream >> index[0] >> trash >> index[1] >> trash >> index[2]){
+                    for (int i = 0; i < 3; ++i) {
+                        index[i]--;//wavefront obj 文件索引从1开始
+                    }
+                    face.push_back(index);
+                }
+                faces.push_back(face);
             }
         }
     }
 
 };
 
-class Model {
-private:
-    std::vector<Vector3f> vertices;
-    std::vector<std::vector<int>> faces;
-
-public:
-
-    Model() {};
-
-    void AddVertex(Vector3f vertex) { vertices.push_back(vertex); }
-
-    void AddFaces(std::vector<int> face) { faces.push_back(face); }
+struct Model{
+    std::vector<Mesh> meshes;
+    std::vector<Texture> textures;
 };
 
 
