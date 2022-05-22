@@ -13,11 +13,11 @@ struct SimplePathIntegrator : PathIntegrator {
     virtual Color3f CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) override;
 };
 
-Color3f SimplePathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
+inline Color3f SimplePathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     return CastRay(ray, scene, 0);
 }
 
-Color3f SimplePathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) {
+inline Color3f SimplePathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) {
     if (depth >= depth_max)
         return Color3f(0.f);
     HitResult result;

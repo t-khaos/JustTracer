@@ -331,6 +331,16 @@ inline float Length(const Vector< N,float> &a) {
     return std::sqrtf(SquareLength(a));
 }
 
+template<size_t N, typename T>
+inline T Norm(const Vector<N,T> &a) {
+    return std::sqrt(SquareLength(a));
+}
+
+template<size_t N>
+inline float Norm(const Vector< N,float> &a) {
+    return std::sqrtf(SquareLength(a));
+}
+
 //矢量归一化
 template<size_t N, typename T>
 inline Vector<N,T> Normalize(const Vector<N,T> &a) {

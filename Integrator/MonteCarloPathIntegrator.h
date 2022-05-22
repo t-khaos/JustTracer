@@ -13,7 +13,7 @@ struct MonteCarloPathIntegrator : PathIntegrator {
     virtual Color3f CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) override;
 };
 
-Color3f MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
+inline Color3f MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     return CastRay(ray, scene, 0);
 }
 

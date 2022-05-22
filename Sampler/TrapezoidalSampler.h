@@ -12,7 +12,7 @@ private:
     int index = 0;
 };
 
-Vector2f TrapezoidalSampler::CastRayByDistribution(int x, int y) {
+inline Vector2f TrapezoidalSampler::CastRayByDistribution(int x, int y) {
     index = index >= 4 ? 0 : index;
 
     int sx = index % 2;

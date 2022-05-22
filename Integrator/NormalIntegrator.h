@@ -9,7 +9,7 @@ struct NormalIntegrator : public Integrator {
     virtual Color3f Li(const Ray &ray, std::shared_ptr<Scene> scene) override;
 };
 
-Color3f NormalIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
+inline Color3f NormalIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     HitResult result;
     if (scene->Intersect(ray, result)) {
         return 0.5f * (result.normal + Color3f(1.f));

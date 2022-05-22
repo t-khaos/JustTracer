@@ -16,7 +16,7 @@ public:
     virtual Ray GetRay(const float &s, const float &t) const override;
 };
 
-PerspectiveCamera::PerspectiveCamera(Point3f look_from, Point3f look_at, Vector3f up, float fov, float aspect_ratio) {
+inline PerspectiveCamera::PerspectiveCamera(Point3f look_from, Point3f look_at, Vector3f up, float fov, float aspect_ratio) {
     float theta = Degrees2Radians(fov);
     float h = std::tan(theta / 2);
 
@@ -33,6 +33,6 @@ PerspectiveCamera::PerspectiveCamera(Point3f look_from, Point3f look_at, Vector3
     start = origin - horizontal / 2.f - vertical / 2.f - w;
 }
 
-Ray PerspectiveCamera::GetRay(const float &s, const float &t) const {
+inline Ray PerspectiveCamera::GetRay(const float &s, const float &t) const {
     return Ray(origin, start + s * horizontal + t * vertical - origin);
 }

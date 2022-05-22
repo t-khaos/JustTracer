@@ -26,12 +26,14 @@ struct Texture {
 
 
 struct Mesh {
-    std::vector<Vector3f> positions;
-    std::vector<Vector3f> normals;
-    std::vector<Vector2f> uvs;
+
     std::vector<std::vector<Vector3i>> faces;
 
-    void LoadModel(const std::string &fileName) {
+    void LoadObj(const std::string &fileName) {
+
+        std::vector<Vector3f> positions;
+        std::vector<Vector3f> normals;
+        std::vector<Vector2f> uvs;
 
         std::ifstream fileStream(fileName);
 
@@ -73,6 +75,8 @@ struct Mesh {
                 faces.push_back(face);
             }
         }
+
+
     }
 
 };

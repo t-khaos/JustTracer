@@ -1,0 +1,8 @@
+//
+// Created by Tian on 5/22/2022.
+//
+
+#ifndef JUSTTRACER_AREALIGHT_H
+#define JUSTTRACER_AREALIGHT_H
+
+#endif //JUSTTRACER_AREALIGHT_H

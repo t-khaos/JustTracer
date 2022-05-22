@@ -38,7 +38,7 @@ public:
 };
 
 
-void Renderer::Render() const {
+inline void Renderer::Render() const {
 
     std::vector<Color3f> pixels(film->width * film->height);
     Color3f color(0.0);

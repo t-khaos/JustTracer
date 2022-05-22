@@ -15,7 +15,6 @@ int main() {
 
     Mesh mesh;
 
-    mesh.LoadModel("../Resources/Models/cube.obj");
 
     //参数
     //-------------------------------------------------------------
@@ -23,7 +22,7 @@ int main() {
     const int height = 480;
     const float aspect_ratio = static_cast<float>(width) / height;
     const float fov = 90;
-    const int spp = 1000;
+    const int spp = 500;
 
     //材质
     //-------------------------------------------------------------
@@ -65,7 +64,7 @@ int main() {
 
     //光源
     //-------------------------------------------------------------
-    auto light = std::make_shared<Light>(sphere_light);
+    auto light = std::make_shared<SphereLight>(sphere_light);
 
     //场景
     //-------------------------------------------------------------
@@ -103,7 +102,7 @@ int main() {
     //胶片
     //-------------------------------------------------------------
     auto film = std::make_shared<Film>(width, height);
-    film->filename = "test.ppm";
+    film->fileName = "test.ppm";
 
     //渲染器
     //-------------------------------------------------------------
