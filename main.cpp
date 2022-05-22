@@ -9,6 +9,7 @@
 #include "Material/RefractMaterial.h"
 #include "Integrator/MonteCarloPathIntegrator.h"
 #include "Shape/Model.h"
+#include "Light/AreaLight.h"
 
 int main() {
 
@@ -22,7 +23,7 @@ int main() {
     const int height = 480;
     const float aspect_ratio = static_cast<float>(width) / height;
     const float fov = 90;
-    const int spp = 500;
+    const int spp = 100;
 
     //材质
     //-------------------------------------------------------------
@@ -44,7 +45,7 @@ int main() {
     );
 
     auto mat_light = std::make_shared<DiffuseMaterial>(
-            Color3f(0.65, 0.65, 0.65),
+            Color3f(0.f),
             Color3f(100, 100, 100),
             MaterialType::LIGHT
     );
@@ -57,14 +58,16 @@ int main() {
     auto sphere_bottom = std::make_shared<Sphere>(2000, Vector3f(0, -2060, 0), mat_diffuse_white);
     auto sphere_top = std::make_shared<Sphere>(1e5, Vector3f(0, 1e5 + 150, 0), mat_diffuse_white);
 
-
     auto sphere_red = std::make_shared<Sphere>(35, Vector3f(0, 0, 0), mat_diffuse_red);
 
     auto sphere_light = std::make_shared<Sphere>(30, Vector3f(0, 180, 0), mat_light);
+    auto area_light = std::make_shared<Triangle>(Vector3f(-30, 120 ,30), Vector3f(-30,120,-30), Vector3f(30,120,-30), mat_light);
 
     //光源
     //-------------------------------------------------------------
-    auto light = std::make_shared<SphereLight>(sphere_light);
+    auto light_sphere = std::make_shared<SphereLight>(sphere_light);
+
+    auto light_area = std::make_shared<AreaLight>(area_light);
 
     //场景
     //-------------------------------------------------------------
@@ -77,9 +80,14 @@ int main() {
 
     scene->AddObject(sphere_red);
 
-    scene->AddObject(sphere_light);
 
-    scene->AddLight(light);
+    scene->AddObject(area_light);
+    scene->AddLight(light_area);
+
+    //scene->AddObject(sphere_light);
+    //scene->AddLight(light_sphere);
+
+
 
     //相机
     //-------------------------------------------------------------

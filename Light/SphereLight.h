@@ -14,10 +14,6 @@ struct SphereLight : Light{
 
 };
 
-inline float SphereLight::PDF() {
-    return 1 / (4 * PI * sphere->radius * sphere->radius);
-}
-
 inline void SphereLight::Sample(HitResult &result) {
 
     float theta = 2.0 * PI * RandomFloat();
@@ -31,4 +27,8 @@ inline void SphereLight::Sample(HitResult &result) {
     result.point = sphere->center + direction * sphere->radius;
     result.normal = direction;
     result.material = sphere->material;
+}
+
+inline float SphereLight::PDF() {
+    return 1 / (4 * PI * sphere->radius * sphere->radius);
 }

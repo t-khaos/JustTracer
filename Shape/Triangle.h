@@ -17,12 +17,12 @@ struct Triangle : Object {
 
     Vector3f normal;
     float area;
-
-
     std::shared_ptr<Material> material;
 
+
     //三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
-    Triangle(Vector3f _v0, Vector3f _v1, Vector3f _v2) : A(_v0), B(_v1), C(_v2) {
+    Triangle(Vector3f _v0, Vector3f _v1, Vector3f _v2, std::shared_ptr<Material> _mat)
+        : A(_v0), B(_v1), C(_v2), material(_mat) {
         Vector3f AB, AC;
         AB = B - A;
         AC = C - A;
@@ -39,6 +39,7 @@ struct Triangle : Object {
 };
 
 inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const {
+    // 光线方向打向交点，故要反过来
     if (Dot(ray.direction, normal) > 0)
         return false;
 
@@ -109,4 +110,17 @@ inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, 
     result.point = alpha * A + beta * B + (1-alpha-beta) * C;
     result.normal = normal;
     result.material = material;
+
+    return true;
 }
+
+
+struct Mesh{
+    std::vector<std::shared_ptr<Triangle>> triangles;
+
+    Mesh(){}
+
+    void AddTriangle(std::shared_ptr<Triangle> triangle){triangles.push_back(triangle);}
+
+
+};

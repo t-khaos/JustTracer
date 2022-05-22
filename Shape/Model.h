@@ -25,7 +25,7 @@ struct Texture {
 
 
 
-struct Mesh {
+struct ModelMesh {
 
     std::vector<std::vector<Vector3i>> faces;
 
