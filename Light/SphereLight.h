@@ -1,29 +1,7 @@
 #pragma once
 
-#include "../Tool/Vector.h"
-#include "../Shape/Object.h"
-#include "../Shape/Triangle.h"
 
-
-struct LightSampleResult {
-    float PDF;
-    Point3f position;
-};
-
-struct Light{
-    virtual void Sample(HitResult &result) = 0;
-    virtual float PDF() = 0;
-};
-
-struct AreaLight : Light{
-    std::shared_ptr<std::vector<Triangle>> triangles;
-    AreaLight(std::shared_ptr<std::vector<Triangle>> _triangles) : triangles(_triangles) {}
-
-    virtual void Sample(HitResult &result) override;
-
-    virtual float PDF() override;
-};
-
+#include "Light.h"
 
 struct SphereLight : Light{
     std::shared_ptr<Sphere> sphere;
@@ -37,7 +15,7 @@ struct SphereLight : Light{
 };
 
 inline float SphereLight::PDF() {
-    return sphere->PDF();
+    return 1 / (4 * PI * sphere->radius * sphere->radius);
 }
 
 inline void SphereLight::Sample(HitResult &result) {

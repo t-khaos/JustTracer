@@ -16,12 +16,8 @@ struct Sphere : Object {
 
     bool intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const override;
 
-    float PDF();
 };
 
-inline float Sphere::PDF() {
-    return 1 / (4 * PI * radius * radius);
-}
 
 inline bool Sphere::intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const {
     //t^2*d.d + 2*t*(o-p).d + (o-p).(o-p)-R^2 = 0

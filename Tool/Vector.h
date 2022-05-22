@@ -320,22 +320,22 @@ inline T SquareLength(const Vector<N,T> &a) {
         sum += a[i] * a[i];
     return sum;
 }
-
+//矢量长度
 template<size_t N, typename T>
 inline T Length(const Vector<N,T> &a) {
     return std::sqrt(SquareLength(a));
 }
-
+//特化float类型开方
 template<size_t N>
 inline float Length(const Vector< N,float> &a) {
     return std::sqrtf(SquareLength(a));
 }
-
+//矢量取模（长度的别名）
 template<size_t N, typename T>
 inline T Norm(const Vector<N,T> &a) {
     return std::sqrt(SquareLength(a));
 }
-
+//特化float类型开方
 template<size_t N>
 inline float Norm(const Vector< N,float> &a) {
     return std::sqrtf(SquareLength(a));
@@ -391,17 +391,21 @@ inline Vector<3,T> ToWorld(const Vector<3,T>& a, const Vector<3,T>& n){
     return a.x*U+a.y*V+a.z*N;
 }
 
+//特化矢量别名
+//------------------------------------------
 
 //特化double类型矢量别名
 typedef Vector<4,double> Vector4d;
 typedef Vector<3,double> Vector3d;
 typedef Vector<2,double> Vector2d;
+
 //特化float类型矢量别名
 typedef Vector<4,float> Vector4f;
 typedef Vector<3,float> Vector3f;
 typedef Vector<3,float> Point3f;
 typedef Vector<3,float> Color3f;
 typedef Vector<2,float> Vector2f;
+
 //特化int类型矢量别名
 typedef Vector<4,int> Vector4i;
 typedef Vector<3,int> Vector3i;

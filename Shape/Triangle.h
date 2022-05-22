@@ -14,7 +14,7 @@ struct Triangle : Object {
         };
     };
 
-    Vector3f AB, AC;
+
     Vector3f normal;
     float area;
 
@@ -23,25 +23,20 @@ struct Triangle : Object {
 
     //三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
     Triangle(Vector3f _v0, Vector3f _v1, Vector3f _v2) : A(_v0), B(_v1), C(_v2) {
+        Vector3f AB, AC;
         AB = B - A;
         AC = C - A;
         normal = Normalize(Cross(AB, AC));
 
         // 三维空间中三角形面积为两边叉积的取模乘以二分之一
-        // 1/2 *|AB x AC|
+        // 1/2 * |AB x AC|
         area = Norm(Cross(AB, AC)) * 0.5f;
     }
 
 
     virtual bool intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const override;
 
-    float PDF();
-
 };
-
-inline float Triangle::PDF() {
-    return 1 / area;
-}
 
 inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const {
     if (Dot(ray.direction, normal) > 0)
@@ -62,19 +57,19 @@ inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, 
 
     // 根据克拉默法则可得
 
-    //      |S E1 E2|          |-D S E2|        |-D E1 S|
-    // t = ------------, α =  -----------, β = -----------
-    //      |-D E1 E2|         |-D E1 E2|       |-D E1 E2|
+    //      det([S E1 E2])        det([-D S E2])        det([-D E1 S])
+    // t = ----------------, α = ----------------, β = -----------------
+    //      det([-D E1 E2])       det([-D E1 E2])       det([-D E1 E2])
 
     // 将行列式转换为标量三重积形式
-    //      (S × E1) · E2     (S × E1) · E2 //按照行列式顺序，叉乘和点乘可以调换
+    //      (S × E1) · E2     (S × E1) · E2  --> 按照行列式顺序，叉乘和点乘前后可以调换
     // t = --------------- = ---------------
-    //      -D · (E1 × E2)    E1 · (D × E2) //初等变换消掉负号消掉负号
+    //      -D · (E1 × E2)    E1 · (D × E2)  --> 改变行列式顺序，做初等变换，消掉负号
 
     //                                     S2 · E2
     // 令 S1 = D × E2, S2 = S × E1, 则 t = ---------
-    //
     //                                     E1 · S1
+
     //同理可得
     //      -D · (S × E2)     S · (D × E2)      S · S1
     // α = --------------- = --------------- = --------
@@ -86,22 +81,23 @@ inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, 
 
     // 整理可得
     //  [t]      1     [S2 · E2]
-    //  [α] = -------  [S1 · S]
-    //  [β]   S1 * E1  [S2 · D]
+    //  [α] = -------  [S1 · S ]
+    //  [β]   S1 · E1  [S2 · D ]
 
     // 代码实现
-    auto S = ray.origin - A;
-    auto E1 = AB, E2 = AC;
-    auto S1 = Cross(ray.direction, E2);
-    auto S2 = Cross(S, E1);
+    Vector3f D = ray.direction;
+    Vector3f S = ray.origin - A;
+    Vector3f E1 = B - A, E2 = C - A;
+    Vector3f S1 = Cross(D, E2);
+    Vector3f S2 = Cross(S, E1);
 
-    auto division = 1 / Dot(S1, E1);
+    float division = 1 / Dot(S1, E1);
 
-    auto time = Dot(S2, E2) * division;
-    auto alpha = Dot(S1, S) * division;
-    auto beta = Dot(S2, ray.direction) * division;
+    float time = Dot(S2, E2) * division;
+    float alpha = Dot(S1, S) * division;
+    float beta = Dot(S2, D) * division;
 
-    //如果γ特别小可能会出现浮点数精度误差导致 1 - alpha - beta 小于0
+    //如果 γ 特别小可能会出现浮点数精度误差导致 1 - alpha - beta 小于0
     if (time <= 0.f || alpha < 0.f || beta < 0.f || (1 - alpha - beta) < -EPSILON)
         return false;
 
