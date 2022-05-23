@@ -1,9 +1,13 @@
 # Just Tracer 软光追渲染器
 
-## About & References
+![](Resources/Output/Cornell_Box.jpg)
+
+## About 
 
 该项目是我个人在学习图形学过程中的练习项目，起源于跟着 Ray Tracing in One Weekend 系列第一部实现了简单的软光追渲染器，而后又阅读了其他各种软渲染器的代码，诸如 TinyRenderer, Nori, GAMES101作业7框架,
 smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现论文算法的需要，开始制作自己的软光追渲染器。
+
+## References
 
 > 1. [Ray Tracing in One Weekend Series](https://raytracing.github.io/)
 > 2. [smallpt - 99 行 C++ 代码实现全局光照](http://www.kevinbeason.com/smallpt/)
