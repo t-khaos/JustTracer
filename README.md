@@ -1,6 +1,7 @@
 # Just Tracer 软光追渲染器
 
-![](Resources/Output/Cornell_Box.jpg "720p×720p - 100spp 渲染结果")
+![](Resources/Output/Cornell_Box.jpg)
+<center>720p×720p - 100spp 渲染结果</center>
 ## About 
 
 该项目是我个人在学习图形学过程中的练习项目，起源于跟着 Ray Tracing in One Weekend 系列第一部实现了简单的软光追渲染器，而后又阅读了其他各种软渲染器的代码，诸如 TinyRenderer, Nori, GAMES101作业7框架,
