@@ -11,7 +11,7 @@ struct NormalIntegrator : public Integrator {
 
 inline Color3f NormalIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     HitResult result;
-    if (scene->Intersect(ray, result)) {
+    if (scene->Intersect(ray, result, MAX_FLOAT)) {
         return 0.5f * (result.normal + Color3f(1.f));
     }
     float t = 0.5f * (ray.direction.y + 1.0);

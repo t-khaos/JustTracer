@@ -14,12 +14,12 @@ struct Sphere : Object {
     Sphere(const float _r, const Vector3f _p, std::shared_ptr<Material> _mat)
             : radius(_r), center(_p), material(_mat) {}
 
-    bool intersect(const Ray &ray, HitResult &result, float t_near) const override;
+    bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
 };
 
 
-inline bool Sphere::intersect(const Ray &ray, HitResult &result, float t_near) const {
+inline bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     //t^2*d.d + 2*t*(o-p).d + (o-p).(o-p)-R^2 = 0
     Vector3f op = ray.origin - center;
     //h=b/2

@@ -23,7 +23,7 @@ Color3f MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene>
         return Color3f(0.f);
     //光线与场景求交
     HitResult result;
-    if (!scene->Intersect(ray, result))
+    if (!scene->Intersect(ray, result, MAX_FLOAT))
         return Color3f(0.f);
     //击中光源
     if (result.material->type == MaterialType::LIGHT)
@@ -41,7 +41,7 @@ Color3f MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene>
     //生成光线，向该方向投射，获取与光源交点的信息
     Ray toLightRay(result.point, toLightDirN);
     HitResult toLightResult;
-    scene->Intersect(toLightRay, toLightResult);
+    scene->Intersect(toLightRay, toLightResult, MAX_FLOAT);
 
     if (toLightResult.distance - distance > -EPSILON) {
         //L_dir = L_i * Eval * cos_theta * cos_theta_x / | x - p | ^ 2 / pdf_light
@@ -62,7 +62,7 @@ Color3f MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene>
     Ray diffuseRay(result.point, diffuseDirN);
     HitResult diffuseResult;
     //是否击中物体
-    if (!scene->Intersect(diffuseRay, diffuseResult))
+    if (!scene->Intersect(diffuseRay, diffuseResult, MAX_FLOAT))
         return L_direct;
     //击中的物体是否为光源
     if (diffuseResult.material->type == MaterialType::LIGHT)

@@ -9,6 +9,7 @@
 
 #define PI 3.1415926f
 #define EPSILON 0.0001f
+#define MAX_FLOAT std::numeric_limits<float>::max()
 
 //数学
 //-------------------------------------------------------------

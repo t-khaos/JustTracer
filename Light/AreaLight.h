@@ -2,24 +2,30 @@
 
 #include "Light.h"
 
+
 struct AreaLight : Light {
-    std::shared_ptr<Triangle> triangle;
 
-    AreaLight(const std::shared_ptr<Triangle> &_triangle) : triangle(_triangle) {}
+/*    std::shared_ptr<Triangle> triangle;
+    AreaLight(const std::shared_ptr<Triangle> &_triangle) : triangle(_triangle) {}*/
 
+
+    std::shared_ptr<Mesh> mesh;
+
+    AreaLight(const std::shared_ptr<Mesh> &_mesh) : mesh(_mesh) {}
     virtual void Sample(HitResult &result) override;
 
     virtual float PDF() override;
 };
 
 inline void AreaLight::Sample(HitResult &result) {
+    //随机选取 mesh 中的一个三角形
+    int index = static_cast<int>(RandomFloat()+0.5f);//[0.5,1.5]四舍五入
+    auto triangle = mesh->triangles[index];
 
     //三角形内均匀采样
     //α = 1 - √u, β = √u * v, γ = √u * (1 - √v)
     //可以优化为
     //设 s = √u, 有 α = 1 - s, β = s * v, γ = 1 - α - β
-
-    //随机选取一个三角形
 
     float s = std::sqrtf(RandomFloat());
     float v = RandomFloat();
@@ -31,10 +37,10 @@ inline void AreaLight::Sample(HitResult &result) {
             + beta * triangle->B
             + (1 - alpha - beta) * triangle->C;
 
-    result.material = triangle->material;
+    result.material = mesh->material;
     result.normal = triangle->normal;
 }
 
 inline float AreaLight::PDF() {
-    return 1 / triangle->area;
+    return 1 / mesh->TotalArea();
 }

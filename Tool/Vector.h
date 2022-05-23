@@ -391,6 +391,24 @@ inline Vector<3,T> ToWorld(const Vector<3,T>& a, const Vector<3,T>& n){
     return a.x*U+a.y*V+a.z*N;
 }
 
+template<size_t N, typename T>
+inline Vector<N,T> MaxVector(const Vector<N,T>& a, const Vector<N,T>& b){
+    Vector<N,T> temp;
+    for(int i = 0; i<N; i++){
+        temp[i] = (a[i] > b[i])? a[i] : b[i];
+    }
+    return temp;
+}
+
+template<size_t N, typename T>
+inline Vector<N,T> MinVector(const Vector<N,T>& a, const Vector<N,T>& b){
+    Vector<N,T> temp;
+    for(int i = 0; i<N; i++){
+        temp[i] = (a[i] < b[i])? a[i] : b[i];
+    }
+    return temp;
+}
+
 //特化矢量别名
 //------------------------------------------
 

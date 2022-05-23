@@ -4,6 +4,56 @@
 #include "../Tool/Vector.h"
 #include "Object.h"
 
+
+struct Rectangle : Object {
+    union {
+        Vector3f vertices[4];
+        struct {
+            Vector3f A, B, C, D;
+        };
+    };
+
+    Vector3f normal;
+    float area;
+
+    Rectangle(Vector3f _v0, Vector3f _v1, Vector3f _v2, Vector3f _v3)
+            : A(_v0), B(_v1), C(_v2), D(_v3) {
+        Vector3f AB, AD;
+        AB = B - A;
+        AD = D - A;
+        normal = Normalize(Cross(AB, AD));
+        area = Norm(Cross(AB, AD));
+    }
+
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
+
+};
+
+
+inline bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+    if (Dot(-ray.direction, normal) < EPSILON)
+        return false;
+
+    Vector3f u = B - A;
+    Vector3f v = D - A;
+
+    float time = Dot((A - ray.origin), normal) * (1 / Dot(ray.direction, normal));
+
+    if (time < 0.f)
+        return false;
+
+    Point3f p = ray.at(time);
+    auto maxVector = MaxVector(MaxVector(A, B), MaxVector(C, D));
+    auto minVector= MinVector(MinVector(A, B), MinVector(C, D));
+
+    result.distance = time;
+    result.point = ray.at(time);
+    result.normal = normal;
+
+    return true;
+}
+
+
 struct Triangle : Object {
 
 
@@ -14,15 +64,12 @@ struct Triangle : Object {
         };
     };
 
-
     Vector3f normal;
     float area;
-    std::shared_ptr<Material> material;
-
 
     //三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
-    Triangle(Vector3f _v0, Vector3f _v1, Vector3f _v2, std::shared_ptr<Material> _mat)
-        : A(_v0), B(_v1), C(_v2), material(_mat) {
+    Triangle(Vector3f _v0, Vector3f _v1, Vector3f _v2)
+            : A(_v0), B(_v1), C(_v2) {
         Vector3f AB, AC;
         AB = B - A;
         AC = C - A;
@@ -34,13 +81,12 @@ struct Triangle : Object {
     }
 
 
-    virtual bool intersect(const Ray &ray, HitResult &result, float t_near) const override;
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
 };
 
-inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_near) const {
-    // 光线方向打向交点，故要反过来
-    if (Dot(ray.direction, normal) > 0)
+inline bool Triangle::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+    if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 
     // Möller-Trumbore Algorithm
@@ -103,24 +149,51 @@ inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_near)
         return false;
 
     //如果时间大于了最大时间，说明已经再碰到该三角形之前已经碰撞到了别的三角形
-    if(time > t_near)
+    if (time > t_near)
         return false;
 
     result.distance = time;
-    result.point = alpha * A + beta * B + (1-alpha-beta) * C;
+    result.point = alpha * A + beta * B + (1 - alpha - beta) * C;
     result.normal = normal;
-    result.material = material;
 
     return true;
 }
 
 
-struct Mesh{
+struct Mesh : Object {
     std::vector<std::shared_ptr<Triangle>> triangles;
+    std::shared_ptr<Material> material;
 
-    Mesh(){}
+    Mesh(const std::shared_ptr<Material> &_mat)
+            : material(_mat) {}
 
-    void AddTriangle(std::shared_ptr<Triangle> triangle){triangles.push_back(triangle);}
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
+    void AddTriangle(const std::shared_ptr<Triangle> &triangle) { triangles.push_back(triangle); }
+
+    float TotalArea();
 
 };
+
+float Mesh::TotalArea() {
+    float sum = 0.f;
+    for (auto &triangle: triangles)
+        sum += triangle->area;
+    return sum;
+}
+
+bool Mesh::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+    HitResult tempResult;
+    bool isHit = false;
+    float closestTime = t_near;
+
+    for (auto &triangle: triangles) {
+        if (triangle->Intersect(ray, tempResult, closestTime)) {
+            isHit = true;
+            closestTime = result.distance;
+            result = tempResult;
+            result.material = material;
+        }
+    }
+    return isHit;
+}

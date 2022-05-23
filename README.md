@@ -14,8 +14,9 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
 > 7. [TinyRenderer - 中文教程&修改版](https://zhuanlan.zhihu.com/p/399056546)
 > 8. [Filament PBR 文档 - 中文翻译](https://jerkwin.github.io/filamentcn/Filament.md.html)
 > 9. [GAME101 - liupeining 的作业 7 实现](https://github.com/liupeining/Games_101_homework/tree/main/a7)
-> 10. [Mitsuba1/2 科研用的渲染器可以看看源代码](http://www.mitsuba-renderer.org/) 
-> 11. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
+> 10. [RenderHelp - 矢量模板写的特别好的软光栅化渲染器](https://github.com/skywind3000/RenderHelp)
+> 11. [Mitsuba1/2 科研用的渲染器可以看看源代码](http://www.mitsuba-renderer.org/) 
+> 12. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
 
 
 ## TODO

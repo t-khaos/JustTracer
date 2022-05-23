@@ -6,7 +6,7 @@
 #include "Shape/Sphere.h"
 #include "Light/SphereLight.h"
 
-struct Scene {
+struct Scene : Object{
 
     std::vector<std::shared_ptr<Object>> objects;
     std::vector<std::shared_ptr<Light>> lights;
@@ -16,18 +16,18 @@ struct Scene {
     void AddObject(std::shared_ptr<Object> object) { objects.push_back(object); }
     void AddLight(std::shared_ptr<Light> light){lights.push_back(light);}
 
-    bool Intersect(const Ray &ray, HitResult &result) const;
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 };
 
-inline bool Scene::Intersect(const Ray &ray, HitResult &result) const {
+inline bool Scene::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     HitResult tempResult;
     bool isHit = false;
-    float time_closest = std::numeric_limits<float>::max();
+    float closestTime = t_near;
 
     for (auto &object: objects) {
-        if (object->intersect(ray, tempResult, time_closest)) {
+        if (object->Intersect(ray, tempResult, closestTime)) {
             isHit = true;
-            time_closest = tempResult.distance;
+            closestTime = tempResult.distance;
             result = tempResult;
         }
     }
