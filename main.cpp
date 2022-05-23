@@ -23,41 +23,37 @@ int main() {
     const int height = 480;
     const float aspect_ratio = static_cast<float>(width) / height;
     const float fov = 90;
-    const int spp = 100;
+    const int spp = 5000;
 
     //材质
     //-------------------------------------------------------------
 
     auto mat_diffuse_red = std::make_shared<DiffuseMaterial>(
-            Color3f(0.63f, 0.065f, 0.05f),
-            Color3f(0.f),
+            Color3f(0.63f, 0.065f, 0.05f), //base color
+            Color3f(0.f), // emission
             MaterialType::DIFFUSE
     );
     auto mat_diffuse_green = std::make_shared<DiffuseMaterial>(
-            Color3f(0.14f, 0.45f, 0.091f),
-            Color3f(0.f),
+            Color3f(0.14f, 0.45f, 0.091f), //base color
+            Color3f(0.f), // emission
             MaterialType::DIFFUSE
     );
     auto mat_diffuse_white = std::make_shared<DiffuseMaterial>(
-            Color3f(0.725f, 0.71f, 0.68f),
-            Color3f(0.f),
+            Color3f(0.725f, 0.71f, 0.68f), //base color
+            Color3f(0.f), // emission
             MaterialType::DIFFUSE
     );
 
     auto mat_light = std::make_shared<DiffuseMaterial>(
-            Color3f(0.f),
-            Color3f(100, 100, 100),
+            Color3f(0.f), //base color
+            Color3f(100, 100, 100), // emission
             MaterialType::LIGHT
     );
 
     //物体
     //-------------------------------------------------------------
-    auto sphere_left = std::make_shared<Sphere>(1e5, Vector3f(-1e5 - 150, 0, 0), mat_diffuse_red);
-    auto sphere_right = std::make_shared<Sphere>(1e5, Vector3f(1e5 + 150, 0, 0), mat_diffuse_green);
-    auto sphere_back = std::make_shared<Sphere>(1e5, Vector3f(0, 0, 1e5 + 150), mat_diffuse_white);
-    auto sphere_bottom = std::make_shared<Sphere>(2000, Vector3f(0, -2060, 0), mat_diffuse_white);
-    auto sphere_top = std::make_shared<Sphere>(1e5, Vector3f(0, 1e5 + 150, 0), mat_diffuse_white);
 
+    auto sphere_bottom = std::make_shared<Sphere>(2000, Vector3f(0, -2060, 0), mat_diffuse_white);
     auto sphere_red = std::make_shared<Sphere>(35, Vector3f(0, 0, 0), mat_diffuse_red);
 
     auto sphere_light = std::make_shared<Sphere>(30, Vector3f(0, 180, 0), mat_light);
@@ -66,7 +62,6 @@ int main() {
     //光源
     //-------------------------------------------------------------
     auto light_sphere = std::make_shared<SphereLight>(sphere_light);
-
     auto light_area = std::make_shared<AreaLight>(area_light);
 
     //场景

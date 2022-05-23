@@ -1,13 +1,42 @@
-# 软光追渲染器
+# Just Tracer 软光追渲染器 - 
 
-## TODO List
+## About & References
+
+该项目是我个人在学习图形学过程中的练习项目，起源于跟着 Ray Tracing in One Weekend 系列第一部
+实现了简单的软光追渲染器，而后又阅读了其他各种软渲染器的代码，诸如 TinyRenderer, Nori, GAMES101作业7框架,
+smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现论文算法的需要，开始制作自己的软光追渲染器。
+
+> 1. [Ray Tracing in One Weekend Series](https://raytracing.github.io/)
+> 2. [smallpt 99行C++代码实现](http://www.kevinbeason.com/smallpt/)
+> 3. [vinjn 大佬提供的 smallpt 魔改版合集](https://github.com/vinjn/learn-raytracing)
+> 4. [smallpt 改写为 pbrt](https://infancy.github.io/smallpt2pbrt.html)
+> 5. [Pursuit 大佬的软光追渲染器](https://github.com/ksgfk/Pursuit)
+> 6. [Nori - Pursuit 作者的作业解析](https://www.zhihu.com/column/c_1407025850030698496)
+> 7. [TinyRenderer 中文教程&修改版](https://zhuanlan.zhihu.com/p/399056546)
+> 8. [Filament PBR 中文翻译](https://jerkwin.github.io/filamentcn/Filament.md.html)
+> 9. [liupeining 大佬的GAME101作业7](https://github.com/liupeining/Games_101_homework/tree/main/a7)
+> 10. [Mitsuba1/2 科研用的渲染器可以看看源代码](http://www.mitsuba-renderer.org/) 
+> 11. [pbrt 同样是可以用于科研用的渲染器](https://www.pbr-book.org/3ed-2018/contents)
+
+
+## TODO
+
+- PBR 材质
+- 空间加速结构
+- 模型加载和解析
+- 透视相机
+- 点光源
+- Cornell Box 场景
+- 场景 Json 文件解析
+- 纹理贴图
+
+## Features
 
 - Object 物体 √
     - Sphere 球体 √
     - Model 模型
         - Mesh 网格
-        - Triangle 三角形
-        - Vertex 顶点
+        - Triangle 三角形 √
         - Texture 纹理
 - Ray 射线 √
 - HitResult 相交结果 √
@@ -32,6 +61,9 @@
   - ReflectMaterial 镜面反射材质 √
   - RefractMaterial 折射材质
   - MircofacetMaterial 微表面材质
+- Light 灯光 √
+  - SphereLight 体积光源 - 球体 √
+  - AreaLight 面光源 √
 - Accelerator 加速结构
   - AABB 轴向包围盒
   - BVH 层次包围体
@@ -46,7 +78,11 @@
   - TextureLoader 纹理文件解析
 
 
-## Issue List
+## Dependencies
+
+以后可能会加上 stb_image 头文件以支持输出其他格式图片
+
+## Issues
 
 - 超大直径（1e5）球体有渲染瑕疵
-- 间接光照阴影渲染瑕疵
+- 相机透视变形
