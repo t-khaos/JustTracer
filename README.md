@@ -1,8 +1,7 @@
-# Just Tracer 软光追渲染器
 
-![](Resources/Output/Cornell_Box.jpg)
-
-<center>720p×720p - 100spp 渲染结果</center>
+<h1 align="center">Just Tracer</h1>
+<p align="center"><img src="Resources/Output/Cornell_Box.jpg" alt="Logo" width="50%"></p>
+<p align="center">软光线追踪渲染器 720p×720p | 100spp 渲染结果</p>
 
 ## About 
 
