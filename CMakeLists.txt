@@ -28,7 +28,7 @@ add_executable(
         Common/Ray.h
         Common/Global.h
         Common/Vector.h
-        Common/Matrix4.h
+        Common/Matrix.h
         Common/Camera.h
         Common/Vector.h
         Common/Material.h
