@@ -2,19 +2,18 @@
 
 #include <memory>
 #include <vector>
+#include "Object/IIntersect.h"
+#include "Object/ILight.h"
 
-#include "Shape/Sphere.h"
-#include "Light/SphereLight.h"
+struct Scene : IIntersect{
 
-struct Scene : Object{
-
-    std::vector<std::shared_ptr<Object>> objects;
-    std::vector<std::shared_ptr<Light>> lights;
+    std::vector<std::shared_ptr<IIntersect>> objects;
+    std::vector<std::shared_ptr<ILight>> lights;
 
     Scene() : objects{} {};
 
-    void AddObject(std::shared_ptr<Object> object) { objects.push_back(object); }
-    void AddLight(std::shared_ptr<Light> light){lights.push_back(light);}
+    void AddObject(std::shared_ptr<IIntersect> object) { objects.push_back(object); }
+    void AddLight(std::shared_ptr<ILight> light){lights.push_back(light);}
 
     virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 };

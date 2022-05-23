@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Sampler.h"
+#include "ISampler.h"
 
-struct TrapezoidalSampler : Sampler {
+struct TrapezoidalSampler : ISampler {
 public:
     TrapezoidalSampler() {}
 

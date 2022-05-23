@@ -3,7 +3,7 @@
 #include <limits>
 #include <memory>
 #include "Tool/Vector.h"
-#include "Material/Material.h"
+#include "Material/IMaterial.h"
 
 
 struct Ray {
@@ -21,7 +21,7 @@ struct HitResult {
     Vector3f normal;
     float distance;
 
-    std::shared_ptr<Material> material = nullptr;
+    std::shared_ptr<IMaterial> material = nullptr;
 
     HitResult() : point(Point3f()), normal(Vector3f()), distance(0.0) {}
 };

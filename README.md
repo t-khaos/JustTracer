@@ -34,11 +34,13 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
 
 ## Features
 
-- [x] Object 物体
+- [x] IIntersect 物体
     - [x] Sphere 球体
     - [x] Triangle 三角形
     - [x] Rectangle 矩形
-- [ ] Texture 纹理
+- [ ] Model 模型
+  - [ ] Mesh 网格
+  - [ ] Texture 纹理
 - [x] Ray 射线
 - [x] HitResult 相交结果
 - [x] Renderer 渲染器
@@ -47,22 +49,22 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
   - [x] 输出PPM格式图片
   - [ ] 使用第三方库输出常用格式图片
 - [x] Scene 场景
-- [x] Camera 相机
+- [x] ICamera 相机
   - [x] PerspectiveCamera 透视相机
   - [ ] OrthogonalCamera 正交相机
-- [x] Sampler 采样器
+- [x] ISampler 采样器
   - [x] TrapezoidalSampler 梯形分布采样器
-- [x] Integrator 积分器
+- [x] IIntegrator 积分器
   - [x] MonteCarloPathIntegrator 蒙特卡洛路径追踪积分器
     - [x] 对光源采样
   - [x] SimplePathIntegrator 简单路径追踪积分器
   - [x] NormalIntegrator 法线可视化积分器
-- [x] Material 材质
+- [x] IMaterial 材质
   - [x] DiffuseMaterial 漫反射材质
   - [ ] ReflectMaterial 镜面反射材质
   - [ ] RefractMaterial 折射材质
   - [ ] MircofacetMaterial 微表面材质
-- [x] Light 灯光
+- [x] ILight 灯光
   - [x] SphereLight 体积光源
   - [x] AreaLight 面光源
 - [ ] Accelerator 加速结构

@@ -8,16 +8,16 @@
 #include "Tool/Global.h"
 #include "Camera/PerspectiveCamera.h"
 #include "Film.h"
-#include "Sampler/Sampler.h"
-#include "Integrator/Integrator.h"
+#include "Sampler/ISampler.h"
+#include "Integrator/IIntegrator.h"
 
 class Renderer {
 private:
     std::shared_ptr<Scene>  scene = nullptr;
-    std::shared_ptr<Camera>  camera = nullptr;
-    std::shared_ptr<Sampler>  sampler = nullptr;
+    std::shared_ptr<ICamera>  camera = nullptr;
+    std::shared_ptr<ISampler>  sampler = nullptr;
     std::shared_ptr<Film>  film = nullptr;
-    std::shared_ptr<Integrator>  integrator = nullptr;
+    std::shared_ptr<IIntegrator>  integrator = nullptr;
 
     int spp;
 
@@ -26,13 +26,13 @@ public:
 
     void SetScene(std::shared_ptr<Scene> _scene) { scene = _scene; }
 
-    void SetCamera(std::shared_ptr<Camera> _camera) { camera = _camera; }
+    void SetCamera(std::shared_ptr<ICamera> _camera) { camera = _camera; }
 
-    void SetSampler(std::shared_ptr<Sampler> _sample) { sampler = _sample; }
+    void SetSampler(std::shared_ptr<ISampler> _sample) { sampler = _sample; }
 
     void SetFilm(std::shared_ptr<Film> _film) { film = _film; }
 
-    void SetIntegrator(std::shared_ptr<Integrator> _integrator) { integrator = _integrator; }
+    void SetIntegrator(std::shared_ptr<IIntegrator> _integrator) { integrator = _integrator; }
 
     void Render() const;
 };

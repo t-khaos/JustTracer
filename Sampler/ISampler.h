@@ -5,6 +5,6 @@
 #include "../Tool/Vector.h"
 
 
-struct Sampler {
+struct ISampler {
     virtual Vector2f CastRayByDistribution(int x, int y) = 0;
 };

@@ -1,7 +1,7 @@
 /*
 #pragma once
 
-#include "Material.h"
+#include "IMaterial.h"
 
 enum PBRType {
     COOK_TORRANCE_GGX

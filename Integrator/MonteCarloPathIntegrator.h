@@ -33,7 +33,7 @@ Color3f MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene>
     HitResult sampleLightResult;
     //1.对光源采样，获取采样pdf，在光源表面均选取采样的位置
     float pdf_light = scene->lights[0]->PDF();
-    scene->lights[0]->Sample(sampleLightResult);
+    scene->lights[0]->SampleHitResult(sampleLightResult);
     //交点与采样点方向
     Vector3f toLightDir = sampleLightResult.point - result.point;
     Vector3f toLightDirN = Normalize(toLightDir);
@@ -56,7 +56,7 @@ Color3f MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene>
     if (depth > 3 && RandomFloat() > P_RR)
         return L_direct;
     //2.对交点采样，随机采样漫反射方向
-    Vector3f diffuseDir = result.material->Sample(ray.direction, result.normal);
+    Vector3f diffuseDir = result.material->SampleDirection(ray.direction, result.normal);
     Vector3f diffuseDirN = Normalize(diffuseDir);
     //生成光线，向该方向投射
     Ray diffuseRay(result.point, diffuseDirN);

@@ -6,7 +6,7 @@
 #include "../Scene.h"
 
 
-struct Integrator {
+struct IIntegrator {
     virtual Color3f Li(const Ray &ray, std::shared_ptr<Scene> scene) = 0;
 };
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Camera.h"
+#include "ICamera.h"
 #include "../Tool/Vector.h"
 
-class PerspectiveCamera : public Camera {
+class PerspectiveCamera : public ICamera {
 private:
     Point3f origin;
     Point3f start;

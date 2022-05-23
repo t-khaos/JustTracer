@@ -1,21 +1,25 @@
 #pragma once
 
 
-#include "Object.h"
+#include "IIntersect.h"
 #include "../Tool/Vector.h"
+#include "ILight.h"
 
 
-struct Sphere : Object {
+struct Sphere : IIntersect, ILight {
 
     float radius;
     Vector3f center;
-    std::shared_ptr<Material> material;
+    std::shared_ptr<IMaterial> material;
 
-    Sphere(const float _r, const Vector3f _p, std::shared_ptr<Material> _mat)
+    Sphere(const float _r, const Vector3f _p, std::shared_ptr<IMaterial> _mat)
             : radius(_r), center(_p), material(_mat) {}
 
     bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
+    virtual void SampleHitResult(HitResult &result) override;
+
+    virtual float PDF() override;
 };
 
 
@@ -41,4 +45,23 @@ inline bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) c
     result.normal = NoL < 0 ? result.normal : -result.normal;
     result.material = material;
     return true;
+}
+
+inline void Sphere::SampleHitResult(HitResult &result) {
+
+    float theta = 2.0 * PI * RandomFloat();
+    float phi = PI * RandomFloat();
+    Vector3f direction(
+            std::cos(phi),
+            std::sin(phi) * std::cos(theta),
+            std::sin(phi) * std::sin(theta)
+    );
+
+    result.point = center + direction * radius;
+    result.normal = direction;
+    result.material = material;
+}
+
+inline float Sphere::PDF() {
+    return 1 / (4 * PI * radius * radius);
 }

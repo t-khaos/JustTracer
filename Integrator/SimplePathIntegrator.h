@@ -24,7 +24,7 @@ inline Color3f SimplePathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Sce
     if (scene->Intersect(ray, result, MAX_FLOAT)) {
         if (result.material->type == MaterialType::LIGHT)
             return result.material->emission;
-        auto direction = result.material->Sample(ray.direction, result.normal);
+        auto direction = result.material->SampleDirection(ray.direction, result.normal);
         if (Dot(direction, result.normal) < 0)
             return Color3f(0.0);
         Ray ray_out(result.point, direction);

@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include "Integrator.h"
+#include "IIntegrator.h"
 
-struct PathIntegrator : Integrator {
+struct PathIntegrator : IIntegrator {
     int depth_max;
 
     PathIntegrator(int _depth = 5) : depth_max(_depth) {}
