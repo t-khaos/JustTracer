@@ -2,21 +2,20 @@
 
 ## About & References
 
-该项目是我个人在学习图形学过程中的练习项目，起源于跟着 Ray Tracing in One Weekend 系列第一部
-实现了简单的软光追渲染器，而后又阅读了其他各种软渲染器的代码，诸如 TinyRenderer, Nori, GAMES101作业7框架,
+该项目是我个人在学习图形学过程中的练习项目，起源于跟着 Ray Tracing in One Weekend 系列第一部实现了简单的软光追渲染器，而后又阅读了其他各种软渲染器的代码，诸如 TinyRenderer, Nori, GAMES101作业7框架,
 smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现论文算法的需要，开始制作自己的软光追渲染器。
 
 > 1. [Ray Tracing in One Weekend Series](https://raytracing.github.io/)
-> 2. [smallpt 99行C++代码实现](http://www.kevinbeason.com/smallpt/)
+> 2. [smallpt - 99 行 C++ 代码实现全局光照](http://www.kevinbeason.com/smallpt/)
 > 3. [vinjn 大佬提供的 smallpt 魔改版合集](https://github.com/vinjn/learn-raytracing)
-> 4. [smallpt 改写为 pbrt](https://infancy.github.io/smallpt2pbrt.html)
-> 5. [Pursuit 大佬的软光追渲染器](https://github.com/ksgfk/Pursuit)
-> 6. [Nori - Pursuit 作者的作业解析](https://www.zhihu.com/column/c_1407025850030698496)
-> 7. [TinyRenderer 中文教程&修改版](https://zhuanlan.zhihu.com/p/399056546)
-> 8. [Filament PBR 中文翻译](https://jerkwin.github.io/filamentcn/Filament.md.html)
-> 9. [liupeining 大佬的GAME101作业7](https://github.com/liupeining/Games_101_homework/tree/main/a7)
+> 4. [smallpt 改写为 pbrt - infancy 的中文教程](https://infancy.github.io/smallpt2pbrt.html)
+> 5. [Pursuit - ksgfk 的软光追渲染器](https://github.com/ksgfk/Pursuit)
+> 6. [Nori - Pursuit 作者的 Nori 作业解析](https://www.zhihu.com/column/c_1407025850030698496)
+> 7. [TinyRenderer - 中文教程&修改版](https://zhuanlan.zhihu.com/p/399056546)
+> 8. [Filament PBR 文档 - 中文翻译](https://jerkwin.github.io/filamentcn/Filament.md.html)
+> 9. [GAME101 - liupeining 的作业 7 实现](https://github.com/liupeining/Games_101_homework/tree/main/a7)
 > 10. [Mitsuba1/2 科研用的渲染器可以看看源代码](http://www.mitsuba-renderer.org/) 
-> 11. [pbrt 同样是可以用于科研用的渲染器](https://www.pbr-book.org/3ed-2018/contents)
+> 11. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
 
 
 ## TODO
