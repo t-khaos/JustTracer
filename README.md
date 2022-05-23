@@ -1,4 +1,4 @@
-# Just Tracer 软光追渲染器 - 
+# Just Tracer 软光追渲染器
 
 ## About & References
 

@@ -34,11 +34,11 @@ struct Triangle : Object {
     }
 
 
-    virtual bool intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const override;
+    virtual bool intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
 };
 
-inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, float t_max) const {
+inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_near) const {
     // 光线方向打向交点，故要反过来
     if (Dot(ray.direction, normal) > 0)
         return false;
@@ -103,7 +103,7 @@ inline bool Triangle::intersect(const Ray &ray, HitResult &result, float t_min, 
         return false;
 
     //如果时间大于了最大时间，说明已经再碰到该三角形之前已经碰撞到了别的三角形
-    if(time > t_max)
+    if(time > t_near)
         return false;
 
     result.distance = time;
