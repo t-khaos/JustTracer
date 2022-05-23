@@ -2,10 +2,15 @@
 
 #include <memory>
 
-#include "../Ray.h"
+#include "Global.h"
+#include "Ray.h"
+#include "HitResult.h"
 
-struct IIntersect {
-    IIntersect() {}
+struct Object {
+    Object() {}
 
     virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const = 0;
 };
+
+
+

@@ -1,12 +1,9 @@
-#pragma once
-
 
 #include <vector>
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <assert.h>
-#include "../Tool/Vector.h"
+#include "../Common/Vector.h"
 
 struct Vertex {
     Point3f position;
@@ -79,11 +76,6 @@ struct ModelMesh {
 
     }
 
-};
-
-struct Model{
-    std::vector<Mesh> meshes;
-    std::vector<Texture> textures;
 };
 
 

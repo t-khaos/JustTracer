@@ -1,10 +1,8 @@
 #pragma once
 
 #include <cassert>
-
 #include <initializer_list>
 #include <cmath>
-
 
 //通用矢量模板
 //------------------------------------------

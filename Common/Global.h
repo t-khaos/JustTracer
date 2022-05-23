@@ -1,19 +1,16 @@
 #pragma once
 
-
 #include <cmath>
 #include <random>
 
 //数值定义
 //-------------------------------------------------------------
-
 #define PI 3.1415926f
 #define EPSILON 0.001f
 #define MAX_FLOAT std::numeric_limits<float>::max()
 
 //数学
 //-------------------------------------------------------------
-
 inline float Clamp(float x, float min, float max) {
     if (x < min) return min;
     if (x > max) return max;

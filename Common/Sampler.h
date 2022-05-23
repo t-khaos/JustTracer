@@ -2,9 +2,10 @@
 
 #include <vector>
 #include <iostream>
-#include "../Tool/Vector.h"
 
+#include "Global.h"
+#include "Vector.h"
 
-struct ISampler {
+struct Sampler {
     virtual Vector2f CastRayByDistribution(int x, int y) = 0;
 };

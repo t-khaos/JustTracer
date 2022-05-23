@@ -1,8 +1,7 @@
 #pragma once
 
-#include "../Tool/Vector.h"
-#include "../Tool/Global.h"
-
+#include "Global.h"
+#include "Vector.h"
 
 enum class MaterialType {
     DIFFUSE,
@@ -10,12 +9,12 @@ enum class MaterialType {
     LIGHT,
 };
 
-struct IMaterial {
+struct Material {
     Color3f emission;
     Color3f base_color;
     MaterialType type;
 
-    IMaterial(const Color3f &_color, const Color3f &_emission, const MaterialType &_type)
+    Material(const Color3f &_color, const Color3f &_emission, const MaterialType &_type)
             : base_color(_color), emission(_emission), type(_type) {}
 
     virtual float PDF(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) = 0;
@@ -24,4 +23,3 @@ struct IMaterial {
 
     virtual Vector3f SampleDirection(const Vector3f &V, const Vector3f &N) = 0;
 };
-

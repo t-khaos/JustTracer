@@ -1,7 +1,6 @@
 /*
-#pragma once
 
-#include "IMaterial.h"
+#include "Material.h"
 
 enum PBRType {
     COOK_TORRANCE_GGX
@@ -21,11 +20,11 @@ struct MicrofacetMaterial {
 
     Vector3f Fr_COOK_TORRANCE_GGX(const Vector3f &wi, const Vector3f &wo, const Vector3f &normal);
 
-    inline float D_GGX_TR(Vector3f N, Vector3f H, float a);
+    float D_GGX_TR(Vector3f N, Vector3f H, float a);
 
-    inline float Geometry_Schlick_GGX(float NoV, float k);
+    float Geometry_Schlick_GGX(float NoV, float k);
 
-    inline float GeometrySmith(Vector3f N, Vector3f V, Vector3f L, float k);
+    float GeometrySmith(Vector3f N, Vector3f V, Vector3f L, float k);
 
     Vector3f fresnel_schlick(float cosTheta, Vector3f F0);
 };
@@ -72,7 +71,7 @@ Vector3f MicrofacetMaterial::Fr_COOK_TORRANCE_GGX(const Vector3f &wi, const Vect
     return diffuse + specular;
 }
 
-inline float MicrofacetMaterial::D_GGX_TR(Vector3f N, Vector3f H, float a) {
+float MicrofacetMaterial::D_GGX_TR(Vector3f N, Vector3f H, float a) {
     float a2 = a * a;
     float NoH = std::max(N.Dot(H), 0.0);
     float NoH2 = NoH * NoH;
@@ -84,14 +83,14 @@ inline float MicrofacetMaterial::D_GGX_TR(Vector3f N, Vector3f H, float a) {
     return nom / denom;
 }
 
-inline float MicrofacetMaterial::Geometry_Schlick_GGX(float NoV, float k) {
+float MicrofacetMaterial::Geometry_Schlick_GGX(float NoV, float k) {
     float nom = NoV;
     float denom = NoV * (1.0 - k) + k;
 
     return nom / denom;
 }
 
-inline float MicrofacetMaterial::GeometrySmith(Vector3f N, Vector3f V, Vector3f L, float k) {
+float MicrofacetMaterial::GeometrySmith(Vector3f N, Vector3f V, Vector3f L, float k) {
     float NoV = std::max(N.Dot(V), 0.0);
     float NoL = std::max(N.Dot(L), 0.0);
     float ggx1 = Geometry_Schlick_GGX(NoV, k);
@@ -100,7 +99,7 @@ inline float MicrofacetMaterial::GeometrySmith(Vector3f N, Vector3f V, Vector3f 
     return ggx1 * ggx2;
 }
 
-inline Vector3f MicrofacetMaterial::fresnel_schlick(float cos_theta, Vector3f F0) {
+Vector3f MicrofacetMaterial::fresnel_schlick(float cos_theta, Vector3f F0) {
     return F0 + (Vector3f(1.0) - F0) * pow(1.0 - cos_theta, 5.0);
 }
 */

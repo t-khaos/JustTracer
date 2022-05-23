@@ -1,18 +1,15 @@
 #include <iostream>
-#include "Renderer.h"
-#include "Material/MicrofacetMaterial.h"
-#include "Sampler/TrapezoidalSampler.h"
-#include "Integrator/NormalIntegrator.h"
-#include "Tool/Vector.h"
-#include "Integrator/SimplePathIntegrator.h"
+
+#include "Common/Vector.h"
+#include "Renderer/Renderer.h"
 #include "Material/DiffuseMaterial.h"
-#include "Material/RefractMaterial.h"
-#include "Integrator/MonteCarloPathIntegrator.h"
 #include "Object/Rectangle.h"
 #include "Object/Sphere.h"
+#include "Camera/PerspectiveCamera.h"
+#include "Integrator/MonteCarloPathIntegrator.h"
+#include "Sampler/TrapezoidalSampler.h"
 
 int main() {
-
     // 右手坐标系
     //          y
     //          ↑
@@ -62,7 +59,6 @@ int main() {
             Color3f(0.f), // emission
             MaterialType::DIFFUSE
     );
-
     auto lightMat = std::make_shared<DiffuseMaterial>(
             Color3f(0.f), //base color
             Color3f(50, 50, 50), // emission
@@ -140,11 +136,11 @@ int main() {
     //-------------------------------------------------------------
     Renderer renderer(spp);
 
-    renderer.SetCamera(camera);
-    renderer.SetFilm(film);
-    renderer.SetScene(scene);
-    renderer.SetSampler(sampler);
-    renderer.SetIntegrator(integrator);
+    renderer.camera = camera;
+    renderer.film = film;
+    renderer.scene=scene;
+    renderer.sampler=sampler;
+    renderer.integrator=integrator;
 
     renderer.Render();
 

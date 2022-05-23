@@ -1,44 +1,7 @@
-#pragma once
 
-#include <string>
-#include <iostream>
-#include <fstream>
+#include "Renderer.h"
 
-#include "Scene.h"
-#include "Tool/Global.h"
-#include "Camera/PerspectiveCamera.h"
-#include "Film.h"
-#include "Sampler/ISampler.h"
-#include "Integrator/IIntegrator.h"
-
-class Renderer {
-private:
-    std::shared_ptr<Scene>  scene = nullptr;
-    std::shared_ptr<ICamera>  camera = nullptr;
-    std::shared_ptr<ISampler>  sampler = nullptr;
-    std::shared_ptr<Film>  film = nullptr;
-    std::shared_ptr<IIntegrator>  integrator = nullptr;
-
-    int spp;
-
-public:
-    explicit Renderer(int _spp) : spp(_spp) {}
-
-    void SetScene(std::shared_ptr<Scene> _scene) { scene = _scene; }
-
-    void SetCamera(std::shared_ptr<ICamera> _camera) { camera = _camera; }
-
-    void SetSampler(std::shared_ptr<ISampler> _sample) { sampler = _sample; }
-
-    void SetFilm(std::shared_ptr<Film> _film) { film = _film; }
-
-    void SetIntegrator(std::shared_ptr<IIntegrator> _integrator) { integrator = _integrator; }
-
-    void Render() const;
-};
-
-
-inline void Renderer::Render() const {
+void Renderer::Render() const {
 
     std::vector<Color3f> pixels(film->width * film->height);
     Color3f color(0.0);
