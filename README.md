@@ -24,9 +24,6 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
 - PBR 材质
 - 空间加速结构
 - 模型加载和解析
-- 透视相机
-- 点光源
-- Cornell Box 场景
 - 场景 Json 文件解析
 - 纹理贴图
 
@@ -62,7 +59,7 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
   - RefractMaterial 折射材质
   - MircofacetMaterial 微表面材质
 - Light 灯光 √
-  - SphereLight 体积光源 - 球体 √
+  - SphereLight 体积光源 √
   - AreaLight 面光源 √
 - Accelerator 加速结构
   - AABB 轴向包围盒

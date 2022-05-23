@@ -8,16 +8,28 @@ struct AreaLight : Light {
 /*    std::shared_ptr<Triangle> triangle;
     AreaLight(const std::shared_ptr<Triangle> &_triangle) : triangle(_triangle) {}*/
 
+    std::shared_ptr<Rectangle> rectangle;
 
-    std::shared_ptr<Mesh> mesh;
+    AreaLight(const std::shared_ptr<Rectangle> &_rec) : rectangle(_rec) {}
 
-    AreaLight(const std::shared_ptr<Mesh> &_mesh) : mesh(_mesh) {}
     virtual void Sample(HitResult &result) override;
 
     virtual float PDF() override;
 };
 
 inline void AreaLight::Sample(HitResult &result) {
+    //矩形内均匀采样
+    result.point = rectangle->A + rectangle->s * RandomFloat() + rectangle->t * RandomFloat();
+    result.material = rectangle->material;
+    result.normal = rectangle->normal;
+}
+
+
+inline float AreaLight::PDF() {
+    return 1 / rectangle->area;
+}
+
+/*inline void AreaLight::Sample(HitResult &result) {
     //随机选取 mesh 中的一个三角形
     int index = static_cast<int>(RandomFloat()+0.5f);//[0.5,1.5]四舍五入
     auto triangle = mesh->triangles[index];
@@ -39,8 +51,4 @@ inline void AreaLight::Sample(HitResult &result) {
 
     result.material = mesh->material;
     result.normal = triangle->normal;
-}
-
-inline float AreaLight::PDF() {
-    return 1 / mesh->TotalArea();
-}
+}*/

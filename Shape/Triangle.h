@@ -15,14 +15,15 @@ struct Rectangle : Object {
 
     Vector3f normal;
     float area;
+    Vector3f s, t;
+    std::shared_ptr<Material> material;
 
-    Rectangle(Vector3f _v0, Vector3f _v1, Vector3f _v2, Vector3f _v3)
-            : A(_v0), B(_v1), C(_v2), D(_v3) {
-        Vector3f AB, AD;
-        AB = B - A;
-        AD = D - A;
-        normal = Normalize(Cross(AB, AD));
-        area = Norm(Cross(AB, AD));
+    Rectangle(Vector3f _v0, Vector3f _v1, Vector3f _v2, Vector3f _v3, std::shared_ptr<Material> _mat)
+            : A(_v0), B(_v1), C(_v2), D(_v3), material(_mat) {
+        s = B - A;
+        t = D - A;
+        normal = Normalize(Cross(s, t));
+        area = Norm(Cross(s, t));
     }
 
     virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
@@ -34,21 +35,25 @@ inline bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 
-    Vector3f u = B - A;
-    Vector3f v = D - A;
-
     float time = Dot((A - ray.origin), normal) * (1 / Dot(ray.direction, normal));
 
-    if (time < 0.f)
+    if (time <= 0.f || time > t_near)
         return false;
 
-    Point3f p = ray.at(time);
+    Point3f point = ray.at(time);
+
+    //矩形在xyz轴上取值范围
     auto maxVector = MaxVector(MaxVector(A, B), MaxVector(C, D));
-    auto minVector= MinVector(MinVector(A, B), MinVector(C, D));
+    auto minVector = MinVector(MinVector(A, B), MinVector(C, D));
+    if (minVector.x - point.x > EPSILON || point.x - maxVector.x > EPSILON ||
+        minVector.y - point.y > EPSILON || point.y - maxVector.y > EPSILON ||
+        minVector.z - point.z > EPSILON || point.z - maxVector.z > EPSILON)
+        return false;
 
     result.distance = time;
-    result.point = ray.at(time);
+    result.point = point;
     result.normal = normal;
+    result.material = material;
 
     return true;
 }
@@ -155,7 +160,6 @@ inline bool Triangle::Intersect(const Ray &ray, HitResult &result, float t_near)
     result.distance = time;
     result.point = alpha * A + beta * B + (1 - alpha - beta) * C;
     result.normal = normal;
-
     return true;
 }
 
