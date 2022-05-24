@@ -9,7 +9,6 @@
 
 struct Object {
     AABB bounds;
-    virtual AABB GetBounds();
 
     Object():bounds(AABB()) {}
 
