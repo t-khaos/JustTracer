@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DiffuseMaterial.h"
+#include "../Common/Random.h"
 
 
 double DiffuseMaterial::PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) {
@@ -17,7 +18,7 @@ double DiffuseMaterial::PDF(const Vector3d &wi, const Vector3d &wo, const Vector
 }
 
 
-Vector3d DiffuseMaterial::EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) {
+Color3d DiffuseMaterial::EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) {
     double NoL = Dot(wo, N) ;
 
     if (NoL < 0.0)

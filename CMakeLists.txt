@@ -53,4 +53,4 @@ add_executable(
         Renderer/Scene.cpp Renderer/Scene.h
 
         Renderer/Sampler.h Renderer/Sampler.cpp
-)
+        Common/Math.h Common/Random.h)

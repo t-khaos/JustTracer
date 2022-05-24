@@ -12,7 +12,7 @@ struct DiffuseMaterial : Material {
 
     virtual double PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) override;
 
-    virtual Vector3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) override;
+    virtual Color3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) override;
 
     virtual Vector3d SampleDirection(const Vector3d &V, const Vector3d &N) override;
 };

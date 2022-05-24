@@ -1,5 +1,6 @@
 
 #include "Renderer.h"
+#include "../Common/Math.h"
 
 void Film::Develop(const std::vector<Color3d> &pixels) const {
     std::ofstream file;

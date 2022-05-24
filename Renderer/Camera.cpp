@@ -1,5 +1,6 @@
 
 #include "Camera.h"
+#include "../Common/Math.h"
 
 Camera::Camera(Point3d look_from, Point3d look_at, Vector3d up, double fov, double aspect_ratio) {
     double theta = Degrees2Radians(fov);

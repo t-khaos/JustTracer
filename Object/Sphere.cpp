@@ -1,5 +1,6 @@
 
 #include "Sphere.h"
+#include "../Common/Random.h"
 
 Sphere::Sphere(const double _r, const Vector3d _p, std::shared_ptr<Material> _mat)
         : radius(_r), center(_p), material(_mat) {

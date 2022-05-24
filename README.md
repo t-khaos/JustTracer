@@ -5,8 +5,7 @@
 
 ## About 
 
-该项目是我个人在学习图形学过程中的练习项目，起源于跟着 Ray Tracing in One Weekend 系列第一部实现了简单的软光追渲染器，而后又阅读了其他各种软渲染器的代码，诸如 TinyRenderer, Nori, GAMES101作业7框架,
-smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现论文算法的需要，开始制作自己的软光追渲染器。
+**Just Tracer**是我在图形学的旅途中用于学习总结的开源软光线追踪渲染器，其中很多设计和算法参考了许多的开源软渲染器和知乎等网站上的文章。感谢这些优秀且无私的作者，为像我一样初窥图形学门径的新人提供了指路明灯。
 
 ## References
 
@@ -38,23 +37,18 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
 - [x] Renderer 渲染器
   - [x] OpenMP多线程加速
 - [x] Film 胶片
-  - [x] 输出PPM格式图片
-  - [ ] 使用第三方库输出常用格式图片
 - [x] Scene 场景
 - [x] Camera 相机
-  - [x] PerspectiveCamera 透视相机
-- [x] ISampler 采样器
-  - [x] TrapezoidalSampler 梯形分布采样器
+- [x] Sampler 采样器
+  - [x] Trapezoidal 梯形分布
+  - [x] Uniform 均匀分布
 - [x] Integrator 积分器
-  - [x] MonteCarloPathIntegrator 蒙特卡洛路径追踪积分器
-    - [x] 对光源采样
-  - [x] SimplePathIntegrator 简单路径追踪积分器
-  - [x] NormalIntegrator 法线可视化积分器
+  - [x] MonteCarloPathIntegrator 蒙特卡洛路径追踪
 - [x] Material 材质
-  - [x] DiffuseMaterial 漫反射材质
-  - [ ] ReflectMaterial 镜面反射材质
-  - [ ] ReflectMaterial 折射材质
-  - [ ] MircofacetMaterial 微表面材质
+  - [x] DiffuseMaterial 漫反射
+  - [ ] ReflectMaterial 镜面反射
+  - [ ] ReflectMaterial 折射
+  - [ ] MircofacetMaterial 微表面
 - [x] Light 灯光：作为抽象类由继承该类的 Object 实现
 - [ ] Accelerator 加速结构
   - [x] AABB 轴向包围盒

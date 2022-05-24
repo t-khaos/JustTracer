@@ -20,7 +20,7 @@ struct Material {
 
     virtual double PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) = 0;
 
-    virtual Vector3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) = 0;
+    virtual Color3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) = 0;
 
     virtual Vector3d SampleDirection(const Vector3d &V, const Vector3d &N) = 0;
 };
