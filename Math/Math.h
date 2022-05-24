@@ -2,7 +2,7 @@
 
 
 #include <cmath>
-#include "Global.h"
+#include "../Common/Global.h"
 
 
 inline double Clamp(double x, double min, double max) {

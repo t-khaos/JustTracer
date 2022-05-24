@@ -24,10 +24,10 @@ add_executable(
         Common/AABB.h
         Common/Ray.h
         Common/Global.h
-        Common/Vector.h
-        Common/Matrix.h
+        Math/Vector.h
+        Math/Matrix.h
         Renderer/Camera.h
-        Common/Vector.h
+        Math/Vector.h
         Common/Material.h
         Common/Object.h
         Common/HitResult.h
@@ -53,4 +53,4 @@ add_executable(
         Renderer/Scene.cpp Renderer/Scene.h
 
         Renderer/Sampler.h Renderer/Sampler.cpp
-        Common/Math.h Common/Random.h)
+        Math/Math.h Math/Random.h)

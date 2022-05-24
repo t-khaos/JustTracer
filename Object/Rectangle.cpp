@@ -1,6 +1,6 @@
 
 #include "Rectangle.h"
-#include "../Common/Random.h"
+#include "../Math/Random.h"
 
 Rectangle::Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std::shared_ptr<Material> _mat)
         : A(_v0), B(_v1), C(_v2), D(_v3), material(_mat) {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Global.h"
-#include "Vector.h"
+#include "../Math/Vector.h"
 
 enum class MaterialType {
     DIFFUSE,

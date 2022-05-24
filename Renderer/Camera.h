@@ -3,7 +3,7 @@
 #include "../Common/Global.h"
 #include "../Common/Ray.h"
 #include "../Common/Global.h"
-#include "../Common/Vector.h"
+#include "../Math/Vector.h"
 
 struct Camera {
     Point3d origin;

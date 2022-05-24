@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Common/Vector.h"
+#include "Math/Vector.h"
 #include "Renderer/Renderer.h"
 #include "Material/DiffuseMaterial.h"
 #include "Object/Rectangle.h"

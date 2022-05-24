@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DiffuseMaterial.h"
-#include "../Common/Random.h"
+#include "../Math/Random.h"
 
 
 double DiffuseMaterial::PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) {

@@ -2,7 +2,7 @@
 
 
 #include "Sampler.h"
-#include "../Common/Random.h"
+#include "../Math/Random.h"
 
 Vector2d Sampler::CastRayByDistribution(int x, int y) {
     double s = x, t = y;

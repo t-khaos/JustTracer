@@ -1,6 +1,6 @@
 
 #include "MonteCarloPathIntegrator.h"
-#include "../Common/Random.h"
+#include "../Math/Random.h"
 
 Color3d MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     return CastRay(ray, scene, 0);

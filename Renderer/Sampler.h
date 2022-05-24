@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "../Common/Global.h"
-#include "../Common/Vector.h"
+#include "../Math/Vector.h"
 
 //Distribution Type
 enum SamplerType{

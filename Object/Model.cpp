@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include "../Common/Vector.h"
+#include "../Math/Vector.h"
 
 struct Vertex {
     Point3d position;

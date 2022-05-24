@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Common/Global.h"
-#include "../Common/Vector.h"
+#include "../Math/Vector.h"
 #include "../Common/Ray.h"
 #include "Scene.h"
 

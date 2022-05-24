@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "Vector.h"
+#include "../Math/Vector.h"
 #include "Material.h"
 
 struct HitResult {
