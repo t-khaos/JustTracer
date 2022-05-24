@@ -5,31 +5,31 @@
 
 //数值定义
 //-------------------------------------------------------------
-#define PI 3.1415926f
-#define EPSILON 0.001f
-#define MAX_FLOAT std::numeric_limits<float>::max()
+#define PI 3.1415926535897932
+#define EPSILON 0.001
+#define MAX_DOUBLE std::numeric_limits<double>::max()
 
 //数学
 //-------------------------------------------------------------
-inline float Clamp(float x, float min, float max) {
+inline double Clamp(double x, double min, double max) {
     if (x < min) return min;
     if (x > max) return max;
     return x;
 }
 
-inline float Clamp(float x){
+inline double Clamp(double x){
     return Clamp(x, 0.0, 1.0);
 }
 
 //转换
 //-------------------------------------------------------------
 
-inline int Map2RGB(float x){
-    return int(std::pow(Clamp(x), 1./2.2) * 255 + .5);
+inline int Map2RGB(double x){
+    return int(std::pow(Clamp(x), 1.0/2.2) * 255 + 0.5);
 }
 
 
-inline float Degrees2Radians(float degrees) {
+inline double Degrees2Radians(double degrees) {
     return degrees * PI / 180.0;
 }
 
@@ -37,14 +37,14 @@ inline float Degrees2Radians(float degrees) {
 //-------------------------------------------------------------
 static std::random_device rd;
 static std::mt19937 mersenne_twister(rd());
-static std::uniform_real_distribution<float> uniform(0,1);
+static std::uniform_real_distribution<double> uniform(0,1);
 
-inline float RandomFloat() {
+inline double RandomDouble() {
     return uniform(mersenne_twister);
 }
 
-inline float RandomFloat(float min, float max) {
-    return min + (max-min) * RandomFloat();
+inline double RandomDouble(double min, double max) {
+    return min + (max-min) * RandomDouble();
 }
 
 

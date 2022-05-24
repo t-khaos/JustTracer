@@ -6,9 +6,9 @@
 #include "../Common/Vector.h"
 
 struct Vertex {
-    Point3f position;
-    Vector3f normal;
-    Vector2f textureCoords;
+    Point3d position;
+    Vector3d normal;
+    Vector2d textureCoords;
 };
 
 enum class TextureType {
@@ -28,9 +28,9 @@ struct ModelMesh {
 
     void LoadObj(const std::string &fileName) {
 
-        std::vector<Vector3f> positions;
-        std::vector<Vector3f> normals;
-        std::vector<Vector2f> uvs;
+        std::vector<Vector3d> positions;
+        std::vector<Vector3d> normals;
+        std::vector<Vector2d> uvs;
 
         std::ifstream fileStream(fileName);
 
@@ -42,19 +42,19 @@ struct ModelMesh {
             char trash;
             if (!line.compare(0, 2, "v ")) {
                 strStream >> trash;
-                Vector3f position;
+                Vector3d position;
                 for (int i = 0; i < 3; ++i) {
                     strStream >> position[i];
                 }
                 positions.push_back(position);
             } else if (!line.compare(0, 3, "vn ")) {
-                Vector3f normal;
+                Vector3d normal;
                 for (int i = 0; i < 3; ++i) {
                     strStream >> normal[i];
                 }
                 normals.push_back(normal);
             } else if (!line.compare(0, 3, "vt ")) {
-                Vector2f uv;
+                Vector2d uv;
                 for (int i = 0; i < 2; ++i) {
                     strStream >> uv[i];
                 }

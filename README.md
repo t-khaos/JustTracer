@@ -1,7 +1,7 @@
 
 <h1 align="center">Just Tracer</h1>
 <p align="center"><img src="Resource/Output/Cornell_Box.jpg" alt="Logo" width="50%"></p>
-<p align="center">软光线追踪渲染器 720p×720p | 100spp 渲染结果</p>
+<p align="center">软光线追踪渲染器 720p×720p | 5000spp 渲染结果</p>
 
 ## About 
 

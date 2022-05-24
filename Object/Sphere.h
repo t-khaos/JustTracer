@@ -6,16 +6,16 @@
 
 struct Sphere : Object, Light {
 
-    float radius;
-    Vector3f center;
+    double radius;
+    Vector3d center;
     std::shared_ptr<Material> material;
 
-    Sphere(const float _r, const Vector3f _p, std::shared_ptr<Material> _mat)
+    Sphere(const double _r, const Vector3d _p, std::shared_ptr<Material> _mat)
             : radius(_r), center(_p), material(_mat) {}
 
-    bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
+    bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
 
     virtual void SampleHitResult(HitResult &result) override;
 
-    virtual float PDF() override;
+    virtual double PDF() override;
 };

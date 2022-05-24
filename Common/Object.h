@@ -9,7 +9,7 @@
 struct Object {
     Object() {}
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const = 0;
+    virtual bool Intersect(const Ray &ray, HitResult &result, double t_near) const = 0;
 };
 
 

@@ -7,5 +7,5 @@ struct TrapezoidalSampler : Sampler {
 
     TrapezoidalSampler() {}
 
-    virtual Vector2f CastRayByDistribution(int x, int y) override;
+    virtual Vector2d CastRayByDistribution(int x, int y) override;
 };

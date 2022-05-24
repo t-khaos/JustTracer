@@ -6,10 +6,10 @@
 #include "Material.h"
 
 struct Ray {
-    Point3f origin;
-    Vector3f direction;
+    Point3d origin;
+    Vector3d direction;
 
-    Ray(const Point3f &_ori, const Vector3f &_dir) : origin(_ori), direction((Normalize(_dir))) {}
+    Ray(const Point3d &_ori, const Vector3d &_dir) : origin(_ori), direction((Normalize(_dir))) {}
 
-    Point3f at(float time) const { return origin + direction * time; }
+    Point3d at(double time) const { return origin + direction * time; }
 };

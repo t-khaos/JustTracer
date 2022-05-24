@@ -5,21 +5,22 @@
 
 enum class MaterialType {
     DIFFUSE,
+    DIFFUSE_IDEAL,
     REFRACT,
     LIGHT,
 };
 
 struct Material {
-    Color3f emission;
-    Color3f base_color;
+    Color3d emission;
+    Color3d baseColor;
     MaterialType type;
 
-    Material(const Color3f &_color, const Color3f &_emission, const MaterialType &_type)
-            : base_color(_color), emission(_emission), type(_type) {}
+    Material(const Color3d &_color, const Color3d &_emission, const MaterialType &_type)
+            : baseColor(_color), emission(_emission), type(_type) {}
 
-    virtual float PDF(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) = 0;
+    virtual double PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) = 0;
 
-    virtual Vector3f Eval(const Vector3f &wi, const Vector3f &wo, const Vector3f &N) = 0;
+    virtual Vector3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) = 0;
 
-    virtual Vector3f SampleDirection(const Vector3f &V, const Vector3f &N) = 0;
+    virtual Vector3d SampleDirection(const Vector3d &V, const Vector3d &N) = 0;
 };

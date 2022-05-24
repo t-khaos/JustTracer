@@ -38,48 +38,48 @@ int main() {
     //-------------------------------------------------------------
     const int width = 720;
     const int height = 720;
-    const float aspect_ratio = static_cast<float>(width) / height;
-    const float fov = 40;
-    const int spp = 100;
+    const double aspect_ratio = static_cast<double>(width) / height;
+    const double fov = 40;
+    const int spp = 5000;
 
     //材质
     //-------------------------------------------------------------
     auto redDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color3f(0.63f, 0.065f, 0.05f), //base color
-            Color3f(0.f), // emission
-            MaterialType::DIFFUSE
+            Color3d(0.63, 0.065, 0.05), //base color
+            Color3d(0.0), // emission
+            MaterialType::DIFFUSE_IDEAL
     );
     auto greenDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color3f(0.14f, 0.45f, 0.091f), //base color
-            Color3f(0.f), // emission
-            MaterialType::DIFFUSE
+            Color3d(0.14, 0.45, 0.091), //base color
+            Color3d(0.0), // emission
+            MaterialType::DIFFUSE_IDEAL
     );
     auto whiteDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color3f(0.725f, 0.71f, 0.68f), //base color
-            Color3f(0.f), // emission
-            MaterialType::DIFFUSE
+            Color3d(0.725, 0.71, 0.68), //base color
+            Color3d(0.0), // emission
+            MaterialType::DIFFUSE_IDEAL
     );
     auto lightMat = std::make_shared<DiffuseMaterial>(
-            Color3f(0.f), //base color
-            Color3f(50, 50, 50), // emission
+            Color3d(0.0), //base color
+            Color3d(50, 50, 50), // emission
             MaterialType::LIGHT
     );
 
     //坐标
     //-------------------------------------------------------------
-    Vector3f origin(0,-70,0);//球体坐标
-    Vector3f A(-100, 100, 100);// 矩形 Cornell Box 顶点坐标
-    Vector3f B(-100, -100, 100);
-    Vector3f C(100, -100, 100);
-    Vector3f D(100, 100, 100);
-    Vector3f E(-100, 100, -100);
-    Vector3f F(-100, -100, -100);
-    Vector3f G(100, -100, -100);
-    Vector3f H(100, 100, -100);
-    Vector3f L1(20, 99.99, 20);// 矩形灯光顶点坐标
-    Vector3f L2(-20, 99.99, 20);
-    Vector3f L3(-20, 99.99, -20);
-    Vector3f L4(20, 99.99, -20);
+    Vector3d origin(0,-70,0);//球体坐标
+    Vector3d A(-100, 100, 100);// 矩形 Cornell Box 顶点坐标
+    Vector3d B(-100, -100, 100);
+    Vector3d C(100, -100, 100);
+    Vector3d D(100, 100, 100);
+    Vector3d E(-100, 100, -100);
+    Vector3d F(-100, -100, -100);
+    Vector3d G(100, -100, -100);
+    Vector3d H(100, 100, -100);
+    Vector3d L1(20, 99.99, 20);// 矩形灯光顶点坐标
+    Vector3d L2(-20, 99.99, 20);
+    Vector3d L3(-20, 99.99, -20);
+    Vector3d L4(20, 99.99, -20);
 
     //物体
     //-------------------------------------------------------------
@@ -112,9 +112,9 @@ int main() {
     //相机
     //-------------------------------------------------------------
     auto camera = std::make_shared<PerspectiveCamera>(
-            Vector3f(0, 0, 380),
-            Vector3f(0, 0, 0),
-            Vector3f(0, 1, 0),
+            Vector3d(0, 0, 380),
+            Vector3d(0, 0, 0),
+            Vector3d(0, 1, 0),
             fov,
             aspect_ratio
     );
