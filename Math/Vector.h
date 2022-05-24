@@ -23,7 +23,7 @@ struct Vector {
     }
 
     //拷贝构造函数
-    inline Vector(const Vector<N,T> &v) {
+    inline Vector(const Vector<N, T> &v) {
         for (size_t i = 0; i < N; i++)
             data[i] = v.data[i];
     }
@@ -159,14 +159,14 @@ struct Vector<4, T> {
 //------------------------------------------
 //+a
 template<size_t N, typename T>
-inline Vector<N,T> operator+(const Vector<N,T> &a) {
+inline Vector<N, T> operator+(const Vector<N, T> &a) {
     return a;
 }
 
 //-a
 template<size_t N, typename T>
-inline Vector<N,T> operator-(const Vector<N,T> &a) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator-(const Vector<N, T> &a) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = -a[i];
     return temp;
@@ -175,7 +175,7 @@ inline Vector<N,T> operator-(const Vector<N,T> &a) {
 
 //a==b
 template<size_t N, typename T>
-inline bool operator==(const Vector<N,T> &a, const Vector<N,T> &b) {
+inline bool operator==(const Vector<N, T> &a, const Vector<N, T> &b) {
     for (size_t i = 0; i < N; i++) {
         if (a[i] != b[i])
             return false;
@@ -185,14 +185,14 @@ inline bool operator==(const Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a!=b
 template<size_t N, typename T>
-inline bool operator!=(const Vector<N,T> &a, const Vector<N,T> &b) {
+inline bool operator!=(const Vector<N, T> &a, const Vector<N, T> &b) {
     return !(a == b);
 }
 
 //a+b
 template<size_t N, typename T>
-inline Vector<N,T> operator+(const Vector<N,T> &a, const Vector<N,T> &b) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator+(const Vector<N, T> &a, const Vector<N, T> &b) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] + b[i];
     return temp;
@@ -200,8 +200,8 @@ inline Vector<N,T> operator+(const Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a-b
 template<size_t N, typename T>
-inline Vector<N,T> operator-(const Vector<N,T> &a, const Vector<N,T> &b) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator-(const Vector<N, T> &a, const Vector<N, T> &b) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] - b[i];
     return temp;
@@ -209,8 +209,8 @@ inline Vector<N,T> operator-(const Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a*b
 template<size_t N, typename T>
-inline Vector<N,T> operator*(const Vector<N,T> &a, const Vector<N,T> &b) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator*(const Vector<N, T> &a, const Vector<N, T> &b) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] * b[i];
     return temp;
@@ -218,8 +218,8 @@ inline Vector<N,T> operator*(const Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a/b
 template<size_t N, typename T>
-inline Vector<N,T> operator/(const Vector<N,T> &a, const Vector<N,T> &b) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator/(const Vector<N, T> &a, const Vector<N, T> &b) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] / b[i];
     return temp;
@@ -227,8 +227,8 @@ inline Vector<N,T> operator/(const Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a*k
 template<size_t N, typename T>
-inline Vector<N,T> operator*(const Vector<N,T> &a, T k) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator*(const Vector<N, T> &a, T k) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] * k;
     return temp;
@@ -236,8 +236,8 @@ inline Vector<N,T> operator*(const Vector<N,T> &a, T k) {
 
 //k*a
 template<size_t N, typename T>
-inline Vector<N,T> operator*(T k, const Vector<N,T> &a) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator*(T k, const Vector<N, T> &a) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] * k;
     return temp;
@@ -245,8 +245,8 @@ inline Vector<N,T> operator*(T k, const Vector<N,T> &a) {
 
 //a/k
 template<size_t N, typename T>
-inline Vector<N,T> operator/(const Vector<N,T> &a, T k) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator/(const Vector<N, T> &a, T k) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = a[i] / k;
     return temp;
@@ -254,8 +254,8 @@ inline Vector<N,T> operator/(const Vector<N,T> &a, T k) {
 
 //k/a
 template<size_t N, typename T>
-inline Vector<N,T> operator/(T k, const Vector<N,T> &a) {
-    Vector<N,T> temp;
+inline Vector<N, T> operator/(T k, const Vector<N, T> &a) {
+    Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = k / a[i];
     return temp;
@@ -263,7 +263,7 @@ inline Vector<N,T> operator/(T k, const Vector<N,T> &a) {
 
 //a+=b
 template<size_t N, typename T>
-inline Vector<N,T> operator+=(Vector<N,T> &a, const Vector<N,T> &b) {
+inline Vector<N, T> operator+=(Vector<N, T> &a, const Vector<N, T> &b) {
     for (size_t i = 0; i < N; i++)
         a[i] += b[i];
     return a;
@@ -271,7 +271,7 @@ inline Vector<N,T> operator+=(Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a-=b
 template<size_t N, typename T>
-inline Vector<N,T> operator-=(Vector<N,T> &a, const Vector<N,T> &b) {
+inline Vector<N, T> operator-=(Vector<N, T> &a, const Vector<N, T> &b) {
     for (size_t i = 0; i < N; i++)
         a[i] -= b[i];
     return a;
@@ -279,7 +279,7 @@ inline Vector<N,T> operator-=(Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a*=b
 template<size_t N, typename T>
-inline Vector<N,T> operator*=(Vector<N,T> &a, const Vector<N,T> &b) {
+inline Vector<N, T> operator*=(Vector<N, T> &a, const Vector<N, T> &b) {
     for (size_t i = 0; i < N; i++)
         a[i] *= b[i];
     return a;
@@ -287,7 +287,7 @@ inline Vector<N,T> operator*=(Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a/=b
 template<size_t N, typename T>
-inline Vector<N,T> operator/=(Vector<N,T> &a, const Vector<N,T> &b) {
+inline Vector<N, T> operator/=(Vector<N, T> &a, const Vector<N, T> &b) {
     for (size_t i = 0; i < N; i++)
         a[i] /= b[i];
     return a;
@@ -295,7 +295,7 @@ inline Vector<N,T> operator/=(Vector<N,T> &a, const Vector<N,T> &b) {
 
 //a*=k
 template<size_t N, typename T>
-inline Vector<N,T> operator*=(Vector<N,T> &a, T k) {
+inline Vector<N, T> operator*=(Vector<N, T> &a, T k) {
     for (size_t i = 0; i < N; i++)
         a[i] *= k;
     return a;
@@ -303,7 +303,7 @@ inline Vector<N,T> operator*=(Vector<N,T> &a, T k) {
 
 //a/=k
 template<size_t N, typename T>
-inline Vector<N,T> operator/=(Vector<N,T> &a, T k) {
+inline Vector<N, T> operator/=(Vector<N, T> &a, T k) {
     for (size_t i = 0; i < N; i++)
         a[i] /= k;
     return a;
@@ -312,42 +312,46 @@ inline Vector<N,T> operator/=(Vector<N,T> &a, T k) {
 //矢量函数
 //------------------------------------------
 template<size_t N, typename T>
-inline T SquareLength(const Vector<N,T> &a) {
+inline T SquareLength(const Vector<N, T> &a) {
     T sum = 0;
     for (size_t i = 0; i < N; i++)
         sum += a[i] * a[i];
     return sum;
 }
+
 //矢量长度
 template<size_t N, typename T>
-inline T Length(const Vector<N,T> &a) {
+inline T Length(const Vector<N, T> &a) {
     return std::sqrt(SquareLength(a));
 }
+
 //特化double类型开方
 template<size_t N>
-inline double Length(const Vector< N,double> &a) {
+inline double Length(const Vector<N, double> &a) {
     return std::sqrtf(SquareLength(a));
 }
+
 //矢量取模（长度的别名）
 template<size_t N, typename T>
-inline T Norm(const Vector<N,T> &a) {
+inline T Norm(const Vector<N, T> &a) {
     return std::sqrt(SquareLength(a));
 }
+
 //特化double类型开方
 template<size_t N>
-inline double Norm(const Vector< N,double> &a) {
+inline double Norm(const Vector<N, double> &a) {
     return std::sqrtf(SquareLength(a));
 }
 
 //矢量归一化
 template<size_t N, typename T>
-inline Vector<N,T> Normalize(const Vector<N,T> &a) {
+inline Vector<N, T> Normalize(const Vector<N, T> &a) {
     return a / Length(a);
 }
 
 //矢量点乘
 template<size_t N, typename T>
-inline T Dot(const Vector<N,T> &a, const Vector<N, T> &b) {
+inline T Dot(const Vector<N, T> &a, const Vector<N, T> &b) {
     T sum = 0;
     for (size_t i = 0; i < N; i++)
         sum += a[i] * b[i];
@@ -380,30 +384,30 @@ inline Vector<3, T> Reflect(const Vector<3, T> &a, const Vector<3, T> &n) {
 
 //转换到世界坐标系
 template<typename T>
-inline Vector<3,T> ToWorld(const Vector<3,T>& a, const Vector<3,T>& n){
+inline Vector<3, T> ToWorld(const Vector<3, T> &a, const Vector<3, T> &n) {
     //施密特标准正交化
-    auto N  = Normalize(n);
-    auto temp = std::fabs(n.x)>.1? Vector<3,T>(0.,1.,0.):Vector<3,T>(1.,0.,0.);
-    auto U = Normalize(temp-Dot(temp,N)*N);
-    auto V = Cross(N,U);
-    return a.x*U+a.y*V+a.z*N;
+    auto N = Normalize(n);
+    auto temp = std::fabs(n.x) > .1 ? Vector<3, T>(0., 1., 0.) : Vector<3, T>(1., 0., 0.);
+    auto U = Normalize(temp - Dot(temp, N) * N);
+    auto V = Cross(N, U);
+    return a.x * U + a.y * V + a.z * N;
 }
 
 template<size_t N, typename T>
-inline Vector<N,T> MaxVector(const Vector<N,T>& a, const Vector<N,T>& b){
-    Vector<N,T> temp;
-    for(int i = 0; i<N; i++){
-        temp[i] = (a[i] > b[i])? a[i] : b[i];
-    }
+inline Vector<N, T> MaxVector(const Vector<N, T> &a, const Vector<N, T> &b) {
+    Vector<N, T> temp;
+    for (size_t i = 0; i < N; i++)
+        temp[i] = (a[i] > b[i]) ? a[i] : b[i];
+
     return temp;
 }
 
 template<size_t N, typename T>
-inline Vector<N,T> MinVector(const Vector<N,T>& a, const Vector<N,T>& b){
-    Vector<N,T> temp;
-    for(int i = 0; i<N; i++){
-        temp[i] = (a[i] < b[i])? a[i] : b[i];
-    }
+inline Vector<N, T> MinVector(const Vector<N, T> &a, const Vector<N, T> &b) {
+    Vector<N, T> temp;
+    for (size_t i = 0; i < N; i++)
+        temp[i] = (a[i] < b[i]) ? a[i] : b[i];
+
     return temp;
 }
 
@@ -411,23 +415,23 @@ inline Vector<N,T> MinVector(const Vector<N,T>& a, const Vector<N,T>& b){
 //------------------------------------------
 
 //特化double类型矢量别名
-typedef Vector<4,double> Vector4d;
-typedef Vector<3,double> Vector3d;
-typedef Vector<3,double> Point3d;
-typedef Vector<3,double> Color3d;
-typedef Vector<2,double> Vector2d;
+typedef Vector<4, double> Vector4d;
+typedef Vector<3, double> Vector3d;
+typedef Vector<3, double> Point3d;
+typedef Vector<3, double> Color3d;
+typedef Vector<2, double> Vector2d;
 
 //特化double类型矢量别名
-typedef Vector<4,double> Vector4f;
-typedef Vector<3,double> Vector3f;
-typedef Vector<3,double> Point3f;
-typedef Vector<3,double> Color3f;
-typedef Vector<2,double> Vector2f;
+typedef Vector<4, double> Vector4f;
+typedef Vector<3, double> Vector3f;
+typedef Vector<3, double> Point3f;
+typedef Vector<3, double> Color3f;
+typedef Vector<2, double> Vector2f;
 
 //特化int类型矢量别名
-typedef Vector<4,int> Vector4i;
-typedef Vector<3,int> Vector3i;
-typedef Vector<2,int> Vector2i;
+typedef Vector<4, int> Vector4i;
+typedef Vector<3, int> Vector3i;
+typedef Vector<2, int> Vector2i;
 
 
 

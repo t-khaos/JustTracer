@@ -21,7 +21,7 @@ add_executable(
 
         Renderer/Camera.cpp
 
-        Common/AABB.h
+        Accelerator/AABB.h
         Common/Ray.h
         Common/Global.h
         Math/Vector.h
@@ -34,7 +34,7 @@ add_executable(
         Renderer/Sampler.h
         Renderer/Integrator.h
         Common/Light.h
-        Common/BVH.h
+        Accelerator/BVH.h
 
         Integrator/MonteCarloPathIntegrator.h Integrator/MonteCarloPathIntegrator.cpp
 

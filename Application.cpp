@@ -38,7 +38,7 @@ int main() {
     const int height = 720;
     const double aspect_ratio = static_cast<double>(width) / height;
     const double fov = 40;
-    const int spp = 100;
+    const int spp = 24;
 
     //材质
     //-------------------------------------------------------------
@@ -65,7 +65,7 @@ int main() {
 
     //坐标
     //-------------------------------------------------------------
-    Vector3d origin(0,-70,0);//球体坐标
+    Vector3d origin(0, -70, 0);//球体坐标
     Vector3d A(-100, 100, 100);// 矩形 Cornell Box 顶点坐标
     Vector3d B(-100, -100, 100);
     Vector3d C(100, -100, 100);
@@ -84,10 +84,10 @@ int main() {
     auto redSphere = std::make_shared<Sphere>(30, origin, redDiffuseMat);//球体
 
     auto bottomRectangle = std::make_shared<Rectangle>(G, F, B, C, whiteDiffuseMat);//Cornell Box
-    auto topRectangle = std::make_shared<Rectangle>(H,D,A,E, whiteDiffuseMat);
+    auto topRectangle = std::make_shared<Rectangle>(H, D, A, E, whiteDiffuseMat);
     auto leftRectangle = std::make_shared<Rectangle>(A, B, F, E, redDiffuseMat);
     auto rightRectangle = std::make_shared<Rectangle>(C, D, H, G, greenDiffuseMat);
-    auto backRectangle = std::make_shared<Rectangle>(E,F,G,H, whiteDiffuseMat);
+    auto backRectangle = std::make_shared<Rectangle>(E, F, G, H, whiteDiffuseMat);
 
     //光源
     //-------------------------------------------------------------
@@ -136,9 +136,9 @@ int main() {
 
     renderer.camera = camera;
     renderer.film = film;
-    renderer.scene=scene;
-    renderer.sampler=sampler;
-    renderer.integrator=integrator;
+    renderer.scene = scene;
+    renderer.sampler = sampler;
+    renderer.integrator = integrator;
 
     renderer.Render();
 
