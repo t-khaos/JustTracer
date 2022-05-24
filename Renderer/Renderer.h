@@ -7,7 +7,7 @@
 #include "../Common/Global.h"
 #include "Scene.h"
 #include "Sampler.h"
-#include "../Common/Integrator.h"
+#include "Integrator.h"
 #include "Film.h"
 #include "Camera.h"
 

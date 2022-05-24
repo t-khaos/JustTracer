@@ -1,8 +1,9 @@
 #pragma once
 
-#include "PathIntegrator.h"
+#include "../Renderer/Integrator.h"
 
 struct MonteCarloPathIntegrator : PathIntegrator {
+
     double P_RR = 0.8;
 
     MonteCarloPathIntegrator(int _depth = 5) : PathIntegrator(_depth) {}

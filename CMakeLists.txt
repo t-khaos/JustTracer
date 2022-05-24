@@ -32,13 +32,10 @@ add_executable(
         Common/Object.h
         Common/HitResult.h
         Renderer/Sampler.h
-        Common/Integrator.h
+        Renderer/Integrator.h
         Common/Light.h
         Common/BVH.h
 
-        Integrator/PathIntegrator.h
-        Integrator/NormalIntegrator.h Integrator/NormalIntegrator.cpp
-        Integrator/SimplePathIntegrator.h Integrator/SimplePathIntegrator.cpp
         Integrator/MonteCarloPathIntegrator.h Integrator/MonteCarloPathIntegrator.cpp
 
         Material/DiffuseMaterial.h Material/DiffuseMaterial.cpp

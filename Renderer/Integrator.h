@@ -1,5 +1,13 @@
+#pragma once
 
-#include "../Common/Integrator.h"
+#include "../Common/Global.h"
+#include "../Common/Vector.h"
+#include "../Common/Ray.h"
+#include "Scene.h"
+
+struct Integrator {
+    virtual Color3d Li(const Ray &ray, std::shared_ptr<Scene> scene) = 0;
+};
 
 struct PathIntegrator : Integrator {
     int depth_max;
@@ -10,4 +18,5 @@ struct PathIntegrator : Integrator {
 
     virtual Color3d CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) = 0;
 };
+
 
