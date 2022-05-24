@@ -55,7 +55,7 @@ add_executable(
 
         Renderer/Renderer.h Renderer/Renderer.cpp
         Renderer/Film.cpp Renderer/Film.h
-        Renderer/Scene.cpp Renderer/Scene.h
+        Renderer/World.cpp Renderer/World.h
 
         Sampler/TrapezoidalSampler.h Sampler/TrapezoidalSampler.cpp
-)
+        Scene/CornellBox.h)

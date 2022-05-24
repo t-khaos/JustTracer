@@ -1,8 +1,8 @@
 
-#include "Scene.h"
+#include "World.h"
 
 
-bool Scene::Intersect(const Ray &ray, HitResult &result) const {
+bool World::Intersect(const Ray &ray, HitResult &result) const {
     HitResult tempResult;
     bool isHit = false;
     double closestTime = MAX_DOUBLE;

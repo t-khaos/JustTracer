@@ -40,7 +40,7 @@ int main() {
     const int height = 720;
     const double aspect_ratio = static_cast<double>(width) / height;
     const double fov = 40;
-    const int spp = 5000;
+    const int spp = 100;
 
     //材质
     //-------------------------------------------------------------
@@ -97,7 +97,7 @@ int main() {
 
     //场景
     //-------------------------------------------------------------
-    auto scene = std::make_shared<Scene>();
+    auto scene = std::make_shared<World>();
 
     scene->AddObject(redSphere);//添加物体
     scene->AddObject(bottomRectangle);
