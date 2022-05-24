@@ -1,7 +1,9 @@
 
-#include "TrapezoidalSampler.h"
 
-Vector2d TrapezoidalSampler::CastRayByDistribution(int x, int y) {
+
+#include "Sampler.h"
+
+Vector2d Sampler::CastRayByDistribution(int x, int y) {
     index = index >= 4 ? 0 : index;
 
     int sx = index % 2;

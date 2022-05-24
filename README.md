@@ -40,7 +40,7 @@ smallpt 以及各种魔改版, Pursuit, Filament PBR 文档等等，加上复现
 - [x] Film 胶片
   - [x] 输出PPM格式图片
   - [ ] 使用第三方库输出常用格式图片
-- [x] World 场景
+- [x] Scene 场景
 - [x] Camera 相机
   - [x] PerspectiveCamera 透视相机
 - [x] ISampler 采样器

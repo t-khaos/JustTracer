@@ -1,7 +1,7 @@
 
-#include "PerspectiveCamera.h"
+#include "Camera.h"
 
-PerspectiveCamera::PerspectiveCamera(Point3d look_from, Point3d look_at, Vector3d up, double fov, double aspect_ratio) {
+Camera::Camera(Point3d look_from, Point3d look_at, Vector3d up, double fov, double aspect_ratio) {
     double theta = Degrees2Radians(fov);
     double h = std::tan(theta / 2);
 
@@ -18,6 +18,6 @@ PerspectiveCamera::PerspectiveCamera(Point3d look_from, Point3d look_at, Vector3
     start = origin - horizontal / 2.0 - vertical / 2.0 - w;
 }
 
-Ray PerspectiveCamera::GetRay(const double &s, const double &t) const {
+Ray Camera::GetRay(const double &s, const double &t) const {
     return Ray(origin, start + s * horizontal + t * vertical - origin);
 }

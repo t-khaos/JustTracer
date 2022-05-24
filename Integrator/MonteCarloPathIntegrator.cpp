@@ -1,11 +1,11 @@
 
 #include "MonteCarloPathIntegrator.h"
 
-Color3d MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<World> scene) {
+Color3d MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     return CastRay(ray, scene, 0);
 }
 
-Color3d MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<World> scene, int depth) {
+Color3d MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) {
     //递归超过指定层数结束
     if (depth >= depth_max)
         return Color3d(0.0);

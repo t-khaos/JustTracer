@@ -1,11 +1,11 @@
 
 #include "SimplePathIntegrator.h"
 
-Color3d SimplePathIntegrator::Li(const Ray &ray, std::shared_ptr<World> scene) {
+Color3d SimplePathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
     return CastRay(ray, scene, 0);
 }
 
-Color3d SimplePathIntegrator::CastRay(const Ray &ray, std::shared_ptr<World> scene, int depth) {
+Color3d SimplePathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) {
     if (depth >= depth_max)
         return Color3d(0.0);
     HitResult result;

@@ -6,7 +6,6 @@
 #include "Object/Rectangle.h"
 #include "Object/Sphere.h"
 #include "Integrator/MonteCarloPathIntegrator.h"
-#include "Sampler/TrapezoidalSampler.h"
 
 int main() {
     // 右手坐标系
@@ -39,7 +38,7 @@ int main() {
     const int height = 720;
     const double aspect_ratio = static_cast<double>(width) / height;
     const double fov = 40;
-    const int spp = 100;
+    const int spp = 12;
 
     //材质
     //-------------------------------------------------------------
@@ -96,7 +95,7 @@ int main() {
 
     //场景
     //-------------------------------------------------------------
-    auto scene = std::make_shared<World>();
+    auto scene = std::make_shared<Scene>();
 
     scene->AddObject(redSphere);//添加物体
     scene->AddObject(bottomRectangle);
@@ -124,7 +123,7 @@ int main() {
 
     //采样器
     //-------------------------------------------------------------
-    auto sampler = std::make_shared<TrapezoidalSampler>();
+    auto sampler = std::make_shared<Sampler>();
 
     //胶片
     //-------------------------------------------------------------

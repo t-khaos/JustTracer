@@ -5,17 +5,16 @@
 #include <fstream>
 
 #include "../Common/Global.h"
-#include "World.h"
-#include "../Common/Sampler.h"
+#include "Scene.h"
+#include "Sampler.h"
 #include "../Common/Integrator.h"
 #include "Film.h"
-#include "../Common/Camera.h"
-#include "../Sampler/TrapezoidalSampler.h"
+#include "Camera.h"
 
 
 struct Renderer {
     int spp;
-    std::shared_ptr<World>  scene;
+    std::shared_ptr<Scene>  scene;
     std::shared_ptr<Camera>  camera;
     std::shared_ptr<Sampler>  sampler;
     std::shared_ptr<Film>  film;

@@ -31,9 +31,10 @@ add_executable(
         Common/Material.h
         Common/Object.h
         Common/HitResult.h
-        Common/Sampler.h
+        Renderer/Sampler.h
         Common/Integrator.h
         Common/Light.h
+        Common/BVH.h
 
         Integrator/PathIntegrator.h
         Integrator/NormalIntegrator.h Integrator/NormalIntegrator.cpp
@@ -52,7 +53,7 @@ add_executable(
 
         Renderer/Renderer.h Renderer/Renderer.cpp
         Renderer/Film.cpp Renderer/Film.h
-        Renderer/World.cpp Renderer/World.h
+        Renderer/Scene.cpp Renderer/Scene.h
 
-        Sampler/TrapezoidalSampler.h Sampler/TrapezoidalSampler.cpp
-        Common/BVH.h)
+        Renderer/Sampler.h Renderer/Sampler.cpp
+)
