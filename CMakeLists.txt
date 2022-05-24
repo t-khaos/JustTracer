@@ -19,17 +19,14 @@ add_executable(
 
         Application.cpp
 
-        Accelerator/BVH.h
-        Accelerator/KDTree.h
-        Accelerator/AABB.h
+        Renderer/Camera.cpp
 
-        Camera/PerspectiveCamera.h Camera/PerspectiveCamera.cpp
-
+        Common/AABB.h
         Common/Ray.h
         Common/Global.h
         Common/Vector.h
         Common/Matrix.h
-        Common/Camera.h
+        Renderer/Camera.h
         Common/Vector.h
         Common/Material.h
         Common/Object.h
@@ -58,4 +55,4 @@ add_executable(
         Renderer/World.cpp Renderer/World.h
 
         Sampler/TrapezoidalSampler.h Sampler/TrapezoidalSampler.cpp
-        Scene/CornellBox.h)
+        Common/BVH.h)

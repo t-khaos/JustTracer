@@ -5,7 +5,6 @@
 #include "Material/DiffuseMaterial.h"
 #include "Object/Rectangle.h"
 #include "Object/Sphere.h"
-#include "Camera/PerspectiveCamera.h"
 #include "Integrator/MonteCarloPathIntegrator.h"
 #include "Sampler/TrapezoidalSampler.h"
 
@@ -111,7 +110,7 @@ int main() {
 
     //相机
     //-------------------------------------------------------------
-    auto camera = std::make_shared<PerspectiveCamera>(
+    auto camera = std::make_shared<Camera>(
             Vector3d(0, 0, 380),
             Vector3d(0, 0, 0),
             Vector3d(0, 1, 0),

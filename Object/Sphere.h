@@ -10,8 +10,7 @@ struct Sphere : Object, Light {
     Vector3d center;
     std::shared_ptr<Material> material;
 
-    Sphere(const double _r, const Vector3d _p, std::shared_ptr<Material> _mat)
-            : radius(_r), center(_p), material(_mat) {}
+    Sphere(const double _r, const Vector3d _p, std::shared_ptr<Material> _mat);
 
     bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
 

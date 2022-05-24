@@ -14,6 +14,7 @@ void Renderer::Render() const {
             color = Color3d(0.0);
             for (int index = 0; index < spp; index++) {
                 //根据采样分布计算投射的光线方向参数
+                //auto position = Vector2d(x,y); //用来测试1spp
                 auto position = sampler->CastRayByDistribution(x, y);
                 double s = position.x / (film->width - 1);
                 double t = position.y / (film->height - 1);

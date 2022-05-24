@@ -1,23 +1,35 @@
 
 #include "Rectangle.h"
 
+Rectangle::Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std::shared_ptr<Material> _mat)
+        : A(_v0), B(_v1), C(_v2), D(_v3), material(_mat) {
+    s = B - A;
+    t = D - A;
+    normal = Normalize(Cross(s, t));
+    area = Norm(Cross(s, t));
+
+    //构建包围盒
+    bounds = AABB(
+            MinVector(MinVector(A, B), MinVector(C, D)),
+            MaxVector(MaxVector(A, B), MaxVector(C, D))
+    );
+}
+
 bool Rectangle::Intersect(const Ray &ray, HitResult &result, double t_near) const {
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 
     double time = Dot((A - ray.origin), normal) * (1 / Dot(ray.direction, normal));
 
-    if (time <= 0.0 || time > t_near)
+    if (time <= 0.f || time > t_near)
         return false;
 
     Point3d point = ray.at(time);
 
     //矩形在xyz轴上取值范围
-    auto maxVector = MaxVector(MaxVector(A, B), MaxVector(C, D));
-    auto minVector = MinVector(MinVector(A, B), MinVector(C, D));
-    if (minVector.x - point.x > EPSILON || point.x - maxVector.x > EPSILON ||
-        minVector.y - point.y > EPSILON || point.y - maxVector.y > EPSILON ||
-        minVector.z - point.z > EPSILON || point.z - maxVector.z > EPSILON)
+    if (bounds.minVector.x - point.x > EPSILON || point.x - bounds.maxVector.x > EPSILON ||
+        bounds.minVector.y - point.y > EPSILON || point.y - bounds.maxVector.y > EPSILON ||
+        bounds.minVector.z - point.z > EPSILON || point.z - bounds.maxVector.z > EPSILON)
         return false;
 
     result.time = time;

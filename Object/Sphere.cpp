@@ -1,6 +1,17 @@
 
 #include "Sphere.h"
 
+Sphere::Sphere(const double _r, const Vector3d _p, std::shared_ptr<Material> _mat)
+        : radius(_r), center(_p), material(_mat) {
+
+    //构建包围盒
+    bounds = AABB(
+            center - Vector3d(radius, radius, radius),
+            center + Vector3d(radius, radius, radius)
+    );
+
+}
+
 bool Sphere::Intersect(const Ray &ray, HitResult &result, double t_near) const {
     //t^2*d.d + 2*t*(o-p).d + (o-p).(o-p)-R^2 = 0
     Vector3d op = ray.origin - center;

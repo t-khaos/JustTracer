@@ -16,13 +16,7 @@ struct Rectangle : Object, Light {
     Vector3d s, t;
     std::shared_ptr<Material> material;
 
-    Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std::shared_ptr<Material> _mat)
-            : A(_v0), B(_v1), C(_v2), D(_v3), material(_mat) {
-        s = B - A;
-        t = D - A;
-        normal = Normalize(Cross(s, t));
-        area = Norm(Cross(s, t));
-    }
+    Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std::shared_ptr<Material> _mat);
 
     virtual bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
 

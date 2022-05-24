@@ -3,6 +3,25 @@
 
 #include "Triangle.h"
 
+//三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
+Triangle::Triangle(Vector3d _v0, Vector3d _v1, Vector3d _v2)
+        : A(_v0), B(_v1), C(_v2) {
+    Vector3d AB, AC;
+    AB = B - A;
+    AC = C - A;
+    normal = Normalize(Cross(AB, AC));
+
+    // 三维空间中三角形面积为两边叉积的取模乘以二分之一
+    // 1/2 * |AB x AC|
+    area = Norm(Cross(AB, AC)) * 0.5;
+
+    //构建包围盒
+    bounds = AABB(
+            MinVector(MinVector(A, B), C),
+            MaxVector(MaxVector(A, B), C)
+    );
+}
+
 bool Triangle::Intersect(const Ray &ray, HitResult &result, double t_near) const {
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
