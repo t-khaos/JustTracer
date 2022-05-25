@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "../Common/Global.h"
+#include "../Math/Global.h"
 #include "../Common/Object.h"
 #include "../Common/Light.h"
 

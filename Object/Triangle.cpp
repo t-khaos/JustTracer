@@ -95,12 +95,12 @@ struct Mesh : Object {
     std::vector<std::shared_ptr<Triangle>> triangles;
     std::shared_ptr<Material> material;
 
-    Mesh(const std::shared_ptr<Material> &_mat)
+    Mesh(std::shared_ptr<Material> _mat)
             : material(_mat) {}
 
     virtual bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
 
-    void AddTriangle(const std::shared_ptr<Triangle> &triangle) { triangles.push_back(triangle); }
+    void AddTriangle(std::shared_ptr<Triangle> triangle) { triangles.push_back(triangle); }
 
     double TotalArea();
 

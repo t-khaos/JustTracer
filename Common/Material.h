@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Global.h"
+#include "../Math/Global.h"
 #include "../Math/Vector.h"
 
 enum class MaterialType {

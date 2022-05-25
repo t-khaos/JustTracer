@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "Global.h"
+#include "../Math/Global.h"
 #include "Ray.h"
 #include "HitResult.h"
 #include "../Accelerator/AABB.h"

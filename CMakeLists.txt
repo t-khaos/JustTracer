@@ -23,7 +23,7 @@ add_executable(
 
         Accelerator/AABB.h
         Common/Ray.h
-        Common/Global.h
+        Math/Global.h
         Math/Vector.h
         Math/Matrix.h
         Renderer/Camera.h

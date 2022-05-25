@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-#include "../Common/Global.h"
+#include "../Math/Global.h"
 #include "../Math/Vector.h"
 
 //Distribution Type

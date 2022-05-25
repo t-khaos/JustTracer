@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "../Common/Global.h"
+#include "../Math/Global.h"
 #include "Scene.h"
 #include "Sampler.h"
 #include "Integrator.h"

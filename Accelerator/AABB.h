@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Math/Vector.h"
-#include "../Common/Global.h"
+#include "../Math/Global.h"
 
 //最大的维度
 enum class Dimension {

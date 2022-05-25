@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Common/Global.h"
+#include "../Math/Global.h"
 #include "../Common/Ray.h"
-#include "../Common/Global.h"
+#include "../Math/Global.h"
 #include "../Math/Vector.h"
 
 struct Camera {
