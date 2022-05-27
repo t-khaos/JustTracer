@@ -47,12 +47,11 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     Ray toLightRay(result.point, toLightDirN);
     HitResult toLightResult;
     scene->Intersect(toLightRay, toLightResult);
-    if (toLightResult.distance - distance > -EPSILON) {
-        if (result.material->type == MaterialType::REFLECT) {
 
-        } else {
+    if (toLightResult.distance - distance > -EPSILON) {
+        if (result.material->type != MaterialType::REFLECT) {
             L_direct = sampleLightResult.material->emission
-                       * result.material->EvalColor(toLightDirN, ray.direction, result.normal)
+                       * result.material->EvalColor(toLightDirN, -ray.direction, result.normal)
                        * Dot(toLightDirN, result.normal)
                        * Dot(-toLightDirN, sampleLightResult.normal)
                        / (distance * distance)
@@ -63,8 +62,8 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     /* ==================================================================== */
     /*                     Indirect illumination sampling                     */
     /* ==================================================================== */
-    //随机采样反射方向
-    Vector3 nextDir = result.material->SampleDirection(ray.direction, result.normal);
+    //采样反射方向
+    Vector3 nextDir = result.material->SampleDirection(toLightRay.direction, -ray.direction, result.normal);
     Vector3 nextDirN = Normalize(nextDir);
 
     //至少3次递归再进行轮盘赌 && 角度合适
@@ -77,9 +76,9 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
             if (nextResult.material->type != MaterialType::LIGHT) {
                 //击中物体则继续递归
                 L_indirect = CastRay(nextRay, scene, ++depth)
-                             * result.material->EvalColor(nextDirN, ray.direction, result.normal)
+                             * result.material->EvalColor(nextDirN, -ray.direction, result.normal)
                              * Dot(nextDirN, result.normal)
-                             / result.material->PDF(nextDirN, ray.direction, result.normal)
+                             / result.material->PDF(nextDirN, -ray.direction, result.normal)
                              / P_RR;
             } else {
                 if (result.material->type == MaterialType::REFLECT) {

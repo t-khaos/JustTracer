@@ -1,23 +1,30 @@
 
 #include "MicrofacetMaterial.h"
 
-float MicrofacetMaterial::PDF(const Vector3 &wi, const Vector3 &wo, const Vector3 &N) const {
-    Vector3 v = -wo;
-    Vector3 l = wi;
-    Vector3 h = Normalize(v + l);
+float MicrofacetMaterial::PDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const {
+    Vector3 H = Normalize(V+L);
 
-    float roughness = perceptualRoughness * perceptualRoughness;
-    float NoH = std::clamp(Dot(N, h), 0.0f, 1.0f);
-    float D = D_GGX(NoH, roughness);
+    float roughnessR = roughness * roughness;
+    float NoH = std::clamp(Dot(N, H), 0.0f, 1.0f);
+    float D = D_GGX(NoH, roughnessR);
 
     return NoH*D;
 }
 
-Vector3 MicrofacetMaterial::SampleDirection(const Vector3 &wi, const Vector3 &N) const {
-    return Vector3(1.0f);
+Vector3 MicrofacetMaterial::SampleDirection(const Vector3 &L, const Vector3 &V, const Vector3 &N) const {
+/*    Vector3 v = -wo;
+    Vector3 l = wi;
+    Vector3 h = Normalize(v + l);
+    float LoH = std::clamp(Dot(l, h), 0.0f, 1.0f);
+    Vector3 F = F_Schlick(LoH,F0());*/
+    float r = RandomFloat();
+    if(r > metallic)
+        return SampleDiffuseDirection(N);
+    else
+        return SampleReflectDirection(V,N);
 }
 
-Color MicrofacetMaterial::EvalColor(const Vector3 &wi, const Vector3 &wo, const Vector3 &normal) const {
+Color MicrofacetMaterial::EvalColor(const Vector3 &L, const Vector3 &V, const Vector3 &N) const {
     /* ==================================================================== */
     /*                         Filament PBR Document                        */
     /* ==================================================================== */
@@ -26,37 +33,39 @@ Color MicrofacetMaterial::EvalColor(const Vector3 &wi, const Vector3 &wo, const 
     //   wi   n    wo
     //   ↘    ↑    ↗
     //—————————————————
-    //   v    n    l
+    //   l    n    v
     //   ↖    ↑    ↗
     //—————————————————
 
-    Vector3 v = -wo;
-    Vector3 l = wi;
-    Vector3 h = Normalize(v + l);
+    Vector3 h = Normalize(V+L);
 
     //粗糙度重映射
-    float roughness = perceptualRoughness * perceptualRoughness;
-
-    //漫反射颜色
-    Color diffuseColor = (1 - metallic) * baseColor;
-    //统一电解质和金属材质的掠射角f0
-    //注：加法前项为常量，后项为矢量，加法操作符重载会将前项转为各维数值相同的矢量进行运算
-    Color f0 = 0.16f * reflectance * reflectance * (1-metallic) + baseColor * metallic;
+    float roughnessR = roughness * roughness;
 
     //入射和出射方向与法线的夹角余弦
-    float NoV = std::abs(Dot(normal, v)) + 1e-5;
-    float NoL = std::clamp(Dot(normal, l), 0.0f, 1.0f);
-    float NoH = std::clamp(Dot(normal, h), 0.0f, 1.0f);
-    float LoH = std::clamp(Dot(l, h), 0.0f, 1.0f);
+    float NoV = std::abs(Dot(N,V)) + 1e-5;
+    float NoL = std::clamp(Dot(N, L), 0.0f, 1.0f);
+    float NoH = std::clamp(Dot(N, h), 0.0f, 1.0f);
+    float VoH = std::clamp(Dot(V, h), 0.0f, 1.0f);
 
-    float D = D_GGX(NoH, roughness);
-    Color F = F_Schlick(LoH, f0);
-    float V = V_SmithGGXCorrelated(NoV, NoL, roughness);
+    float D = DistributionGGX(NoH, roughnessR);
+    Color F = FresnelSchlick(VoH, F0());
+    float G = GeometrySchlickGGX(NoV, roughnessR);
 
-    Color Fr = D * V * F;
-    Color Fd = diffuseColor * (1/PI);
+    Vector3 numerator = D * G * F;
+    //+0.0001避免除零
+    float denominator = 4.8f * std::max(NoV,0.0f) *std::max(NoL,0.0f) + 0.0001;
 
-    return Fr + Fd;
+    Vector3 specular = numerator / denominator;
+
+    Vector3 Ks = F;
+    Vector3 Kd = 1.0f - Ks;
+
+    Kd *= 1-metallic;
+
+    Vector3 diffuse = baseColor * Kd / PI;
+
+    return diffuse + specular;
 }
 
 

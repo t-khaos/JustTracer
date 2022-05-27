@@ -415,12 +415,6 @@ inline Vector<4, T> Cross(const Vector<4, T> &a, const Vector<4, T> &b) {
     return {a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x, a.w};
 }
 
-//三维矢量求反射矢量
-template<typename T>
-inline Vector<3, T> Reflect(const Vector<3, T> &a, const Vector<3, T> &n) {
-    return a - 2 * Dot(a, n) * n;
-}
-
 //转换到世界坐标系
 template<typename T>
 inline Vector<3, T> ToWorld(const Vector<3, T> &a, const Vector<3, T> &n) {
