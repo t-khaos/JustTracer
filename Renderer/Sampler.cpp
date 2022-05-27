@@ -4,8 +4,8 @@
 #include "Sampler.h"
 #include "../Math/Random.h"
 
-Vector2d Sampler::CastRayByDistribution(int x, int y) {
-    double s = x, t = y;
+Vector2 Sampler::CastRayByDistribution(int x, int y) {
+    float s = x, t = y;
 
     if(type == SamplerType::Trapezoidal){
         index = index >= 4 ? 0 : index;
@@ -13,21 +13,21 @@ Vector2d Sampler::CastRayByDistribution(int x, int y) {
         int sx = index % 2;
         int sy = index / 2;
 
-        double r1 = 2 * RandomDouble();
-        double r2 = 2 * RandomDouble();
+        float r1 = 2 * RandomFloat();
+        float r2 = 2 * RandomFloat();
 
-        double dx = r1 < 1 ? sqrt(r1) - 1 : 1 - sqrt(2 - r1);
-        double dy = r2 < 1 ? sqrt(r2) - 1 : 1 - sqrt(2 - r2);
+        float dx = r1 < 1 ? sqrt(r1) - 1 : 1 - sqrt(2 - r1);
+        float dy = r2 < 1 ? sqrt(r2) - 1 : 1 - sqrt(2 - r2);
 
-        s = static_cast<double>(x) + (dx + sx + 0.5) / 2;
-        t = static_cast<double>(y) + (dy + sy + 0.5) / 2;
+        s = static_cast<float>(x) + (dx + sx + 0.5) / 2;
+        t = static_cast<float>(y) + (dy + sy + 0.5) / 2;
 
         index++;
     }
     else if(type == SamplerType::Uniform){
-        s = static_cast<double>(x) + RandomDouble();
-        t = static_cast<double>(y) + RandomDouble();
+        s = static_cast<float>(x) + RandomFloat();
+        t = static_cast<float>(y) + RandomFloat();
     }
 
-    return Vector2d(s, t);
+    return Vector2(s, t);
 }

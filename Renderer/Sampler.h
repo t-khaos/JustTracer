@@ -18,5 +18,5 @@ struct Sampler {
 
     Sampler(SamplerType _type):type(_type) {}
 
-    Vector2d CastRayByDistribution(int x, int y);
+    Vector2 CastRayByDistribution(int x, int y);
 };

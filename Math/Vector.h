@@ -364,9 +364,9 @@ inline T Length(const Vector<N, T> &a) {
     return std::sqrt(SquareLength(a));
 }
 
-//特化double类型开方
+//特化float类型开方
 template<size_t N>
-inline double Length(const Vector<N, double> &a) {
+inline float Length(const Vector<N, float> &a) {
     return std::sqrtf(SquareLength(a));
 }
 
@@ -376,9 +376,9 @@ inline T Norm(const Vector<N, T> &a) {
     return std::sqrt(SquareLength(a));
 }
 
-//特化double类型开方
+//特化float类型开方
 template<size_t N>
-inline double Norm(const Vector<N, double> &a) {
+inline float Norm(const Vector<N, float> &a) {
     return std::sqrtf(SquareLength(a));
 }
 
@@ -453,25 +453,14 @@ inline Vector<N, T> MinVector(const Vector<N, T> &a, const Vector<N, T> &b) {
 //特化矢量别名
 //------------------------------------------
 
-//特化double类型矢量别名
-typedef Vector<4, double> Vector4d;
-typedef Vector<3, double> Vector3d;
-typedef Vector<3, double> Point3d;
-typedef Vector<3, double> Color3d;
-typedef Vector<2, double> Vector2d;
-typedef Vector<2, double> Range2d;
 
-//特化double类型矢量别名
-typedef Vector<4, double> Vector4f;
-typedef Vector<3, double> Vector3f;
-typedef Vector<3, double> Point3f;
-typedef Vector<3, double> Color3f;
-typedef Vector<2, double> Vector2f;
+typedef Vector<3, float> Vector3;
+typedef Vector<3, float> Point3;
+typedef Vector<3, float> Color;
+typedef Vector<2, float> Vector2;
+typedef Vector<2, float> Range;
 
-//特化int类型矢量别名
-typedef Vector<4, int> Vector4i;
-typedef Vector<3, int> Vector3i;
-typedef Vector<2, int> Vector2i;
+typedef Vector<3, int> Int3;
 
 
 

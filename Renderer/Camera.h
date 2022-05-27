@@ -6,13 +6,13 @@
 #include "../Math/Vector.h"
 
 struct Camera {
-    Point3d origin;
-    Point3d start;
-    Vector3d horizontal;
-    Vector3d vertical;
+    Point3 origin;
+    Point3 start;
+    Vector3 horizontal;
+    Vector3 vertical;
 
-    Camera(Point3d look_from, Point3d look_at, Vector3d up, double fov, double aspect_ratio);
+    Camera(Point3 look_from, Point3 look_at, Vector3 up, float fov, float aspect_ratio);
 
-    Ray GetRay(const double &s, const double &t) const;
+    Ray GetRay(const float &s, const float &t) const;
 };
 

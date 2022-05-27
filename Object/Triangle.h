@@ -6,18 +6,18 @@ struct Triangle : Object {
 
 
     union {
-        Vector3d vertices[3];
+        Vector3 vertices[3];
         struct {
-            Vector3d A, B, C;
+            Vector3 A, B, C;
         };
     };
 
-    Vector3d normal;
-    double area;
+    Vector3 normal;
+    float area;
 
     //三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
-    Triangle(Vector3d _v0, Vector3d _v1, Vector3d _v2);
+    Triangle(Vector3 _v0, Vector3 _v1, Vector3 _v2);
 
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 };

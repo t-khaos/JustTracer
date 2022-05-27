@@ -2,63 +2,52 @@
 
 
 #include <cmath>
+#include <algorithm>
 #include "Global.h"
 
-
-inline double Clamp(double x, double min, double max) {
-    if (x < min) return min;
-    if (x > max) return max;
-    return x;
+inline int floatToRGB8(float x) {
+    return int(std::pow(std::clamp(x, 0.0f, 1.0f), 1.0f / 2.2f) * 255 + 0.5f);
 }
 
 
-inline double Clamp(double x){
-    return Clamp(x, 0.0, 1.0);
-}
-
-inline int DoubleToRGB8(double x){
-    return int(std::pow(Clamp(x), 1.0/2.2) * 255 + 0.5);
-}
-
-
-inline double DegreesToRadians(double degrees) {
+inline float DegreesToRadians(float degrees) {
     return degrees * PI / 180.0;
 }
 
-inline double RemapRange(double num, Range2d range){
-    assert(range.left!=range.right);
-    if(num>=range.right)
-        return 1;
-    if(num<=range.left)
-        return 0;
+inline float RemapRange(float num, Range range) {
+    assert(range.left != range.right);
+    if (num >= range.right)
+        return 1.0f;
+    if (num <= range.left)
+        return 0.0f;
     return (num - range.left) / (range.right - range.left);
 }
 
-inline void RemapColor(Color3d& color){
+inline void RemapColor(Color &color) {
     //RGB重映射为灰度值
-    auto grayScale = 0.299*color.r+0.587*color.g+0.114*color.b;
+    float grayScale = 0.299f * color.r + 0.587f * color.g + 0.114f * color.b;
 
-    grayScale = RemapRange(grayScale, Range2d(0.15,0.4));
+    grayScale = RemapRange(grayScale, Range(0.15, 0.4));
 
-    Color3d RGB;
+    Color RGB;
 
     //灰度值重映射为热图
-    if(grayScale <= 1.0 && grayScale>0.75){
-        RGB.r = 1.0;
-        RGB.g= 1.0 - RemapRange(grayScale, Range2d(0.75,1));
-        RGB.b= 0;
-    }else if(grayScale<=0.75 && grayScale > 0.5){
-        RGB.r = RemapRange(grayScale, Range2d(0.5,0.75));
-        RGB.g= 1.0;
-        RGB.b= 0;
-    }    else if(grayScale<=0.55 && grayScale > 0.25){
+    if (grayScale <= 1.0f && grayScale > 0.75f) {
+        RGB.r = 1.0f;
+        RGB.g = 1.0f - RemapRange(grayScale, Range(0.75, 1));
+        RGB.b = 0.0f;
+    } else if (grayScale <= 0.75 && grayScale > 0.5f) {
+        RGB.r = RemapRange(grayScale, Range(0.5f, 0.75f));
+        RGB.g = 1.0f;
+        RGB.b = 0.0f;
+    } else if (grayScale <= 0.55f && grayScale > 0.25f) {
         RGB.r = 0;
-        RGB.g= 1.0;
-        RGB.b= 1.0 - RemapRange(grayScale, Range2d(0.25,0.5));
-    }else if(grayScale <= 0.25 && grayScale >= 0.0){
-        RGB.r = 0;
-        RGB.g= RemapRange(grayScale, Range2d(0.0,0.25)) ;
-        RGB.b= 1.0;
+        RGB.g = 1.0f;
+        RGB.b = 1.0f- RemapRange(grayScale, Range(0.25f, 0.5f));
+    } else if (grayScale <= 0.25f && grayScale >= 0.0f) {
+        RGB.r = 0.0f;
+        RGB.g = RemapRange(grayScale, Range(0.0f, 0.25f));
+        RGB.b = 1.0f;
     }
     color = RGB;
 }

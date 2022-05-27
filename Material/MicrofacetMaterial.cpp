@@ -1,93 +1,62 @@
 
+#include "MicrofacetMaterial.h"
 
+float MicrofacetMaterial::PDF(const Vector3 &wi, const Vector3 &wo, const Vector3 &N) const {
+    Vector3 v = -wo;
+    Vector3 l = wi;
+    Vector3 h = Normalize(v + l);
 
-#include <algorithm>
-#include "../Common/Material.h"
+    float roughness = perceptualRoughness * perceptualRoughness;
+    float NoH = std::clamp(Dot(N, h), 0.0f, 1.0f);
+    float D = D_GGX(NoH, roughness);
 
-
-struct MicrofacetMaterial : Material {
-
-    MicrofacetMaterial(const Color3d &_color,
-                       const Color3d &_emission,
-                       const MaterialType &_type = MaterialType::MICROFACET)
-            : Material(_color, _emission, _type) {}
-
-    virtual double PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) const override;
-
-    virtual Color3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N)const override;
-
-    virtual Vector3d SampleDirection(const Vector3d &wi, const Vector3d &N)const override;
-
-
-    double D_GGX_TR(Vector3d N, Vector3d H, double a)const;
-
-    double Geometry_Schlick_GGX(double NoV, double k)const;
-
-    double GeometrySmith(Vector3d N, Vector3d V, Vector3d L, double k)const;
-
-    Vector3d fresnel_schlick(double cosTheta, Vector3d F0)const;
-};
-
-Color3d MicrofacetMaterial::EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N)const {
-    double roughness = 0;
-    double metallic = 0;
-
-    Vector3d V = -wi;
-    Vector3d L = wo;
-    Vector3d H = Normalize(wo + wi);
-
-    Color3d diffuse_color = baseColor;
-
-    Color3d diffuse, specular;
-
-    double NoV = Dot(N,V);
-    double NoL = Dot(N,L);
-
-    Vector3d F0(0.04);
-
-    Vector3d F = fresnel_schlick(NoV, F0);
-    double D = D_GGX_TR(N, H, roughness);
-    double G = GeometrySmith(N, V, L, roughness);
-
-    double c = 1.0;
-
-    Vector3d Ks = F;
-    Vector3d Kd = (Vector3d(1.0) - Ks) * (1.0 - metallic);
-
-    diffuse = Kd * c * (1 / PI);
-    specular = Ks * D * G * (1.0f / (4 * std::max(NoL, EPSILON) * std::max(NoV, EPSILON)));
-
-    return diffuse + specular;
+    return NoH*D;
 }
 
-double MicrofacetMaterial::D_GGX_TR(Vector3d N, Vector3d H, double a) const{
-    double a2 = a * a;
-    double NoH = std::max(Dot(N,H), 0.0);
-    double NoH2 = NoH * NoH;
-
-    double nom = a2;
-    double denom = (NoH2 * (a2 - 1.0) + 1.0);
-    denom = PI * denom * denom;
-
-    return nom / denom;
+Vector3 MicrofacetMaterial::SampleDirection(const Vector3 &wi, const Vector3 &N) const {
+    return Vector3(1.0f);
 }
 
-double MicrofacetMaterial::Geometry_Schlick_GGX(double NoV, double k)const {
-    double nom = NoV;
-    double denom = NoV * (1.0 - k) + k;
+Color MicrofacetMaterial::EvalColor(const Vector3 &wi, const Vector3 &wo, const Vector3 &normal) const {
+    /* ==================================================================== */
+    /*                         Filament PBR Document                        */
+    /* ==================================================================== */
 
-    return nom / denom;
+    //—————————————————
+    //   wi   n    wo
+    //   ↘    ↑    ↗
+    //—————————————————
+    //   v    n    l
+    //   ↖    ↑    ↗
+    //—————————————————
+
+    Vector3 v = -wo;
+    Vector3 l = wi;
+    Vector3 h = Normalize(v + l);
+
+    //粗糙度重映射
+    float roughness = perceptualRoughness * perceptualRoughness;
+
+    //漫反射颜色
+    Color diffuseColor = (1 - metallic) * baseColor;
+    //统一电解质和金属材质的掠射角f0
+    //注：加法前项为常量，后项为矢量，加法操作符重载会将前项转为各维数值相同的矢量进行运算
+    Color f0 = 0.16f * reflectance * reflectance * (1-metallic) + baseColor * metallic;
+
+    //入射和出射方向与法线的夹角余弦
+    float NoV = std::abs(Dot(normal, v)) + 1e-5;
+    float NoL = std::clamp(Dot(normal, l), 0.0f, 1.0f);
+    float NoH = std::clamp(Dot(normal, h), 0.0f, 1.0f);
+    float LoH = std::clamp(Dot(l, h), 0.0f, 1.0f);
+
+    float D = D_GGX(NoH, roughness);
+    Color F = F_Schlick(LoH, f0);
+    float V = V_SmithGGXCorrelated(NoV, NoL, roughness);
+
+    Color Fr = D * V * F;
+    Color Fd = diffuseColor * (1/PI);
+
+    return Fr + Fd;
 }
 
-double MicrofacetMaterial::GeometrySmith(Vector3d N, Vector3d V, Vector3d L, double k) const{
-    double NoV = std::max(Dot(N,V), 0.0);
-    double NoL = std::max(Dot(N,L), 0.0);
-    double ggx1 = Geometry_Schlick_GGX(NoV, k);
-    double ggx2 = Geometry_Schlick_GGX(NoL, k);
 
-    return ggx1 * ggx2;
-}
-
-Vector3d MicrofacetMaterial::fresnel_schlick(double cos_theta, Vector3d F0) const{
-    return F0 + (Vector3d(1.0) - F0) * pow(1.0 - cos_theta, 5.0);
-}

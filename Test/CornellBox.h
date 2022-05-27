@@ -16,59 +16,59 @@ struct CornellBox {
         //-------------------------------------------------------------
         const int width = 720;
         const int height = 720;
-        const double aspect_ratio = static_cast<double>(width) / height;
-        const double fov = 40;
-        const int spp = 48;
+        const float aspect_ratio = static_cast<float>(width) / height;
+        const float fov = 40;
+        const int spp = 240;
 
 //材质
         //-------------------------------------------------------------
         auto redDiffuseMat = std::make_shared<DiffuseMaterial>(
-                Color3d(0.63, 0.065, 0.05), //base color
-                Color3d(0.0), // emission
+                Color(0.63f, 0.065f, 0.05f), //base color
+                Color(0.0f), // emission
                 MaterialType::DIFFUSE_IDEAL
         );
         auto greenDiffuseMat = std::make_shared<DiffuseMaterial>(
-                Color3d(0.14, 0.45, 0.091), //base color
-                Color3d(0.0), // emission
+                Color(0.14f, 0.45f, 0.091f), //base color
+                Color(0.0f), // emission
                 MaterialType::DIFFUSE_IDEAL
         );
         auto whiteDiffuseMat = std::make_shared<DiffuseMaterial>(
-                Color3d(0.725, 0.71, 0.68), //base color
-                Color3d(0.0), // emission
+                Color(0.725f, 0.71f, 0.68f), //base color
+                Color(0.0f), // emission
                 MaterialType::DIFFUSE_IDEAL
         );
         auto lightMat = std::make_shared<DiffuseMaterial>(
-                Color3d(0.0), //base color
-                Color3d(50, 50, 50), // emission
+                Color(0.0), //base color
+                Color(50, 50, 50), // emission
                 MaterialType::LIGHT
         );
         auto mirrorMat = std::make_shared<ReflectMaterial>(
-                Color3d(1.0, 1.0, 1.0), //base color
-                Color3d(0.0), // emission
+                Color(1.0f, 1.0f, 1.0f), //base color
+                Color(0.0f), // emission
                 MaterialType::REFLECT
         );
 
         auto remapMat = std::make_shared<DiffuseMaterial>(
-                Color3d(0.65, 0.65, 0.65),
-                Color3d(),
+                Color(0.65f, 0.65f, 0.65f),
+                Color(0.0f),
                 MaterialType::DIFFUSE_IDEAL_REMAP
         );
 
         //坐标
         //-------------------------------------------------------------
-        Vector3d origin(0, -70, 0);//球体坐标
-        Vector3d A(-100, 100, 100);// 矩形 Cornell Box 顶点坐标
-        Vector3d B(-100, -100, 100);
-        Vector3d C(100, -100, 100);
-        Vector3d D(100, 100, 100);
-        Vector3d E(-100, 100, -100);
-        Vector3d F(-100, -100, -100);
-        Vector3d G(100, -100, -100);
-        Vector3d H(100, 100, -100);
-        Vector3d L1(20, 99.99, 20);// 矩形灯光顶点坐标
-        Vector3d L2(-20, 99.99, 20);
-        Vector3d L3(-20, 99.99, -20);
-        Vector3d L4(20, 99.99, -20);
+        Vector3 origin(0, -70, 0);//球体坐标
+        Vector3 A(-100, 100, 100);// 矩形 Cornell Box 顶点坐标
+        Vector3 B(-100, -100, 100);
+        Vector3 C(100, -100, 100);
+        Vector3 D(100, 100, 100);
+        Vector3 E(-100, 100, -100);
+        Vector3 F(-100, -100, -100);
+        Vector3 G(100, -100, -100);
+        Vector3 H(100, 100, -100);
+        Vector3 L1(20, 99.99, 20);// 矩形灯光顶点坐标
+        Vector3 L2(-20, 99.99, 20);
+        Vector3 L3(-20, 99.99, -20);
+        Vector3 L4(20, 99.99, -20);
 
         //物体
         //-------------------------------------------------------------
@@ -101,9 +101,9 @@ struct CornellBox {
         //相机
         //-------------------------------------------------------------
         auto camera = std::make_shared<Camera>(
-                Vector3d(0, 0, 380),
-                Vector3d(0, 0, 0),
-                Vector3d(0, 1, 0),
+                Vector3(0, 0, 380),
+                Vector3(0, 0, 0),
+                Vector3(0, 1, 0),
                 fov,
                 aspect_ratio
         );

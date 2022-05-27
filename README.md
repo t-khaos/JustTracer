@@ -7,7 +7,7 @@
 
 **Just Tracer** 是我学习图形学的过程中用于练习的软光线追踪渲染器，其中很多设计和算法参考了许多的开源软渲染器和知乎等网站上的文章。感谢这些优秀且无私的作者，为像我一样初窥图形学门径的新人提供了指路明灯。
 
-## References
+## Reference
 
 > 1. [Ray Tracing in One Weekend Series](https://raytracing.github.io/)
 > 2. [smallpt - 99 行 C++ 代码实现全局光照](http://www.kevinbeason.com/smallpt/)
@@ -23,7 +23,7 @@
 > 12. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
 
 
-## Features
+## Feature
 
 - [x] Intersect 物体
     - [x] Sphere 球体
@@ -64,6 +64,6 @@
   - [ ] JsonLoader 场景json文件解析
 
 
-## Dependencies
+##  
 
 以后可能会加上 stb_image 头文件以支持输出其他格式图片

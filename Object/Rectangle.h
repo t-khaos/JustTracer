@@ -5,22 +5,22 @@
 
 struct Rectangle : Object, Light {
     union {
-        Vector3d vertices[4];
+        Vector3 vertices[4];
         struct {
-            Vector3d A, B, C, D;
+            Vector3 A, B, C, D;
         };
     };
 
-    Vector3d normal;
-    double area;
-    Vector3d s, t;
+    Vector3 normal;
+    float area;
+    Vector3 s, t;
     std::shared_ptr<Material> material;
 
-    Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std::shared_ptr<Material> _mat);
+    Rectangle(Vector3 _v0, Vector3 _v1, Vector3 _v2, Vector3 _v3, std::shared_ptr<Material> _mat);
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
     virtual void SampleHitResult(HitResult &result) override;
 
-    virtual double PDF() override;
+    virtual float PDF() override;
 };

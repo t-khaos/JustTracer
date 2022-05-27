@@ -12,5 +12,5 @@ struct Film {
     Film(const int &_w, const int &_h)
             : width(_w), height(_h), fileName("output.ppm") {}
 
-    void Develop(const std::vector<Color3d> &pixels) const;
+    void Develop(const std::vector<Color> &pixels) const;
 };

@@ -11,17 +11,17 @@ enum class Dimension {
 };
 
 struct AABB {
-    Vector3d minVector, maxVector;
+    Vector3 minVector, maxVector;
 
-    AABB() : minVector(MIN_DOUBLE), maxVector(MAX_DOUBLE) {}
+    AABB() : minVector(MIN_FLOAT), maxVector(MAX_FLOAT) {}
 
-    AABB(Vector3d _min, Vector3d _max) : minVector(_min), maxVector(_max) {}
+    AABB(Vector3 _min, Vector3 _max) : minVector(_min), maxVector(_max) {}
 
-    AABB(Vector3d _cen) : minVector(_cen), maxVector(_cen) {}
+    AABB(Vector3 _cen) : minVector(_cen), maxVector(_cen) {}
 
     AABB(const AABB &other) : minVector(other.minVector), maxVector(other.maxVector) {}
 
-    Vector3d Centroid() { return (maxVector + minVector) * 0.5;}
+    Vector3 Centroid() { return (maxVector + minVector) * 0.5f;}
 
     bool Intersect(const Ray &ray, HitResult &result);
 

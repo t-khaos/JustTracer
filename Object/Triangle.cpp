@@ -4,9 +4,9 @@
 #include "Triangle.h"
 
 //三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
-Triangle::Triangle(Vector3d _v0, Vector3d _v1, Vector3d _v2)
+Triangle::Triangle(Vector3 _v0, Vector3 _v1, Vector3 _v2)
         : A(_v0), B(_v1), C(_v2) {
-    Vector3d AB, AC;
+    Vector3 AB, AC;
     AB = B - A;
     AC = C - A;
     normal = Normalize(Cross(AB, AC));
@@ -22,7 +22,7 @@ Triangle::Triangle(Vector3d _v0, Vector3d _v1, Vector3d _v2)
     );
 }
 
-bool Triangle::Intersect(const Ray &ray, HitResult &result, double t_near) const {
+bool Triangle::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 
@@ -69,17 +69,17 @@ bool Triangle::Intersect(const Ray &ray, HitResult &result, double t_near) const
     //  [β]   S1 · E1  [S2 · D ]
 
     // 代码实现
-    Vector3d D = ray.direction;
-    Vector3d S = ray.origin - A;
-    Vector3d E1 = B - A, E2 = C - A;
-    Vector3d S1 = Cross(D, E2);
-    Vector3d S2 = Cross(S, E1);
+    Vector3 D = ray.direction;
+    Vector3 S = ray.origin - A;
+    Vector3 E1 = B - A, E2 = C - A;
+    Vector3 S1 = Cross(D, E2);
+    Vector3 S2 = Cross(S, E1);
 
-    double division = 1 / Dot(S1, E1);
+    float denom = Dot(S1, E1);
 
-    double time = Dot(S2, E2) * division;
-    double alpha = Dot(S1, S) * division;
-    double beta = Dot(S2, D) * division;
+    float time = Dot(S2, E2) / denom;
+    float alpha = Dot(S1, S) / denom;
+    float beta = Dot(S2, D) / denom;
 
     if (time <= 0.f || time > t_near || alpha < 0.f || beta < 0.f || (1 - alpha - beta) < -EPSILON)
         return false;
@@ -98,25 +98,25 @@ struct Mesh : Object {
     Mesh(std::shared_ptr<Material> _mat)
             : material(_mat) {}
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, double t_near) const override;
+    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
     void AddTriangle(std::shared_ptr<Triangle> triangle) { triangles.push_back(triangle); }
 
-    double TotalArea();
+    float TotalArea();
 
 };
 
-double Mesh::TotalArea() {
-    double sum = 0.f;
+float Mesh::TotalArea() {
+    float sum = 0.f;
     for (auto &triangle: triangles)
         sum += triangle->area;
     return sum;
 }
 
-bool Mesh::Intersect(const Ray &ray, HitResult &result, double t_near) const {
+bool Mesh::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     HitResult tempResult;
     bool isHit = false;
-    double closestTime = t_near;
+    float closestTime = t_near;
 
     for (auto &triangle: triangles) {
         if (triangle->Intersect(ray, tempResult, closestTime)) {

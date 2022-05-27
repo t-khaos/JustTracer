@@ -6,17 +6,17 @@
 #include "Material.h"
 
 struct HitResult {
-    Point3d point;
-    Vector3d normal;
+    Point3 point;
+    Vector3 normal;
 
     union{
-        double distance;
-        double time;
+        float distance;
+        float time;
     };
 
     std::shared_ptr<Material> material = nullptr;
 
-    HitResult() : point(Point3d()), normal(Vector3d()), distance(0.0) {}
+    HitResult() : point(Point3()), normal(Vector3()), distance(0.0) {}
 
     HitResult(const HitResult& other){
         //暂时只需要材质的智能指针

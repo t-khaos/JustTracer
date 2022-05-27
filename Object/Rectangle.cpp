@@ -2,7 +2,7 @@
 #include "Rectangle.h"
 #include "../Math/Random.h"
 
-Rectangle::Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std::shared_ptr<Material> _mat)
+Rectangle::Rectangle(Vector3 _v0, Vector3 _v1, Vector3 _v2, Vector3 _v3, std::shared_ptr<Material> _mat)
         : A(_v0), B(_v1), C(_v2), D(_v3), material(_mat) {
     s = B - A;
     t = D - A;
@@ -16,16 +16,16 @@ Rectangle::Rectangle(Vector3d _v0, Vector3d _v1, Vector3d _v2, Vector3d _v3, std
     );
 }
 
-bool Rectangle::Intersect(const Ray &ray, HitResult &result, double t_near) const {
+bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 
-    double time = Dot((A - ray.origin), normal) * (1 / Dot(ray.direction, normal));
+    float time = Dot((A - ray.origin), normal) * (1 / Dot(ray.direction, normal));
 
     if (time <= 0.f || time > t_near)
         return false;
 
-    Point3d point = ray.at(time);
+    Point3 point = ray.at(time);
 
     //矩形在xyz轴上取值范围
     if (bounds.minVector.x - point.x > EPSILON || point.x - bounds.maxVector.x > EPSILON ||
@@ -43,12 +43,12 @@ bool Rectangle::Intersect(const Ray &ray, HitResult &result, double t_near) cons
 
 void Rectangle::SampleHitResult(HitResult &result) {
     //矩形内均匀采样
-    result.point = A + s * RandomDouble() + t * RandomDouble();
+    result.point = A + s * RandomFloat() + t * RandomFloat();
     result.material = material;
     result.normal = normal;
 }
 
 
-double Rectangle::PDF() {
+float Rectangle::PDF() {
     return 1 / area;
 }
