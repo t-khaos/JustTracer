@@ -10,7 +10,6 @@ Sphere::Sphere(const double _r, const Vector3d _p, std::shared_ptr<Material> _ma
             center - Vector3d(radius, radius, radius),
             center + Vector3d(radius, radius, radius)
     );
-
 }
 
 bool Sphere::Intersect(const Ray &ray, HitResult &result, double t_near) const {

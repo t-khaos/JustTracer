@@ -61,6 +61,9 @@ struct Vector<2, T> {
         struct {
             T s, t;
         };
+        struct {
+            T left, right;
+        };
         T data[2];
     };
 
@@ -420,6 +423,7 @@ typedef Vector<3, double> Vector3d;
 typedef Vector<3, double> Point3d;
 typedef Vector<3, double> Color3d;
 typedef Vector<2, double> Vector2d;
+typedef Vector<2, double> Range2d;
 
 //特化double类型矢量别名
 typedef Vector<4, double> Vector4f;

@@ -5,6 +5,7 @@
 struct MonteCarloPathIntegrator : PathIntegrator {
 
     double P_RR = 0.8;
+    HitResult firstHitResult;
 
     MonteCarloPathIntegrator(int _depth = 5) : PathIntegrator(_depth) {}
 

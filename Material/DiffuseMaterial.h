@@ -1,4 +1,4 @@
-
+#pragma once
 
 #include "../Common/Material.h"
 
@@ -10,10 +10,10 @@ struct DiffuseMaterial : Material {
             : Material(_color, _emission, _type) {}
 
 
-    virtual double PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) override;
+    virtual double PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) const override;
 
-    virtual Color3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) override;
+    virtual Color3d EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N)const override;
 
-    virtual Vector3d SampleDirection(const Vector3d &V, const Vector3d &N) override;
+    virtual Vector3d SampleDirection(const Vector3d &wi, const Vector3d &N)const override;
 };
 

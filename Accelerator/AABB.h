@@ -2,6 +2,8 @@
 
 #include "../Math/Vector.h"
 #include "../Math/Global.h"
+#include "../Common/Ray.h"
+#include "../Common/HitResult.h"
 
 //最大的维度
 enum class Dimension {
@@ -13,19 +15,15 @@ struct AABB {
 
     AABB() : minVector(MIN_DOUBLE), maxVector(MAX_DOUBLE) {}
 
-    AABB(Vector3d _min, Vector3d _max)
-            : minVector(_min), maxVector(_max) {}
+    AABB(Vector3d _min, Vector3d _max) : minVector(_min), maxVector(_max) {}
 
-    AABB(Vector3d _cen)
-            : minVector(_cen), maxVector(_cen) {}
+    AABB(Vector3d _cen) : minVector(_cen), maxVector(_cen) {}
 
-    AABB(const AABB &other)
-            : minVector(other.minVector), maxVector(other.maxVector) {}
+    AABB(const AABB &other) : minVector(other.minVector), maxVector(other.maxVector) {}
 
-    Vector3d Centroid() {
-        return (maxVector + minVector) * 0.5;
-    }
+    Vector3d Centroid() { return (maxVector + minVector) * 0.5;}
 
+    bool Intersect(const Ray &ray, HitResult &result);
 
 };
 

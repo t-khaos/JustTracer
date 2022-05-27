@@ -30,3 +30,4 @@ void Renderer::Render() const {
     //冲洗胶卷
     film->Develop(pixels);
 }
+

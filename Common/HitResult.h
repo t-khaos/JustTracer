@@ -17,4 +17,9 @@ struct HitResult {
     std::shared_ptr<Material> material = nullptr;
 
     HitResult() : point(Point3d()), normal(Vector3d()), distance(0.0) {}
+
+    HitResult(const HitResult& other){
+        //暂时只需要材质的智能指针
+        material = other.material;
+    }
 };

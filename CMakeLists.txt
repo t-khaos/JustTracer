@@ -53,4 +53,4 @@ add_executable(
         Renderer/Scene.cpp Renderer/Scene.h
 
         Renderer/Sampler.h Renderer/Sampler.cpp
-        Math/Math.h Math/Random.h)
+        Math/Math.h Math/Random.h Accelerator/AABB.cpp Accelerator/BVH.cpp Test/CornellBox.h Test/Remap.h)

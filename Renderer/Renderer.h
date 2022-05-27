@@ -22,5 +22,5 @@ struct Renderer {
 
     Renderer(int _spp) : spp(_spp) {}
 
-    void Renderer::Render() const;
+    void Render() const;
 };

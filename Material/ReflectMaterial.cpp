@@ -1,15 +1,14 @@
-/*
 
 #include "ReflectMaterial.h"
 
-double ReflectMaterial::PDF(const double& NoL) const {
+double ReflectMaterial::PDF(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) const {
     return 1;
 }
 
-Vector3d ReflectMaterial::EvalColor(const double& NoL) const {
-    return baseColor;
+Color3d ReflectMaterial::EvalColor(const Vector3d &wi, const Vector3d &wo, const Vector3d &N) const {
+    return baseColor / Dot(wo, N);
 }
 
-Vector3d ReflectMaterial::SampleDirection(const Vector3d &V, const Vector3d &N) const {
-    return Reflect(V, N);
-}*/
+Vector3d ReflectMaterial::SampleDirection(const Vector3d &wi, const Vector3d &N) const {
+    return Reflect(wi, N);
+}
