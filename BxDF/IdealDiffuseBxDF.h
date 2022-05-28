@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BxDF.h"
+#include "../Common/BxDF.h"
 
 struct IdealDiffuseBxDF : BxDF {
 

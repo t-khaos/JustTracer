@@ -22,6 +22,12 @@
 > 11. [Mitsuba1/2 闫令琦推荐的科研渲染器](http://www.mitsuba-cornellBoxRenderer.org/) 
 > 12. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
 
+## TODO
+- 对光源采样
+  - 多光源均匀采样（PS: 所有光源视为整体的积分域）
+- 微表面模型
+  - 镜面反射特殊处理 （PS: isDelta 标识）
+  - 镜面反射能量补偿 （PS: Kulla-Conty 方法）
 
 ## Feature
 

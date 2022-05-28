@@ -23,9 +23,11 @@ add_executable(
         Accelerator/AABB.cpp
         Accelerator/BVH.h Accelerator/BVH.cpp
 
-        BxDF/BxDF.h
+
         BxDF/IdealDiffuseBxDF.h BxDF/IdealDiffuseBxDF.cpp
-        BxDF/IdealSpecularBxDF.h
+        BxDF/IdealSpecularBxDF.h BxDF/IdealSpecularBxDF.cpp
+        BxDF/MicrofacetSpecularBxDF.h BxDF/MicrofacetSpecularBxDF.cpp
+        BxDF/SpecularBxDF.h BxDF/SpecularBxDF.cpp
 
         Math/Global.h
         Math/Vector.h
@@ -34,12 +36,12 @@ add_executable(
         Math/Random.h
         Math/Vector.h
 
+        Common/BxDF.h
         Common/Ray.h
         Common/Material.h
         Common/Object.h
         Common/HitResult.h
         Common/Light.h
-
 
         Integrator/MonteCarloPathIntegrator.h Integrator/MonteCarloPathIntegrator.cpp
 
@@ -58,4 +60,4 @@ add_executable(
         Renderer/Sampler.h Renderer/Sampler.cpp
         Renderer/Camera.h Renderer/Camera.cpp
         Renderer/Integrator.h
-        BxDF/IdealSpecularBxDF.cpp BxDF/MicrofacetSpecularBxDF.h BxDF/MicrofacetSpecularBxDF.cpp BxDF/SpecularBxDF.h BxDF/SpecularBxDF.cpp)
+        )
