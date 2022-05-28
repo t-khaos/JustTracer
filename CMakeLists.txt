@@ -26,7 +26,7 @@ add_executable(
 
         BxDF/IdealDiffuseBxDF.h BxDF/IdealDiffuseBxDF.cpp
         BxDF/IdealSpecularBxDF.h BxDF/IdealSpecularBxDF.cpp
-        BxDF/MicrofacetSpecularBxDF.h BxDF/MicrofacetSpecularBxDF.cpp
+        BxDF/MicrofacetBxDF.h BxDF/MicrofacetBxDF.cpp
 
         Math/Global.h
         Math/Vector.h

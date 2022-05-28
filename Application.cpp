@@ -62,8 +62,8 @@ int main() {
     auto mircofacetMat = std::make_shared<MicrofacetMaterial>(
             0.1f, //粗糙度
             0.9f, //金属度
-            1.0f, //线性值反射率
-            Color(0.63f, 0.065f, 0.05f), //基色
+            0.5f, //线性值反射率
+            Color(1.0f, 1.0f, 1.0f), //基色
             Color(0.0f), //自发光
             MaterialType::Object //材质类型
     );
@@ -86,7 +86,7 @@ int main() {
 
     //物体
     //-------------------------------------------------------------
-    auto redSphere = std::make_shared<Sphere>(30, origin, mirrorMat);//球体
+    auto redSphere = std::make_shared<Sphere>(30, origin, mircofacetMat);//球体
 
     auto bottomRectangle = std::make_shared<Rectangle>(G, F, B, C, whiteDiffuseMat);//Cornell Box
     auto topRectangle = std::make_shared<Rectangle>(H, D, A, E, whiteDiffuseMat);
