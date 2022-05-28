@@ -4,8 +4,8 @@
 #include "Triangle.h"
 
 //三角形顶点规定要以逆时针顺序旋转，统一叉乘矢量向上
-Triangle::Triangle(Vector3 _v0, Vector3 _v1, Vector3 _v2)
-        : A(_v0), B(_v1), C(_v2) {
+Triangle::Triangle(Vector3 _v0, Vector3 _v1, Vector3 _v2, std::shared_ptr<Material> _mat)
+        : A(_v0), B(_v1), C(_v2),material(_mat) {
     Vector3 AB, AC;
     AB = B - A;
     AC = C - A;
@@ -87,6 +87,8 @@ bool Triangle::Intersect(const Ray &ray, HitResult &result, float t_near) const 
     result.time = time;
     result.point = alpha * A + beta * B + (1 - alpha - beta) * C;
     result.normal = normal;
+    result.material = material;
+    result.isLight = material->type == MaterialType::Light;
     return true;
 }
 

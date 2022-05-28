@@ -37,6 +37,7 @@ bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near) const
     result.point = point;
     result.normal = normal;
     result.material = material;
+    result.isLight = material->type == MaterialType::Light;
 
     return true;
 }

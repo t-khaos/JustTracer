@@ -16,7 +16,7 @@ struct Material {
     Color baseColor;
     MaterialType type;
 
-    Material(const Color &_c, const Color &_emi, const MaterialType &_type)
+    Material(const Color &_c, const Color &_emi, MaterialType _type)
             : baseColor(_c), emission(_emi), type(_type) {}
 
     virtual BxDFResult SampleBxDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const = 0;

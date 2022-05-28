@@ -8,6 +8,7 @@
 struct HitResult {
     Point3 point;
     Vector3 normal;
+    bool isLight;
 
     union{
         float distance;
@@ -16,7 +17,7 @@ struct HitResult {
 
     std::shared_ptr<Material> material = nullptr;
 
-    HitResult() : point(Point3()), normal(Vector3()), distance(0.0) {}
+    HitResult() : point(Point3()), normal(Vector3()), distance(0.0), isLight(false) {}
 
     HitResult(const HitResult& other){
         //暂时只需要材质的智能指针

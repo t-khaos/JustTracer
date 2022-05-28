@@ -11,17 +11,13 @@ Color MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene)
 Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) {
     //递归超过指定层数结束
     if (depth >= depth_max)
-        return Color(0.0);
+        return Color(0.0f);
 
     //光线与场景求交
     //--------------------------------------------------------------------
     HitResult result;
     if (!scene->Intersect(ray, result))
-        return Color(0.0);
-    //颜色重映射
-    //第一次击中物体,获取物体表面信息
-    if (depth == 0)
-        firstHitResult = HitResult(result);
+        return Color(0.0f);
 
     //击中光源
     //--------------------------------------------------------------------
@@ -29,50 +25,45 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     if (result.material->type == MaterialType::Light)
         return result.material->emission;
 
-    //击中物体
-    //--------------------------------------------------------------------
     Vector3 L_direct, L_indirect;
+
+    //对光源均匀采样
+    HitResult sampleLightResult;
+    scene->lights[0]->SampleHitResult(sampleLightResult);
+    //获取光源采样的概率密度函数
+    float pdf_light = scene->lights[0]->PDF();
+
+    //计算交点到光源方向
+    Vector3 toLightDir = sampleLightResult.point - result.point;
+    Vector3 toLightDirN = Normalize(toLightDir);
+    //计算交点到光源距离
+    float distance = Length(toLightDir);
+
+    //采样BxDF
+    BxDFResult bxdf = result.material->SampleBxDF(toLightDirN, -ray.direction, result.normal);
+
 
     /* ==================================================================== */
     /*                     Direct illumination sampling                     */
     /* ==================================================================== */
-
-    //获取采样pdf，在光源表面均选取采样的位置
-    HitResult sampleLightResult;
-    scene->lights[0]->SampleHitResult(sampleLightResult);
-    //交点与采样点方向
-    Vector3 toLightDir = sampleLightResult.point - result.point;
-    Vector3 toLightDirN = Normalize(toLightDir);
-    float distance = Length(toLightDir);
-    //生成光线，向该方向投射，获取与光源交点的信息
+    //向交点到光源方向投射光线
     Ray toLightRay(result.point, toLightDirN);
+    //计算光线与场景求交
     HitResult toLightResult;
     scene->Intersect(toLightRay, toLightResult);
-    //采样BxDF
-    BxDFResult bxdf = result.material->SampleBxDF(toLightDirN, -ray.direction, result.normal);
-    float pdf_light = scene->lights[0]->PDF();
 
-    //阴影测试
-    if (toLightResult.distance - distance > -EPSILON) {
-        //镜面反射不计算直接光
-        if (!bxdf.isDelta)
-            L_direct = sampleLightResult.material->emission
-                       * bxdf.fr
-                       * Dot(toLightDirN, result.normal)
-                       * Dot(-toLightDirN, sampleLightResult.normal)
-                       / (distance * distance)
-                       / pdf_light;
-    }
+    //比较距离 && 镜面反射不计算直接光
+    L_direct = sampleLightResult.material->emission
+               * bxdf.fr / (distance * distance) / pdf_light
+               * Dot(toLightDirN, result.normal) * Dot(-toLightDirN, sampleLightResult.normal)
+               * (float)((!bxdf.isDelta)&&(toLightResult.distance - distance > -EPSILON));
+
 
     /* ==================================================================== */
     /*                     Indirect illumination sampling                     */
     /* ==================================================================== */
     //至少3次递归再进行轮盘赌
     if (depth >= 3 && RandomFloat() >= P_RR)
-        return L_direct;
-
-    //角度
-    if (Dot(bxdf.direction, result.normal) < 0.0)
         return L_direct;
 
     //生成光线，向该方向投射
@@ -84,25 +75,20 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
         return L_direct;
 
     //镜面反射击中光源特殊处理
-    if (nextResult.material->type == MaterialType::Light){
-        if(bxdf.isDelta)
-            L_direct = bxdf.fr
-                       * Dot(bxdf.direction, result.normal)
-                       / bxdf.pdf
-                       / P_RR;
-    }
-    else{
-        L_indirect = CastRay(nextRay, scene, ++depth)
-                     * bxdf.fr
-                     * Dot(bxdf.direction, result.normal)
-                     / bxdf.pdf
-                     / P_RR;
-    }
-    Color color = L_direct + L_indirect;
-    //颜色重映射
+    L_indirect = bxdf.fr * Dot(bxdf.direction, result.normal) / bxdf.pdf / P_RR
+                 * (nextResult.isLight ? (float) bxdf.isDelta : CastRay(nextRay, scene, ++depth));
+
+    return  L_direct + L_indirect;
+}
+
+
+//颜色重映射
+/*    //第一次击中物体,获取物体表面信息
+    if (depth == 0)
+        firstHitResult = HitResult(result);*/
+
+//颜色重映射
 /*    if (firstHitResult.material &&
         firstHitResult.material->type == MaterialType::Remap) {
         RemapColor(color);
     }*/
-    return color;
-}

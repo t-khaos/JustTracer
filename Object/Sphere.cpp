@@ -33,6 +33,7 @@ bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     float NoL = Dot(result.normal, ray.direction);
     result.normal = NoL < 0 ? result.normal : -result.normal;
     result.material = material;
+    result.isLight = material->type == MaterialType::Light;
     return true;
 }
 

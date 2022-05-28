@@ -13,7 +13,7 @@ struct MicrofacetMaterial : Material {
     MicrofacetMaterial(
             float _rou, float _met, float _ref,
             const Color &_c, const Color &_emi,
-            const MaterialType &_type = MaterialType::MICROFACET)
+            MaterialType _type)
             : Material(_c, _emi, _type), roughness(_rou), metallic(_met), reflectance(_ref) {
 
     }
