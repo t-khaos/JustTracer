@@ -30,33 +30,33 @@ int main() {
     auto redDiffuseMat = std::make_shared<DiffuseMaterial>(
             Color(0.63f, 0.065f, 0.05f), //base color
             Color(0.0f), // emission
-            MaterialType::DIFFUSE_IDEAL
+            MaterialType::Object
     );
     auto greenDiffuseMat = std::make_shared<DiffuseMaterial>(
             Color(0.14f, 0.45f, 0.091f), //base color
             Color(0.0f), // emission
-            MaterialType::DIFFUSE_IDEAL
+            MaterialType::Object
     );
     auto whiteDiffuseMat = std::make_shared<DiffuseMaterial>(
             Color(0.725f, 0.71f, 0.68f), //base color
             Color(0.0f), // emission
-            MaterialType::DIFFUSE_IDEAL
+            MaterialType::Object
     );
     auto lightMat = std::make_shared<DiffuseMaterial>(
             Color(0.0), //base color
             Color(50, 50, 50), // emission
-            MaterialType::LIGHT
+            MaterialType::Light
     );
     auto mirrorMat = std::make_shared<MirrorMaterial>(
             Color(1.0f, 1.0f, 1.0f), //base color
             Color(0.0f), // emission
-            MaterialType::REFLECT
+            MaterialType::Object
     );
 
     auto remapMat = std::make_shared<DiffuseMaterial>(
             Color(0.65f, 0.65f, 0.65f),
             Color(0.0f),
-            MaterialType::DIFFUSE_IDEAL_REMAP
+            MaterialType::Remap
     );
 
     auto mircofacetMat = std::make_shared<MicrofacetMaterial>(
@@ -65,7 +65,7 @@ int main() {
             1.0f, //线性值反射率
             Color(0.63f, 0.065f, 0.05f), //基色
             Color(0.0f), //自发光
-            MaterialType::MIRCOFACET //材质类型
+            MaterialType::Object //材质类型
     );
 
     //坐标
@@ -79,10 +79,10 @@ int main() {
     Vector3 F(-100, -100, -100);
     Vector3 G(100, -100, -100);
     Vector3 H(100, 100, -100);
-    Vector3 L1(20, 99.99, 20);// 矩形灯光顶点坐标
-    Vector3 L2(-20, 99.99, 20);
-    Vector3 L3(-20, 99.99, -20);
-    Vector3 L4(20, 99.99, -20);
+    Vector3 L1(20, 99.999f, 20);// 矩形灯光顶点坐标
+    Vector3 L2(-20, 99.999f, 20);
+    Vector3 L3(-20, 99.999f, -20);
+    Vector3 L4(20, 99.999f, -20);
 
     //物体
     //-------------------------------------------------------------

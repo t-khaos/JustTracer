@@ -6,12 +6,9 @@
 #include "BxDFResult.h"
 
 enum class MaterialType {
-    DIFFUSE,
-    DIFFUSE_IDEAL,
-    DIFFUSE_IDEAL_REMAP,
-    REFLECT,
-    LIGHT,
-    MICROFACET
+    Object,
+    Remap,
+    Light
 };
 
 struct Material {

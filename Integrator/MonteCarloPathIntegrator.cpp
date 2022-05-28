@@ -26,7 +26,7 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     //击中光源
     //--------------------------------------------------------------------
     //直接返回光源自发光
-    if (result.material->type == MaterialType::LIGHT)
+    if (result.material->type == MaterialType::Light)
         return result.material->emission;
 
     //击中物体
@@ -84,7 +84,7 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
         return L_direct;
 
     //镜面反射击中光源特殊处理
-    if (nextResult.material->type == MaterialType::LIGHT){
+    if (nextResult.material->type == MaterialType::Light){
         if(bxdf.isDelta)
             L_direct = bxdf.fr
                        * Dot(bxdf.direction, result.normal)
@@ -101,7 +101,7 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     Color color = L_direct + L_indirect;
     //颜色重映射
 /*    if (firstHitResult.material &&
-        firstHitResult.material->type == MaterialType::DIFFUSE_IDEAL_REMAP) {
+        firstHitResult.material->type == MaterialType::Remap) {
         RemapColor(color);
     }*/
     return color;
