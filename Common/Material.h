@@ -11,7 +11,7 @@ enum class MaterialType {
     DIFFUSE_IDEAL_REMAP,
     REFLECT,
     LIGHT,
-    MIRCOFACET
+    MICROFACET
 };
 
 struct Material {
