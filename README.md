@@ -44,10 +44,14 @@
   - [x] Uniform 均匀分布
 - [x] Integrator 积分器
   - [x] MonteCarloPathIntegrator 蒙特卡洛路径追踪
+- [x] BxDF 双向X分布函数
+  - [x] IdealDiffuseBxDF 漫反射分布函数
+  - [x] IdealSpecularBxDF 理想镜面反射分布函数
+  - [x] SpecularBxDF 镜面（光泽）反射分布函数
 - [x] Material 材质
-  - [x] DiffuseMaterial 漫反射
-  - [ ] ReflectMaterial 镜面反射
-  - [ ] ReflectMaterial 折射
+  - [ ] LambertMaterial 漫反射材质
+  - [ ] MirrorMaterial 镜面材质
+  - [ ] MetalMaterial 金属材质
   - [ ] MircofacetMaterial 微表面
 - [x] Light 灯光：作为抽象类由继承该类的 Object 实现
 - [ ] Accelerator 加速结构

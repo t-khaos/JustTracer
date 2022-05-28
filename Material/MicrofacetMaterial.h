@@ -18,10 +18,6 @@ struct MicrofacetMaterial : Material {
 
     }
 
-    //统一电解质和金属材质的掠射角f0
-    //注：加法前项为常量，后项为矢量，加法操作符重载会将前项转为各维数值相同的矢量进行运算
-    Vector3 F0() const { return 0.16f * reflectance * reflectance * (1 - metallic) + baseColor * metallic; }
-
     virtual float PDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const override;
 
     virtual Color EvalColor(const Vector3 &L, const Vector3 &V, const Vector3 &N) const override;

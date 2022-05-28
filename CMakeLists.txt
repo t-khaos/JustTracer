@@ -19,38 +19,43 @@ add_executable(
 
         Application.cpp
 
-        Renderer/Camera.cpp
-
         Accelerator/AABB.h
-        Common/Ray.h
+        Accelerator/AABB.cpp
+        Accelerator/BVH.h Accelerator/BVH.cpp
+
+        BxDF/BxDF.h
+        BxDF/IdealDiffuseBxDF.h BxDF/IdealDiffuseBxDF.cpp
+        BxDF/IdealSpecularBxDF.h
+
         Math/Global.h
         Math/Vector.h
         Math/Matrix.h
-        Renderer/Camera.h
+        Math/Math.h
+        Math/Random.h
         Math/Vector.h
+
+        Common/Ray.h
         Common/Material.h
         Common/Object.h
         Common/HitResult.h
-        Renderer/Sampler.h
-        Renderer/Integrator.h
         Common/Light.h
-        Accelerator/BVH.h
+
 
         Integrator/MonteCarloPathIntegrator.h Integrator/MonteCarloPathIntegrator.cpp
 
         Material/DiffuseMaterial.h Material/DiffuseMaterial.cpp
         Material/ReflectMaterial.h Material/ReflectMaterial.cpp
-        Material/MicrofacetMaterial.cpp
+        Material/MicrofacetMaterial.cpp Material/MicrofacetMaterial.h
 
         Object/Rectangle.h Object/Rectangle.cpp
         Object/Sphere.h Object/Sphere.cpp
         Object/Triangle.h Object/Triangle.cpp
         Object/Model.cpp
 
-
         Renderer/Renderer.h Renderer/Renderer.cpp
         Renderer/Film.cpp Renderer/Film.h
         Renderer/Scene.cpp Renderer/Scene.h
-
         Renderer/Sampler.h Renderer/Sampler.cpp
-        Math/Math.h Math/Random.h Accelerator/AABB.cpp Accelerator/BVH.cpp Test/CornellBox.h Test/Remap.h Material/MicrofacetMaterial.h BxDF/BxDF.h)
+        Renderer/Camera.h Renderer/Camera.cpp
+        Renderer/Integrator.h
+        BxDF/IdealSpecularBxDF.cpp BxDF/MicrofacetSpecularBxDF.h BxDF/MicrofacetSpecularBxDF.cpp BxDF/SpecularBxDF.h BxDF/SpecularBxDF.cpp)
