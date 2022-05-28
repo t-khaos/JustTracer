@@ -59,4 +59,4 @@ add_executable(
         Renderer/Sampler.h Renderer/Sampler.cpp
         Renderer/Camera.h Renderer/Camera.cpp
         Renderer/Integrator.h
-        Common/BxDFResult.h)
+        Common/BxDFResult.h Common/LightResult.h)

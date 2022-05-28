@@ -37,7 +37,7 @@ bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     return true;
 }
 
-void Sphere::SampleHitResult(HitResult &result) {
+void Sphere::SampleHitResult(LightResult &result) {
 
     float theta = 2.0 * PI * RandomFloat();
     float phi = PI * RandomFloat();
@@ -49,7 +49,9 @@ void Sphere::SampleHitResult(HitResult &result) {
 
     result.point = center + direction * radius;
     result.normal = direction;
-    result.material = material;
+    result.emission = material->emission;
+    result.pdf = PDF();
+
 }
 
 float Sphere::PDF() {

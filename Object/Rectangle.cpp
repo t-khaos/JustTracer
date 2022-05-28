@@ -42,13 +42,13 @@ bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near) const
     return true;
 }
 
-void Rectangle::SampleHitResult(HitResult &result) {
+void Rectangle::SampleHitResult(LightResult &result) {
     //矩形内均匀采样
     result.point = A + s * RandomFloat() + t * RandomFloat();
-    result.material = material;
     result.normal = normal;
+    result.emission = material->emission;
+    result.pdf = PDF();
 }
-
 
 float Rectangle::PDF() {
     return 1 / area;

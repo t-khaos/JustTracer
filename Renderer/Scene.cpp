@@ -16,3 +16,8 @@ bool Scene::Intersect(const Ray &ray, HitResult &result) const {
     }
     return isHit;
 }
+
+void Scene::SampleLight(LightResult &result) const{
+    auto light = lights[0];
+    return light->SampleHitResult(result);
+}
