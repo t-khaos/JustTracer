@@ -28,6 +28,9 @@
 - 微表面模型
   - 镜面反射特殊处理 （PS: isDelta 标识）
   - 镜面反射能量补偿 （PS: Kulla-Conty 方法）
+- 重要性采样
+  - 漫反射和镜面反射BRDF处理 
+  - 混合BRDF
 
 ## Feature
 

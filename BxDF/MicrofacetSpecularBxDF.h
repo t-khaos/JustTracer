@@ -20,8 +20,6 @@ struct MicrofacetSpecularBxDF : BxDF {
     Vector3 F0() const { return 0.16f * reflectance * reflectance * (1 - metallic) + albedo * metallic; }
 };
 
-//法线分布函数D
-//-------------------------------------------------
 inline float DistributionGGX(float NoH, float roughness) {
     float a = roughness * roughness;
     float a2 = a * a;
@@ -33,8 +31,6 @@ inline float DistributionGGX(float NoH, float roughness) {
     return nom / denom;
 }
 
-//几何项G
-//-------------------------------------------------
 inline float GeometrySchlickGGX(float NoV, float roughness) {
     float r = (roughness + 1.0);
     float k = (r * r) / 8.0;
@@ -52,8 +48,6 @@ inline float GeometrySmith(float NoV, float NoL, float roughness) {
     return ggx1 * ggx2;
 }
 
-//菲涅尔项F
-//-------------------------------------------------
 inline Vector3 FresnelSchlick(float VoH, Vector3 f0) {
     return f0 + (1.0f - f0) * std::pow(std::clamp(1.0f - VoH, 0.0f, 1.0f), 5.0f);
 }

@@ -46,7 +46,7 @@ add_executable(
         Integrator/MonteCarloPathIntegrator.h Integrator/MonteCarloPathIntegrator.cpp
 
         Material/DiffuseMaterial.h Material/DiffuseMaterial.cpp
-        Material/ReflectMaterial.h Material/ReflectMaterial.cpp
+        Material/MirrorMaterial.h Material/MirrorMaterial.cpp
         Material/MicrofacetMaterial.cpp Material/MicrofacetMaterial.h
 
         Object/Rectangle.h Object/Rectangle.cpp
@@ -60,4 +60,4 @@ add_executable(
         Renderer/Sampler.h Renderer/Sampler.cpp
         Renderer/Camera.h Renderer/Camera.cpp
         Renderer/Integrator.h
-        )
+        Common/BxDFResult.h)

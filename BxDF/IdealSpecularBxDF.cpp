@@ -11,7 +11,7 @@ Color IdealSpecularBxDF::Eval(const Vector3 &L, const Vector3 &V, const Vector3 
 
 BxDFResult IdealSpecularBxDF::SampleBxDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const {
     Vector3 direction = SpecularDirection(N, V);
-    float pdf = PDF(L, V, N);
-    Color fr = Eval(L, V, N);
+    float pdf = PDF(direction, V, N);
+    Color fr = Eval(direction, V, N);
     return BxDFResult(direction, pdf, fr, true);
 }

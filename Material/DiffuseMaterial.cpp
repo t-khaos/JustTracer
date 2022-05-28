@@ -1,17 +1,10 @@
 #pragma once
 
 #include "DiffuseMaterial.h"
+#include "../BxDF/IdealDiffuseBxDF.h"
 
 
-float DiffuseMaterial::PDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const {
-
-}
-
-
-Color DiffuseMaterial::EvalColor(const Vector3 &L, const Vector3 &V, const Vector3 &N) const{
-
-}
-
-Vector3 DiffuseMaterial::SampleDirection(const Vector3 &L, const Vector3 &V, const Vector3 &N)const {
-
+BxDFResult DiffuseMaterial::SampleBxDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const{
+    IdealDiffuseBxDF bxdf(baseColor);
+    return bxdf.SampleBxDF(L,V,N);
 }

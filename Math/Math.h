@@ -23,7 +23,11 @@ inline float RemapRange(float num, Range range) {
     return (num - range.left) / (range.right - range.left);
 }
 
-inline void RemapColor(Color &color) {
+inline float ToGrayScale(const Color &color){
+    return 0.299f * color.r + 0.587f * color.g + 0.114f * color.b;;
+}
+
+inline Color RemapColor(const Color &color) {
     //RGB重映射为灰度值
     float grayScale = 0.299f * color.r + 0.587f * color.g + 0.114f * color.b;
 
@@ -49,5 +53,5 @@ inline void RemapColor(Color &color) {
         RGB.g = RemapRange(grayScale, Range(0.0f, 0.25f));
         RGB.b = 1.0f;
     }
-    color = RGB;
+    return RGB;
 }

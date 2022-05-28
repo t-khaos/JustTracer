@@ -11,7 +11,8 @@
 #include "Renderer/Film.h"
 #include "Renderer/Renderer.h"
 #include "Material/DiffuseMaterial.h"
-#include "Material/ReflectMaterial.h"
+#include "Material/MirrorMaterial.h"
+#include "Material/MicrofacetMaterial.h"
 
 int main() {
 
@@ -46,7 +47,7 @@ int main() {
             Color(50, 50, 50), // emission
             MaterialType::LIGHT
     );
-    auto mirrorMat = std::make_shared<ReflectMaterial>(
+    auto mirrorMat = std::make_shared<MirrorMaterial>(
             Color(1.0f, 1.0f, 1.0f), //base color
             Color(0.0f), // emission
             MaterialType::REFLECT
@@ -58,14 +59,14 @@ int main() {
             MaterialType::DIFFUSE_IDEAL_REMAP
     );
 
-/*    auto mircofacetConductorMat = std::make_shared<MicrofacetMaterial>(
+    auto mircofacetMat = std::make_shared<MicrofacetMaterial>(
             0.1f, //粗糙度
             0.9f, //金属度
             1.0f, //线性值反射率
             Color(0.63f, 0.065f, 0.05f), //基色
             Color(0.0f), //自发光
             MaterialType::MIRCOFACET //材质类型
-    );*/
+    );
 
     //坐标
     //-------------------------------------------------------------

@@ -3,17 +3,7 @@
 #include "../Math/Vector.h"
 #include "../Math/Global.h"
 #include "../Math/Random.h"
-
-struct BxDFResult {
-    Vector3 direction;
-    float pdf;
-    Color fr;
-    bool isDelta;
-
-    BxDFResult(Vector3 _dir, float _pdf, Color _fr, bool _flag)
-            : direction(_dir), pdf(_pdf), fr(_fr), isDelta(_flag) {}
-};
-
+#include "BxDFResult.h"
 
 struct BxDF {
     Color albedo;
