@@ -5,12 +5,12 @@
 #include <algorithm>
 #include "Global.h"
 
-inline int floatToRGB8(float x) {
+inline int ToRGB(float x) {
     return int(std::pow(std::clamp(x, 0.0f, 1.0f), 1.0f / 2.2f) * 255 + 0.5f);
 }
 
 
-inline float DegreesToRadians(float degrees) {
+inline float ToRadians(float degrees) {
     return degrees * PI / 180.0;
 }
 

@@ -3,7 +3,7 @@
 #include "../Math/Math.h"
 
 Camera::Camera(Point3 look_from, Point3 look_at, Vector3 up, float fov, float aspect_ratio) {
-    float theta = DegreesToRadians(fov);
+    float theta = ToRadians(fov);
     float h = std::tan(theta / 2);
 
     float viewport_height = 2 * h;
