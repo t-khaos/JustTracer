@@ -42,7 +42,7 @@ bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near) const
     return true;
 }
 
-void Rectangle::SampleHitResult(LightResult &result) {
+void Rectangle::SampleLight(LightResult &result) {
     //矩形内均匀采样
     result.point = A + s * RandomFloat() + t * RandomFloat();
     result.normal = normal;

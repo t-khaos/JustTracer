@@ -35,6 +35,8 @@ add_executable(
         Math/Random.h
         Math/Vector.h
 
+        Common/BxDFResult.h
+        Common/LightResult.h
         Common/BxDF.h
         Common/Ray.h
         Common/Material.h
@@ -59,4 +61,4 @@ add_executable(
         Renderer/Sampler.h Renderer/Sampler.cpp
         Renderer/Camera.h Renderer/Camera.cpp
         Renderer/Integrator.h
-        Common/BxDFResult.h Common/LightResult.h)
+        )

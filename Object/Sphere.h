@@ -14,7 +14,7 @@ struct Sphere : Object, Light {
 
     bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
 
-    virtual void SampleHitResult(LightResult &result) override;
+    virtual void SampleLight(LightResult &result) override;
 
     virtual float PDF() override;
 };

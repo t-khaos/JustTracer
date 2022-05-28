@@ -19,5 +19,5 @@ bool Scene::Intersect(const Ray &ray, HitResult &result) const {
 
 void Scene::SampleLight(LightResult &result) const{
     auto light = lights[0];
-    return light->SampleHitResult(result);
+    return light->SampleLight(result);
 }

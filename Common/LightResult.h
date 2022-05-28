@@ -8,5 +8,5 @@ struct LightResult{
     Point3 point;
     float pdf;
 
-    LightResult(): emission(Color()), normal(Vector3()),pdf(0.0f){}
+    LightResult(): emission(Color()), normal(Vector3()), pdf(0.0f){}
 };

@@ -37,7 +37,7 @@ bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) const {
     return true;
 }
 
-void Sphere::SampleHitResult(LightResult &result) {
+void Sphere::SampleLight(LightResult &result) {
 
     float theta = 2.0 * PI * RandomFloat();
     float phi = PI * RandomFloat();
