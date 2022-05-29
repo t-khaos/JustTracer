@@ -17,7 +17,7 @@ struct MicrofacetBxDF : BxDF {
 
     virtual BxDFResult SampleBxDF(const Vector3 &L, const Vector3 &V, const Vector3 &N) const override;
 
-    Vector3 F0() const { return 0.16f * reflectance * reflectance * (1 - metallic) + albedo * metallic; }
+    Vector3 F0() const { return 0.16f * reflectance * reflectance * (1.0f - metallic) + albedo * metallic; }
 };
 
 inline float Fr_Lambert() {

@@ -5,7 +5,7 @@
 
 ## About 
 
-**Just Tracer** 是我学习图形学的过程中用于练习的软光线追踪渲染器，其中很多设计和算法参考了许多的开源软渲染器和知乎等网站上的文章。感谢这些优秀且无私的作者，为像我一样初窥图形学门径的新人提供了指路明灯。
+年轻人的第一台玩具级软光线追踪渲染器，其中很多设计和算法参考了许多的开源软渲染器和知乎等网站上的文章，感谢这些优秀且无私的作者。
 
 ## Reference
 
@@ -25,11 +25,7 @@
 ## TODO
 - 对光源采样
   - 多光源均匀采样（PS: 所有光源视为整体的积分域）
-- 微表面模型
-  - 镜面反射特殊处理 （PS: isDelta 标识）
-  - 镜面反射能量补偿 （PS: Kulla-Conty 方法）
 - 重要性采样
-  - 漫反射和镜面反射BRDF处理 
   - 混合BRDF
 
 ## Feature
@@ -56,12 +52,12 @@
 - [x] BxDF 双向X分布函数
   - [x] IdealDiffuseBxDF 漫反射分布函数
   - [x] IdealSpecularBxDF 理想镜面反射分布函数
-  - [x] SpecularBxDF 镜面（光泽）反射分布函数
+  - [x] MircofacetBxDF 镜面（光泽）反射分布函数
 - [x] Material 材质
-  - [ ] LambertMaterial 漫反射材质
-  - [ ] MirrorMaterial 镜面材质
-  - [ ] MetalMaterial 金属材质
-  - [ ] MircofacetMaterial 微表面
+  - [x] DiffuseMaterial 漫反射材质
+  - [x] MirrorMaterial 镜面材质
+  - [ ] GlossyMaterial 光泽材质
+  - [x] MircofacetMaterial 微表面材质
 - [x] Light 灯光：作为抽象类由继承该类的 Object 实现
 - [ ] Accelerator 加速结构
   - [x] AABB 轴向包围盒

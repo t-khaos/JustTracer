@@ -1,6 +1,6 @@
-
-
 #include <memory>
+#include <iostream>
+
 #include "Math/Vector.h"
 #include "Object/Sphere.h"
 #include "Object/Rectangle.h"
@@ -15,8 +15,6 @@
 #include "Material/MicrofacetMaterial.h"
 
 int main() {
-
-
     //参数
     //-------------------------------------------------------------
     const int width = 720;
@@ -61,11 +59,16 @@ int main() {
 
     auto mircofacetMat = std::make_shared<MicrofacetMaterial>(
             0.1f, //粗糙度
-            0.9f, //金属度
-            0.5f, //线性值反射率
-            Color(1.0f, 1.0f, 1.0f), //基色
+            0.1f, //金属度
+            0.9f, //线性值反射率
+            Color(0.85f, 0.85f, 0.85f), //基色
             Color(0.0f), //自发光
             MaterialType::Object //材质类型
+    );
+    auto testDiffuseMat = std::make_shared<DiffuseMaterial>(
+            Color(1.0f, 1.0f, 1.0f), //base color
+            Color(0.0f), // emission
+            MaterialType::Object
     );
 
     //坐标
