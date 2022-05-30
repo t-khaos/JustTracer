@@ -58,10 +58,10 @@ int main() {
     );
 
     auto mircofacetMat = std::make_shared<MicrofacetMaterial>(
-            0.1f, //粗糙度
-            0.1f, //金属度
-            0.9f, //线性值反射率
-            Color(0.85f, 0.85f, 0.85f), //基色
+            0.4f, //粗糙度
+            0.9f, //金属度
+            2.0f, //线性值反射率
+            Color(1.0f, 1.0f, 1.0f), //基色
             Color(0.0f), //自发光
             MaterialType::Object //材质类型
     );

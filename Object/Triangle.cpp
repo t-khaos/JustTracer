@@ -81,7 +81,7 @@ bool Triangle::Intersect(const Ray &ray, HitResult &result, float t_near) const 
     float alpha = Dot(S1, S) / denom;
     float beta = Dot(S2, D) / denom;
 
-    if (time <= 0.f || time > t_near || alpha < 0.f || beta < 0.f || (1 - alpha - beta) < -EPSILON)
+    if (time <= 0.f || time >= t_near || alpha < 0.f || beta < 0.f || (alpha + beta) > 1.0f)
         return false;
 
     result.time = time;

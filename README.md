@@ -1,11 +1,11 @@
 
 <h1 align="center">Just Tracer</h1>
-<p align="center"><img src="Resource/Output/Cornell_Box.jpg" alt="Logo" width="50%"></p>
+<p align="center"><img src="Resource/Output/Cornell_Box.jpg" alt="Logo" width="100%"></p>
 <p align="center">软光线追踪渲染器 720p×720p | 5000spp 渲染结果</p>
 
 ## About 
 
-年轻人的第一台玩具级软光线追踪渲染器，其中很多设计和算法参考了许多的开源软渲染器和知乎等网站上的文章，感谢这些优秀且无私的作者。
+年轻人的第一台玩具级软光线追踪渲染器，代码的设计和实现算法参考了许多的开源软渲染器和知乎等网站上的文章，感谢这些优秀且无私的作者。
 
 ## Reference
 
@@ -19,8 +19,9 @@
 > 8. [Filament - PBR 文档的中文翻译](https://jerkwin.github.io/filamentcn/Filament.md.html)
 > 9. [GAME101 - liupeining 的作业7实现](https://github.com/liupeining/Games_101_homework/tree/main/a7)
 > 10. [RenderHelp - 矢量模板类的设计值得学习](https://github.com/skywind3000/RenderHelp)
-> 11. [Mitsuba1/2 闫令琦推荐的科研渲染器](http://www.mitsuba-cornellBoxRenderer.org/) 
-> 12. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
+> 11. [恒星的离线渲染器](https://github.com/star-hengxing/cpu_offline_renderer)
+> 12. [Mitsuba1/2 闫令琦推荐的科研渲染器](http://www.mitsuba-cornellBoxRenderer.org/) 
+> 13. [pbrt - 众所周知的圣经](https://www.pbr-book.org/3ed-2018/contents)
 
 ## TODO
 - 对光源采样
