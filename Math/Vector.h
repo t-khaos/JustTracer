@@ -444,6 +444,14 @@ inline Vector<N, T> MinVector(const Vector<N, T> &a, const Vector<N, T> &b) {
     return temp;
 }
 
+template<size_t N, typename T>
+inline Vector<N, T> Mix(const Vector<N, T> &a, const Vector<N, T> &b, T t) {
+    Vector<N, T> temp;
+    for (size_t i = 0; i < N; i++)
+        temp[i] = (1.0f-t)*a[i] + t*b[i];
+
+    return temp;
+}
 //特化矢量别名
 //------------------------------------------
 

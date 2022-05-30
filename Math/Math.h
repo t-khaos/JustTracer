@@ -5,6 +5,10 @@
 #include <algorithm>
 #include "Global.h"
 
+inline int Mix(float x, float y, float t) {
+    return (1.0f - t) * x + t * y;
+}
+
 inline int ToRGB(float x) {
     return int(std::pow(std::clamp(x, 0.0f, 1.0f), 1.0f / 2.2f) * 255 + 0.5f);
 }
@@ -23,7 +27,7 @@ inline float RemapRange(float num, Range range) {
     return (num - range.left) / (range.right - range.left);
 }
 
-inline float ToGrayScale(const Color &color){
+inline float ToGrayScale(const Color &color) {
     return 0.299f * color.r + 0.587f * color.g + 0.114f * color.b;;
 }
 
@@ -47,7 +51,7 @@ inline Color RemapColor(const Color &color) {
     } else if (grayScale <= 0.55f && grayScale > 0.25f) {
         RGB.r = 0;
         RGB.g = 1.0f;
-        RGB.b = 1.0f- RemapRange(grayScale, Range(0.25f, 0.5f));
+        RGB.b = 1.0f - RemapRange(grayScale, Range(0.25f, 0.5f));
     } else if (grayScale <= 0.25f && grayScale >= 0.0f) {
         RGB.r = 0.0f;
         RGB.g = RemapRange(grayScale, Range(0.0f, 0.25f));
