@@ -425,7 +425,7 @@ inline Vector<3, T> ToWorld(const Vector<3, T> &a, const Vector<3, T> &n) {
     auto V = Cross(N, U);
     return a.x * U + a.y * V + a.z * N;
 }
-
+//选取两矢量中最大的值组成新的矢量
 template<size_t N, typename T>
 inline Vector<N, T> MaxVector(const Vector<N, T> &a, const Vector<N, T> &b) {
     Vector<N, T> temp;
@@ -434,7 +434,7 @@ inline Vector<N, T> MaxVector(const Vector<N, T> &a, const Vector<N, T> &b) {
 
     return temp;
 }
-
+//选取两矢量中最小的值组成新的矢量
 template<size_t N, typename T>
 inline Vector<N, T> MinVector(const Vector<N, T> &a, const Vector<N, T> &b) {
     Vector<N, T> temp;
@@ -444,12 +444,29 @@ inline Vector<N, T> MinVector(const Vector<N, T> &a, const Vector<N, T> &b) {
     return temp;
 }
 
+//线性插值
 template<size_t N, typename T>
 inline Vector<N, T> Mix(const Vector<N, T> &a, const Vector<N, T> &b, T t) {
     Vector<N, T> temp;
     for (size_t i = 0; i < N; i++)
         temp[i] = (1.0f-t)*a[i] + t*b[i];
 
+    return temp;
+}
+//获取矢量中最大的值
+template<size_t N, typename T>
+inline T MaxValue(const Vector<N, T> &a) {
+    T temp;
+    for (size_t i = 0; i < N-1; i++)
+        temp = a[i]>a[i+1]?a[i]:a[i+1];
+    return temp;
+}
+//获取矢量中最小的值
+template<size_t N, typename T>
+inline T MinValue(const Vector<N, T> &a) {
+    T temp;
+    for (size_t i = 0; i < N-1; i++)
+        temp = a[i]<a[i+1]?a[i]:a[i+1];
     return temp;
 }
 //特化矢量别名
