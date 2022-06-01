@@ -1,6 +1,5 @@
 
 #include "Sphere.h"
-#include "../Math/Random.h"
 
 Sphere::Sphere(const float _r, const Vector3 _p, std::shared_ptr<Material> _mat)
         : radius(_r), center(_p), material(_mat) {
@@ -38,9 +37,11 @@ bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) const {
 }
 
 void Sphere::SampleLight(LightResult &result) {
-
-    float theta = 2.0 * PI * RandomFloat();
-    float phi = PI * RandomFloat();
+    //球体表面均匀采样
+    //天顶角 arccos(1-2r1)或2*arccos(sqrt(1-r1))
+    //方位角 2*PI*r2
+    float theta = 2 * PI * RandomFloat();
+    float phi = std::acos(1.0f - 2 * RandomFloat());
     Vector3 direction(
             std::cos(phi),
             std::sin(phi) * std::cos(theta),
