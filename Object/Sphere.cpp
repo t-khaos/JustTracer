@@ -11,7 +11,7 @@ Sphere::Sphere(const float _r, const Vector3 _p, std::shared_ptr<Material> _mat)
     );
 }
 
-bool Sphere::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+bool Sphere::Intersect(Ray &ray, HitResult &result, float t_near) const {
     //t^2*d.d + 2*t*(o-p).d + (o-p).(o-p)-R^2 = 0
     Vector3 op = ray.origin - center;
     //h=b/2

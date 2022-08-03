@@ -4,6 +4,7 @@
 #include <cmath>
 #include <algorithm>
 #include "Global.h"
+#include "Vector.h"
 
 inline int Mix(float x, float y, float t) {
     return (1.0f - t) * x + t * y;

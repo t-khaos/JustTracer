@@ -18,7 +18,7 @@ struct Rectangle : Object, Light {
 
     Rectangle(Vector3 _v0, Vector3 _v1, Vector3 _v2, Vector3 _v3, std::shared_ptr<Material> _mat);
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
+    virtual bool Intersect(Ray &ray, HitResult &result, float t_near) const override;
 
     virtual void SampleLight(LightResult &result) override;
 

@@ -22,7 +22,7 @@ Triangle::Triangle(Vector3 _v0, Vector3 _v1, Vector3 _v2, std::shared_ptr<Materi
     );
 }
 
-bool Triangle::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+bool Triangle::Intersect(Ray &ray, HitResult &result, float t_near) const {
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 
@@ -100,7 +100,7 @@ struct Mesh : Object {
     Mesh(std::shared_ptr<Material> _mat)
             : material(_mat) {}
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
+    virtual bool Intersect(Ray &ray, HitResult &result, float t_near) const override;
 
     void AddTriangle(std::shared_ptr<Triangle> triangle) { triangles.push_back(triangle); }
 
@@ -115,7 +115,7 @@ float Mesh::TotalArea() {
     return sum;
 }
 
-bool Mesh::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+bool Mesh::Intersect(Ray &ray, HitResult &result, float t_near) const {
     HitResult tempResult;
     bool isHit = false;
     float closestTime = t_near;

@@ -9,7 +9,7 @@ struct MonteCarloPathIntegrator : PathIntegrator {
 
     MonteCarloPathIntegrator(int _depth = 5) : PathIntegrator(_depth) {}
 
-    virtual Color Li(const Ray &ray, std::shared_ptr<Scene> scene) override;
+    virtual Color Li(Ray &ray, std::shared_ptr<Scene> scene) override;
 
-    virtual Color CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) override;
+    virtual Color CastRay(Ray &ray, std::shared_ptr<Scene> scene, int depth) override;
 };

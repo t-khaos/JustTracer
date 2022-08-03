@@ -23,7 +23,7 @@ struct AABB {
 
     Vector3 Centroid() { return (maxVector + minVector) * 0.5f;}
 
-    bool Intersect(const Ray &ray, float t_near);
+    bool Intersect(Ray &ray, float t_near);
 
 };
 

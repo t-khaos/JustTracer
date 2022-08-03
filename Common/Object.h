@@ -10,7 +10,7 @@
 struct Object {
     AABB bounds;
 
-    virtual bool Intersect(const Ray &ray, HitResult &result, float t_near) const = 0;
+    virtual bool Intersect(Ray &ray, HitResult &result, float t_near) const = 0;
 };
 
 

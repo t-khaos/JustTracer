@@ -21,34 +21,21 @@ int main() {
     const int height = 720;
     const float aspect_ratio = static_cast<float>(width) / height;
     const float fov = 40;
-    const int spp = 100;
+    const int spp = 48;
 
     //材质
     //-------------------------------------------------------------
-    auto redDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color(0.63f, 0.065f, 0.05f), //base color
-            Color(0.0f), // emission
-            MaterialType::Object
-    );
-    auto greenDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color(0.14f, 0.45f, 0.091f), //base color
-            Color(0.0f), // emission
-            MaterialType::Object
-    );
-    auto whiteDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color(0.725f, 0.71f, 0.68f), //base color
+
+
+    auto whiteDiffuseMat = std::make_shared<MirrorMaterial>(
+            Color(1.0f, 1.0f, 1.0f), //base color
             Color(0.0f), // emission
             MaterialType::Object
     );
     auto lightMat = std::make_shared<DiffuseMaterial>(
             Color(0.0), //base color
-            Color(50, 50, 50), // emission
+            Color(100, 100, 100), // emission
             MaterialType::Light
-    );
-    auto mirrorMat = std::make_shared<MirrorMaterial>(
-            Color(1.0f, 1.0f, 1.0f), //base color
-            Color(0.0f), // emission
-            MaterialType::Object
     );
 
     auto remapMat = std::make_shared<DiffuseMaterial>(
@@ -56,7 +43,6 @@ int main() {
             Color(0.0f),
             MaterialType::Remap
     );
-
     auto mircofacetMat = std::make_shared<MicrofacetMaterial>(
             0.4f, //粗糙度
             0.9f, //金属度
@@ -65,37 +51,27 @@ int main() {
             Color(0.0f), //自发光
             MaterialType::Object //材质类型
     );
-    auto testDiffuseMat = std::make_shared<DiffuseMaterial>(
-            Color(1.0f, 1.0f, 1.0f), //base color
-            Color(0.0f), // emission
-            MaterialType::Object
-    );
-
     //坐标
     //-------------------------------------------------------------
-    Vector3 origin(0, -70, 0);//球体坐标
+    Vector3 origin(0, -60, 0);//球体坐标
     Vector3 A(-100, 100, 100);// 矩形 Cornell Box 顶点坐标
-    Vector3 B(-100, -100, 100);
-    Vector3 C(100, -100, 100);
+    Vector3 B(-1000, -100, 1000);
+    Vector3 C(1000, -100, 1000);
     Vector3 D(100, 100, 100);
     Vector3 E(-100, 100, -100);
-    Vector3 F(-100, -100, -100);
-    Vector3 G(100, -100, -100);
+    Vector3 F(-1000, -100, -1000);
+    Vector3 G(1000, -100, -1000);
     Vector3 H(100, 100, -100);
-    Vector3 L1(20, 99.999f, 20);// 矩形灯光顶点坐标
-    Vector3 L2(-20, 99.999f, 20);
-    Vector3 L3(-20, 99.999f, -20);
-    Vector3 L4(20, 99.999f, -20);
+    Vector3 L1(50, 10, 10);// 矩形灯光顶点坐标
+    Vector3 L2(30, 20, 10);
+    Vector3 L3(50, 10, -10);
+    Vector3 L4(30, 20, -10);
 
     //物体
     //-------------------------------------------------------------
-    auto redSphere = std::make_shared<Sphere>(30, origin, redDiffuseMat);//球体
+    auto sphere = std::make_shared<Sphere>(40, origin, remapMat);//球体
 
-    auto bottomRectangle = std::make_shared<Rectangle>(G, F, B, C, whiteDiffuseMat);//Cornell Box
-    auto topRectangle = std::make_shared<Rectangle>(H, D, A, E, whiteDiffuseMat);
-    auto leftRectangle = std::make_shared<Rectangle>(A, B, F, E, redDiffuseMat);
-    auto rightRectangle = std::make_shared<Rectangle>(C, D, H, G, greenDiffuseMat);
-    auto backRectangle = std::make_shared<Rectangle>(E, F, G, H, whiteDiffuseMat);
+    auto bottomRectangle = std::make_shared<Rectangle>(G, F, B, C, mircofacetMat);
 
     //光源
     //-------------------------------------------------------------
@@ -105,14 +81,12 @@ int main() {
     //-------------------------------------------------------------
     auto scene = std::make_shared<Scene>();
 
-    scene->AddObject(redSphere);//添加物体
+    //物体
+    scene->AddObject(sphere);//添加物体
     scene->AddObject(bottomRectangle);
-    scene->AddObject(topRectangle);
-    scene->AddObject(leftRectangle);
-    scene->AddObject(rightRectangle);
-    scene->AddObject(backRectangle);
     scene->AddObject(lightRectangle);
 
+    //灯光
     scene->AddLight(lightRectangle);//添加灯光
 
     //相机
@@ -131,7 +105,7 @@ int main() {
 
     //采样器
     //-------------------------------------------------------------
-    auto sampler = std::make_shared<Sampler>(SamplerType::Disk);
+    auto sampler = std::make_shared<Sampler>(SamplerType::Uniform);
 
     //胶片
     //-------------------------------------------------------------

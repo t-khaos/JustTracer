@@ -5,9 +5,14 @@
 #include "../Math/Vector.h"
 #include "Material.h"
 
+
 struct Ray {
     Point3 origin;
     Vector3 direction;
+
+    float distance;
+
+    size_t objIndex;
 
     Ray(const Point3 &_ori, const Vector3 &_dir) : origin(_ori), direction((Normalize(_dir))) {}
 

@@ -16,7 +16,7 @@ Rectangle::Rectangle(Vector3 _v0, Vector3 _v1, Vector3 _v2, Vector3 _v3, std::sh
     );
 }
 
-bool Rectangle::Intersect(const Ray &ray, HitResult &result, float t_near) const {
+bool Rectangle::Intersect(Ray &ray, HitResult &result, float t_near) const {
     if (Dot(-ray.direction, normal) < EPSILON)
         return false;
 

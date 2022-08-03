@@ -1,7 +1,7 @@
 
 #include "AABB.h"
 
-bool AABB::Intersect(const Ray &ray, float t_near) {
+bool AABB::Intersect(Ray &ray, float t_near) {
     Vector3 invDirection = 1.0f / ray.direction;
 
     Vector3 t0 = (minVector - ray.origin) * invDirection;

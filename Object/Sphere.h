@@ -12,7 +12,7 @@ struct Sphere : Object, Light {
 
     Sphere(const float _r, const Vector3 _p, std::shared_ptr<Material> _mat);
 
-    bool Intersect(const Ray &ray, HitResult &result, float t_near) const override;
+    bool Intersect(Ray &ray, HitResult &result, float t_near) const override;
 
     virtual void SampleLight(LightResult &result) override;
 

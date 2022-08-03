@@ -1,11 +1,12 @@
 
 #include "MonteCarloPathIntegrator.h"
+#include "../Math/Math.h"
 
-Color MonteCarloPathIntegrator::Li(const Ray &ray, std::shared_ptr<Scene> scene) {
+Color MonteCarloPathIntegrator::Li(Ray &ray, std::shared_ptr<Scene> scene) {
     return CastRay(ray, scene, 0);
 }
 
-Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> scene, int depth) {
+Color MonteCarloPathIntegrator::CastRay(Ray &ray, std::shared_ptr<Scene> scene, int depth) {
     //递归超过指定层数结束
     if (depth >= depth_max)
         return Color(0.0f);
@@ -19,6 +20,11 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
     //击中光源直接返回光源自发光
     if (hitResult.material->type == MaterialType::Light)
         return hitResult.material->emission;
+
+/*    //颜色重映射
+    //第一次击中物体,获取物体表面信息
+    if (depth == 0)
+        firstHitResult = HitResult(hitResult);*/
 
     //直接光照
     //--------------------------------------------------------------------
@@ -49,6 +55,12 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
                    / (distance * distance) / lightResult.pdf;
     }
 
+/*    //颜色重映射
+    if (hitResult.material &&
+            hitResult.material->type == MaterialType::Remap) {
+        L_direct = RemapColor(L_direct);
+    }*/
+
     //间接光照
     //--------------------------------------------------------------------
     Vector3 L_indirect;
@@ -72,17 +84,13 @@ Color MonteCarloPathIntegrator::CastRay(const Ray &ray, std::shared_ptr<Scene> s
         L_indirect = bxdf.fr * Dot(bxdf.direction, hitResult.normal) / bxdf.pdf / P_RR;
     }
 
-    return L_direct + L_indirect;
-}
 
 
-//颜色重映射
-/*    //第一次击中物体,获取物体表面信息
-    if (depth == 0)
-        firstHitResult = HitResult(result);*/
-
-//颜色重映射
-/*    if (firstHitResult.material &&
-        firstHitResult.material->type == MaterialType::Remap) {
-        RemapColor(color);
+/*    //颜色重映射
+    if (hitResult.material &&
+            hitResult.material->type == MaterialType::Remap) {
+        L_direct = RemapColor(L_direct);
     }*/
+    auto color = L_direct+L_indirect;
+    return color;
+}

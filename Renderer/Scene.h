@@ -19,7 +19,7 @@ struct Scene {
 
     void AddLight(std::shared_ptr<Light> light) { lights.push_back(light); }
 
-    bool Intersect(const Ray &ray, HitResult &result) const;
+    bool Intersect(Ray &ray, HitResult &result) const;
 
     void SampleLight(LightResult &result) const;
 };

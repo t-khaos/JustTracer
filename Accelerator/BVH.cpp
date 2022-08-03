@@ -1,7 +1,7 @@
 
 #include "BVH.h"
 
-bool BVH::Intersect(const Ray &ray, std::shared_ptr<BVHNode> node, HitResult& result){
+bool BVH::Intersect(Ray &ray, std::shared_ptr<BVHNode> node, HitResult& result){
     return false;
 }
 

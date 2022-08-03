@@ -9,7 +9,8 @@
 //Distribution Type
 enum SamplerType{
     Trapezoidal,
-    Uniform
+    Uniform,
+    Disk,
 };
 
 struct Sampler {

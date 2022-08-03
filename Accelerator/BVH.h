@@ -25,5 +25,5 @@ struct BVH {
 
     std::shared_ptr<BVHNode> Build(std::vector<std::shared_ptr<Object>> objs);
 
-    bool Intersect(const Ray &ray, std::shared_ptr<BVHNode> node, HitResult& result);
+    bool Intersect(Ray &ray, std::shared_ptr<BVHNode> node, HitResult& result);
 };
